@@ -1,0 +1,69 @@
+
+padding:0px;
+list-style:none;
+position:absolute;
+z-index:2;
+    }
+
+#tabrow li {
+    float:left;
+    background-color:#F3F3F3;
+    height:16px;
+    margin-right:5px;
+    padding:5px 5px 5px 5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    border-top:solid #D9D9D9 2px;
+    border-left:solid #D9D9D9 2px;
+    border-right:solid #D9D9D9 2px;
+    border-bottom-width:0;
+    border-bottom-color:transparent;
+    cursor:pointer;
+}
+
+*html #tabrow li {
+    padding:4px 5px 2px 5px;
+    height:28px;
+}
+
+#tabrow li.select {
+    background-color:#FFFFFF;
+    height:18px;
+
+}
+
+*html  #tabrow li.select {
+    background-color:#FFFFFF;
+    height:30px;
+    padding:4px 5px 7px 5px;
+}
+
+/* page styles */
+
+#topbox, #midbox {
+    width:100%;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+}
+
+#topbox {
+    background-color:#FFFFFF;
+    border: solid #D9D9D9 1px;
+    margin-bottom:2em;
+}
+
+#midbox {
+    border: solid #D9D9D9 2px;
+    background-color:#FFFFFF;
+}
+
+#midbox p {
+    margin:0;
+    padding-bottom:1ex;
+}
+div.subpage {
+    padding:1em;
+
+}

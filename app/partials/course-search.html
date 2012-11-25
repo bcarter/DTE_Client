@@ -1,0 +1,70 @@
+<div id="page2" class="subpage" style="height:600px;">
+    <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
+    <p class="blackTen" align="center"><strong>Selection Criteria:</strong>
+        Users may use any of the selection criteria below to search for OSHA
+        training courses offered by the OSHA Training Institute (OTI) Education
+        Centers. Please note that registration is conducted through the authorized
+        OTI Education Center. </p>
+    <hr size="1">
+    <table width="970" border="0" cellspacing="0" cellpadding="1" summary="">
+        <tr >
+            <td class="blackTen" width="162"><strong>Course Title:</strong> </td>
+            <td width="662"><select id="pg3Title" name="pg3Title" class="frmFieldSearch"></select></td>
+            <td width="140" rowspan="3" align="right" valign="bottom">
+                <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Find Courses">
+                <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Refresh">
+                <input class="blackSix"  name="button" type="button" onClick="clearDocument(3);" value= "Reset">
+            </td>
+        </tr>
+        <tr class="blackTen">
+            <td><strong>OTI Education Center:</strong></td>
+            <td><select id="pg3EdCenter" name="pg3EdCenter" class="frmFieldSearch"></select></td>
+        </tr>
+        <tr>
+            <td  class="blackTen" colspan="2"><strong>State:</strong>
+                <select id="stateLov" name="stateLov" class="frmFieldSearch"></select> &nbsp;
+                <strong>Start Date:</strong>
+                <input id="pg3StartDate" name="pg3StartDate" type="text" size="10" value="mm/dd/yyyy">&nbsp;
+                <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" value="mm/dd/yyyy">&nbsp;
+                <strong>No. of Days:</strong> <input id="noOfDays" name="noOfDays" type="text" size="2" value="">&nbsp;
+                <strong>CM:</strong> <input type="checkbox" id="pg3cmPoints" name="pg3cmPoints" value="Y">&nbsp;
+                <strong>CEU:</strong> <input type="checkbox" id="pg3ceuPoints" name="pg3ceuPoints" value="Y">
+            </td>
+        </tr>
+    </table>
+
+    <hr size="1">
+
+    <div style="border: 2px solid #D9D9D9; width:980; height:275; " >
+        <div id = "header" style="width:980;" align="center">
+            <table width="100%" border="1"  summary="">
+                <tr style="font-size:70%; font-weight:bold; background:#D9D9D9;" align="center" id = "srchTabHdr">
+                    <td width="145">OTI Education Center</td>
+                    <td width="175">Course Title</td>
+                    <td width="70">Start Date</td>
+                    <td width="70">End Date</td>
+                    <td width="110">Training Location</td>
+                    <td width="120">Address</td>
+                    <td width="80">City</td>
+                    <td width="40">State</td>
+                    <td width="40">CM</td>
+                    <td width="40">CEU</td>
+                </tr>
+                <tr ng-repeat="course in courses">
+                    <td width="145">{{course.ed_center}}</td>
+                    <td width="175"><a href="#/courses/course_{{course.course_id}}">{{course.title}}</a></td>
+                    <td width="70">{{course.start}}</td>
+                    <td width="70">{{course.end}}</td>
+                    <td width="110">{{course.location}}</td>
+                    <td width="120">{{course.address}}</td>
+                    <td width="80">{{course.city}}</td>
+                    <td width="40">{{course.state}}</td>
+                    <td width="40">{{course.cmpoints}}</td>
+                    <td width="40">{{course.ceupoints}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id = "pg3dgrid" style="width:980; height:250; overflow:auto;" align="center"></div>
+    </div>
+</div>

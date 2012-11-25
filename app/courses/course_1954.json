@@ -1,0 +1,20 @@
+{
+    "course_id": 1954,
+    "center_id": 30,
+    "ed_center": "Great Lakes Regional OTI Education Center - University of Cincinnati",
+    "title": 28,
+    "desc_link": "Description goes here",
+    "location": "UC Reading Campus, 2nd Fl",
+    "address": "2180 E. Galbraith Rd.",
+    "city": "Cincinnati",
+    "state": 36,
+    "start": "03/29/0201",
+    "end": "03/29/2012",
+    "days": 3,
+    "hours": 5,
+    "cmpoints": 1.17,
+    "ceupoints": ".7",
+    "tuition": "   $195.00",
+    "language": 1,
+    "regUrl": "1.800.207.9399"
+}
