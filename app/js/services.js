@@ -2,9 +2,12 @@
 
 /* Services */
 
-angular.module('phonecatServices', ['ngResource']).
+angular.module('dteCourseAdminServices', ['ngResource']).
     factory('Course', function($resource){
-        return $resource('courses/:course_id.json', {}, {
-            query: {method:'GET', params:{course_id:'courses'}, isArray:true}
+       return $resource('/DTEAdmin/services/Course/:course_id', {}, {
+            list: {method:'GET', params:{course_id:'',_:Math.random()}, isArray:false},
+            query: {method:'GET', params:{course_id:'new',_:Math.random()}, isArray:false},
+            update: {method:'PUT'},
+            insert: {method:'POST'}
         });
     });

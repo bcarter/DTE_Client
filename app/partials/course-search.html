@@ -1,4 +1,4 @@
-<div id="page2" class="subpage" style="height:600px;">
+<div id="page2" class="subpage">
     <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
     <p class="blackTen" align="center"><strong>Selection Criteria:</strong>
         Users may use any of the selection criteria below to search for OSHA
@@ -9,7 +9,14 @@
     <table width="970" border="0" cellspacing="0" cellpadding="1" summary="">
         <tr >
             <td class="blackTen" width="162"><strong>Course Title:</strong> </td>
-            <td width="662"><select id="pg3Title" name="pg3Title" class="frmFieldSearch"></select></td>
+            <td width="662">
+            	<select id="pg3Title" name="pg3Title" class="frmFieldSearch" ng-model="filterText.courseTitle">
+                    <option></option>
+                    <option ng-repeat="courseTitle in courseTitles">{{courseTitle.name}}</option>
+            	</select>
+            </td>
+            
+
             <td width="140" rowspan="3" align="right" valign="bottom">
                 <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Find Courses">
                 <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Refresh">
@@ -22,10 +29,22 @@
         </tr>
         <tr>
             <td  class="blackTen" colspan="2"><strong>State:</strong>
-                <select id="stateLov" name="stateLov" class="frmFieldSearch"></select> &nbsp;
+                <select id="stateLov" name="stateLov" class="frmFieldSearch" ng-model="filterText.stateCode">
+                    <option></option>
+                	<option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
+              	</select> &nbsp;
+                <select id="stateLovx" name="stateLovx" class="frmFieldSearch" ng-model="filterText.city">
+                	<option  value="Dublin">Dublin</option>
+                	<option value="Sacramento">Sacramento</option>
+                	<option value="KS">KS</option>
+              	</select> &nbsp;
+              	
+    Search: <input ng-model="filterText.stateCd"/>
+    
+    
                 <strong>Start Date:</strong>
-                <input id="pg3StartDate" name="pg3StartDate" type="text" size="10" value="mm/dd/yyyy">&nbsp;
-                <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" value="mm/dd/yyyy">&nbsp;
+                <input id="pg3StartDate" name="pg3StartDate" type="text" size="10" value="mm/dd/yyyy" ui-date>&nbsp;
+                <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" value="mm/dd/yyyy" ui-date>&nbsp;
                 <strong>No. of Days:</strong> <input id="noOfDays" name="noOfDays" type="text" size="2" value="">&nbsp;
                 <strong>CM:</strong> <input type="checkbox" id="pg3cmPoints" name="pg3cmPoints" value="Y">&nbsp;
                 <strong>CEU:</strong> <input type="checkbox" id="pg3ceuPoints" name="pg3ceuPoints" value="Y">
@@ -34,33 +53,48 @@
     </table>
 
     <hr size="1">
+<button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+    Search: <input ng-model="filterText.$"/><input ng-model="filterText.city"/><br>
+
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>
+    <div ui-modal class="fade" ng-model="modalShown" id="myModal">
+        <div class="modal-header"><h1>Modalin'!</h1></div>
+        <div class="modal-body">
+            <p>Cool beans, dude.</p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn" data-dismiss="modal">Close bootstrap way</a>
+            <a class="btn" ng-click="modalShown=false">Close ng-model way</a>
+        </div>
+    </div>
+    <a class="btn" ng-click="modalShown=true">Open 1</a>
+    <a class="btn" data-toggle="modal" href="#myModal">Open 2</a>
+    <a ng-popup="partials/course-detail.html">Open MyModal</a>
+
 
     <div style="border: 2px solid #D9D9D9; width:980; height:275; " >
         <div id = "header" style="width:980;" align="center">
-            <table width="100%" border="1"  summary="">
+            <table width="100%" border="1"  summary="" ng-grid>
                 <tr style="font-size:70%; font-weight:bold; background:#D9D9D9;" align="center" id = "srchTabHdr">
-                    <td width="145">OTI Education Center</td>
-                    <td width="175">Course Title</td>
-                    <td width="70">Start Date</td>
-                    <td width="70">End Date</td>
-                    <td width="110">Training Location</td>
-                    <td width="120">Address</td>
-                    <td width="80">City</td>
-                    <td width="40">State</td>
-                    <td width="40">CM</td>
-                    <td width="40">CEU</td>
+                    <th ng-repeat="th in head" ng-class="selectedCls(th.column)" ng-click="changeSorting(th.column)">{{th.head}}</th>
                 </tr>
-                <tr ng-repeat="course in courses">
-                    <td width="145">{{course.ed_center}}</td>
-                    <td width="175"><a href="#/courses/course_{{course.course_id}}">{{course.title}}</a></td>
-                    <td width="70">{{course.start}}</td>
-                    <td width="70">{{course.end}}</td>
-                    <td width="110">{{course.location}}</td>
+                <tr ng-repeat="course in filtered = (courses | filter:filterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td width="145">{{course.educationCenter.name}}</td>
+                    <td width="175"><a href="#/course/{{course.id}}">{{course.courseTitle.name}}</a></td>
+                    <td width="70">{{course.startDate | date:'MM/dd/yyyy'}}</td>
+                    <td width="70">{{course.endDate | date:'MM/dd/yyyy'}}</td>
+                    <td width="110"><input ng-model="course.location"/></td>
                     <td width="120">{{course.address}}</td>
                     <td width="80">{{course.city}}</td>
-                    <td width="40">{{course.state}}</td>
-                    <td width="40">{{course.cmpoints}}</td>
-                    <td width="40">{{course.ceupoints}}</td>
+                    <td width="40">{{course.stateCode.stateCd}}</td>
+                    <td width="40">{{course.cmPoints}}</td>
+                    <td width="40">{{course.ceuPoints}}</td>
                 </tr>
             </table>
         </div>

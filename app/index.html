@@ -1,12 +1,27 @@
 <!doctype html>
-<html lang="en" ng-app="phonecat">
-<head>
+	<html lang="en" class="ng-app:dteCourseAdmin" id="ng-app" ng-app="dteCourseAdmin" xmlns:ng="http://angularjs.org">
+<head>  
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <!--[if lt IE 8]>
+          <script src="js/json2.js"></script>
+          <script src="lib/angular/angular-ui-ieshiv.js"></script>
+        <![endif]-->
+
     <meta charset="utf-8">
     <title>OSHA Training Institute Course Search Databasey</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/angular-ui.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/existing.css">
-    <script src="lib/angular/angular.js"></script>
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://angular-ui.github.com/lib/select2/select2.css" >
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/filters.js"></script>
@@ -65,7 +80,7 @@
             <div id="tabrow">
                 <ul>
                     <li id="tab0" class="select curvyRedraw"><strong><a href="#/">Home</a></strong></li>
-                    <li id="tab1" class="curvyRedraw"><strong><a href="#/courses/new">Course Input</a></strong></li>
+                    <li id="tab1" class="curvyRedraw"><strong><a href="#/course/new">Course Input</a></strong></li>
                     <li id="tab2" class="curvyRedraw"><strong><a href="#/courses">Course Edit</a></strong></li>
                     <li id="tab3" class="curvyRedraw"><strong><a href="#/users">User Admin</a></strong></li>
                 </ul>

@@ -1,11 +1,18 @@
-Id: {{course.course_id}}<br>
+Id: {{course.id}}<br>
 Address: {{course.address}}<br>
 Location: {{course.location}}<br>
-
+Title: {{course.courseTitle}}<br>
 
 <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
-<p><h2>Sponsoring OTI Education Center: <select id="select3" name="select3" class="frmFieldSearch" ng-model="course.center_id"><option value="0"> </option><option value="45">Arizona State University, Tempe, Arizona</option><option value="33">Atlantic OSHA Education Center - Universidad de Metropolotania, Bayamón, Puerto Rico</option><option value="28">Atlantic OSHA Education Center - University at Buffalo, Buffalo, New York</option><option value="25">Atlantic OSHA Education Center - University of Medicine and Dentistry of New Jersey, Piscataway, New Jersey</option><option value="2">California State University Dominguez Hills, Carson, California</option><option value="3">Chabot-Las Positas Community College District OSHA Training Center, Dublin, California</option><option value="26">College of Southern Nevada, Las Vegas, Nevada</option><option value="12">Eastern Kentucky University, Richmond, Kentucky</option><option value="42">Florida States College at Jacksonville, Jacksonville, Florida</option><option value="7">Georgia Tech Research Institute, Atlanta, Georgia</option><option value="17">Great Lakes Regional OTI Education Center - Eastern Michigan University, Ypsilanti, Michigan</option><option value="18">Great Lakes Regional OTI Education Center - UAW Health and Safety Department, Detroit, Michigan</option><option value="30">Great Lakes Regional OTI Education Center - University of Cincinnati, Cincinnati, Ohio</option><option value="23">Keene State College, Manchester, New Hampshire</option><option value="19">Metropolitan Community Colleges, Kansas City, Missouri</option><option value="29">Mid-America OTI Education Center - Ohio Valley Construction Education Foundation, Springboro, Ohio</option><option value="14">Mid-Atlantic OTI Education Center - Chesapeake Region Safety Council, Baltimore, Maryland</option><option value="31">Mid-Atlantic OTI Education Center - ECRI Institute, Plymouth Meeting, Pennsylvania</option><option value="15">Mid-Atlantic OTI Education Center - Johns Hopkins University &amp; Health System, Baltimore, Maryland</option><option value="32">Mid-Atlantic OTI Education Center - Mid-Atlantic Construction Safety Council, Philadelphia, Pennsylvania</option><option value="44">Mid-South OTI Education Center, Baton Rouge, Louisiana</option><option value="8">Midwest OTI Education Center - Kirkwood Community College, Cedar Rapids, Iowa</option><option value="22">Midwest OTI Education Center - National Safety Council, Omaha, Nebraska</option><option value="20">Midwest OTI Education Center - Saint Louis University, St. Louis, Missouri</option><option value="37">Mountain West OTI Education Center - Salt Lake Community College, Salt Lake City, Utah</option><option value="38">Mountain West OTI Education Center - Uintah Basin Applied Technology College (UBATC), Vernal, Utah</option><option value="39">Mountain West OTI Education Center - University of Utah, Salt Lake City, Utah</option><option value="13">National Resource Center - Center to Protect Workers Rights (CPWR), Silver Spring, Maryland</option><option value="16">National Resource Center - National Labor College, Silver Spring, Maryland</option><option value="41">National Resource Center - West Virginia University, Morgantown, West Virginia</option><option value="9">National Safety OTI Education Center - Construction Safety Council, Hillside, Illinois</option><option value="10">National Safety OTI Education Center - National Safety Council, Itasca, Illinois</option><option value="11">National Safety OTI Education Center - Northern Illinois University, DeKalb, Illinois</option><option value="27">Rochester Institute of Technology, Rochester, New York</option><option value="5">Rocky Mountain Education Center - Red Rocks Community College, Lakewood, Colorado</option><option value="21">Southeastern OTI Education Center - North Carolina State University, Raleigh, North Carolina</option><option value="34">Southeastern OTI Education Center - University of Tennessee, Nashville, Tennessee</option><option value="35">Southwest Education Center - Texas A&amp;M Engineering Extension Service(TEEX), Mesquite, Texas</option><option value="1">University of Alabama, The, Tuscaloosa, Alabama</option><option value="4">University of California, San Diego, San Diego, California</option><option value="6">University of South Florida, Wesley Chapel, Florida</option><option value="36">University of Texas at Arlington, Arlington, Texas</option><option value="40">University of Washington, Seattle, Washington</option><option value="43">Volunteer State Community College, Gallatin, Tennessee</option></select></h2></p>
-<div style="border: 2px solid D9D9D9; padding: 2px;">
+<p><h2>Sponsoring OTI Education Center: <select id="select3" name="select3" class="frmFieldSearch" ng-model="course.edCenterId">
+    <option value="0"> </option><option value="45">Arizona State University, Tempe, Arizona</option><option value="33">Atlantic OSHA Education Center - Universidad de Metropolotania, Bayamón, Puerto Rico</option><option value="28">Atlantic OSHA Education Center - University at Buffalo, Buffalo, New York</option><option value="25">Atlantic OSHA Education Center - University of Medicine and Dentistry of New Jersey, Piscataway, New Jersey</option><option value="2">California State University Dominguez Hills, Carson, California</option><option value="3">Chabot-Las Positas Community College District OSHA Training Center, Dublin, California</option><option value="26">College of Southern Nevada, Las Vegas, Nevada</option><option value="12">Eastern Kentucky University, Richmond, Kentucky</option><option value="42">Florida States College at Jacksonville, Jacksonville, Florida</option><option value="7">Georgia Tech Research Institute, Atlanta, Georgia</option><option value="17">Great Lakes Regional OTI Education Center - Eastern Michigan University, Ypsilanti, Michigan</option><option value="18">Great Lakes Regional OTI Education Center - UAW Health and Safety Department, Detroit, Michigan</option><option value="30">Great Lakes Regional OTI Education Center - University of Cincinnati, Cincinnati, Ohio</option><option value="23">Keene State College, Manchester, New Hampshire</option><option value="19">Metropolitan Community Colleges, Kansas City, Missouri</option><option value="29">Mid-America OTI Education Center - Ohio Valley Construction Education Foundation, Springboro, Ohio</option><option value="14">Mid-Atlantic OTI Education Center - Chesapeake Region Safety Council, Baltimore, Maryland</option><option value="31">Mid-Atlantic OTI Education Center - ECRI Institute, Plymouth Meeting, Pennsylvania</option><option value="15">Mid-Atlantic OTI Education Center - Johns Hopkins University &amp; Health System, Baltimore, Maryland</option><option value="32">Mid-Atlantic OTI Education Center - Mid-Atlantic Construction Safety Council, Philadelphia, Pennsylvania</option><option value="44">Mid-South OTI Education Center, Baton Rouge, Louisiana</option><option value="8">Midwest OTI Education Center - Kirkwood Community College, Cedar Rapids, Iowa</option><option value="22">Midwest OTI Education Center - National Safety Council, Omaha, Nebraska</option><option value="20">Midwest OTI Education Center - Saint Louis University, St. Louis, Missouri</option><option value="37">Mountain West OTI Education Center - Salt Lake Community College, Salt Lake City, Utah</option><option value="38">Mountain West OTI Education Center - Uintah Basin Applied Technology College (UBATC), Vernal, Utah</option><option value="39">Mountain West OTI Education Center - University of Utah, Salt Lake City, Utah</option><option value="13">National Resource Center - Center to Protect Workers Rights (CPWR), Silver Spring, Maryland</option><option value="16">National Resource Center - National Labor College, Silver Spring, Maryland</option><option value="41">National Resource Center - West Virginia University, Morgantown, West Virginia</option><option value="9">National Safety OTI Education Center - Construction Safety Council, Hillside, Illinois</option><option value="10">National Safety OTI Education Center - National Safety Council, Itasca, Illinois</option><option value="11">National Safety OTI Education Center - Northern Illinois University, DeKalb, Illinois</option><option value="27">Rochester Institute of Technology, Rochester, New York</option><option value="5">Rocky Mountain Education Center - Red Rocks Community College, Lakewood, Colorado</option><option value="21">Southeastern OTI Education Center - North Carolina State University, Raleigh, North Carolina</option><option value="34">Southeastern OTI Education Center - University of Tennessee, Nashville, Tennessee</option><option value="35">Southwest Education Center - Texas A&amp;M Engineering Extension Service(TEEX), Mesquite, Texas</option><option value="1">University of Alabama, The, Tuscaloosa, Alabama</option><option value="4">University of California, San Diego, San Diego, California</option><option value="6">University of South Florida, Wesley Chapel, Florida</option><option value="36">University of Texas at Arlington, Arlington, Texas</option><option value="40">University of Washington, Seattle, Washington</option><option value="43">Volunteer State Community College, Gallatin, Tennessee</option>
+</select></h2></p>
+<p>
+    <form name="myForm">
+    <button ng-click="cancel()">Cancel</button>
+    <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid">Save</button>
+    <button ng-click="delete()">Delete</button>
+</p><div style="border: 2px solid D9D9D9; padding: 2px;">
     <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
     <input  type= "hidden" id="crsId"  ng-model="course.course_id"/>
     <table width="970" border="0" cellspacing="0" cellpadding="0" summary="">
@@ -14,82 +21,44 @@ Location: {{course.location}}<br>
                 <table width="100%" border="0" cellspacing="0" cellpadding="2" summary="">
                     <tr valign="top" >
                         <td><span class="blackTen"><strong>Title:</strong>*</span></td>
-                        <td class="blackTen"> <select id="crsTitle" name="crsTitle" class="frmFieldSearch" onChange="getDesc(this);" ng-model="course.title">
-                            <option value="0"></option>
-                            <option value="1">#500 Trainer Course in Occupational Safety and Health Standards for the Construction Industry</option>
-                            <option value="2">#501 Trainer Course in Occupational Safety and Health Standards for General Industry</option>
-                            <option value="3">#502 Update for Construction Industry Outreach Trainers</option>
-                            <option value="4">#503 Update for General Industry Outreach Trainers</option>
-                            <option value="5">#510 Occupational Safety and Health Standards for the Construction Industry</option>
-                            <option value="6">#511 Occupational Safety and Health Standards for General Industry</option>
-                            <option value="7">#521 OSHA Guide to Industrial Hygiene</option>
-                            <option value="8">#2015 Hazardous Materials</option>
-                            <option value="9">#2045 Machinery and Machine Guarding Standards</option>
-                            <option value="10">#2225 Respiratory Protection</option>
-                            <option value="11">#2250 Principles of Ergonomics Applied to Work-Related Musculoskeletal and Nerve Disorders</option>
-                            <option value="12">#2264 Permit-Required Confined Space Entry</option>
-                            <option value="13">#3010 Excavation, Trenching and Soil Mechanics</option>
-                            <option value="14">#3095 Electrical Standards</option>
-                            <option value="15">#3110 Fall Arrest Systems</option>
-                            <option value="16">#5109 Occupational Safety and Health Standards for the Construction Industry including CAL-OSHA Requirements</option>
-                            <option value="17">#5119 Occupational Safety and Health Standards for General Industry including CAL-OSHA Requirements</option>
-                            <option value="18">#5400 Trainer Course in Occupational Safety and Health Standards for the Maritime Industry</option>
-                            <option value="19">#5402 Maritime Industry Trainer Update Course</option>
-                            <option value="20">#5410 Occupational Safety and Health Standards for the Maritime Industry</option>
-                            <option value="21">#5600 Disaster Site Worker Trainer Course</option>
-                            <option value="22">#5602 Disaster Site Worker Trainer Update Course</option>
-                            <option value="23">#6000 Collateral Duty Course for Other Federal Agencies</option>
-                            <option value="24">#7000 OSHA Ergonomic Guidelines for Nursing Homes</option>
-                            <option value="25">#7005 Public Warehousing and Storage</option>
-                            <option value="26">#7100 Introduction to Machinery and Machine Safeguarding</option>
-                            <option value="27">#7105 Evacuation and Emergency Preparedness</option>
-                            <option value="28">#7110 Safe Bolting: Principles and Practices</option>
-                            <option value="29">#7115 Lockout/Tagout</option>
-                            <option value="33">#7120 Introduction to Combustible Dust Hazards (2 days)</option>
-                            <option value="34">#7125 Seminar on Combustible Dust Hazards (1 day)</option>
-                            <option value="30">#7200 Bloodborne Pathogen Exposure Control for Healthcare Facilities</option>
-                            <option value="31">#7205 Health Hazard Awareness</option>
-                            <option value="32">#7210 Pandemic Influenza Preparedness</option>
-                            <option value="35">#7300 OSHA's Permit-Required Confined Space Standard</option>
-                            <option value="36">#7400 Trainer Course in Construction Noise</option>
-                            <option value="37">#7405 Fall Hazard Awareness for the Construction Industry</option>
-                            <option value="38">#7410 Managing Excavation Hazards</option>
-                            <option value="39">#7415 OSHA Construction Industry Requirements Awareness of Major Hazards and Prevention Strategies</option>
-                            <option value="40">#7500 Introduction to Safety and Health Management</option>
-                            <option value="41">#7505 Introduction to Accident Investigation</option>
-                            <option value="42">#7510 Introduction to OSHA for Small Business</option>
-                            <option value="43">#7845 Recordkeeping Rule Seminar</option>
-                        </select> </td>
+                        <td class="blackTen">
+                            <select ng-options="title.name for title in courseTitles" ng-required="true" ng-model="course.courseTitle" value="{{course.courseTitle}}"></select>
+                        </td>
                     </tr>
                     <tr valign="top" >
                         <td class="blackTen"><strong>Description:</strong></td>
-                        <td ><textarea id="titleDesc" name="titleDesc" cols="92" rows="7" readonly class="blackSix" style="background-color:#F3F3F3;" ng-model="course.desc_link"></textarea></td>
+                        <td ><textarea id="titleDesc" name="titleDesc" cols="92" rows="7" readonly ng-model="course.courseTitle.description"></textarea></td>
                     </tr>
                     <tr valign="top" >
                         <td colspan="2" class="blackTen"></td>
                     </tr>
                     <tr valign="top" >
                         <td width="7%" class="blackTen"><strong>Location:</strong>* </td>
-                        <td class="blackTen"> <input id="textfield4" name="textfield4" type="text" size="92" ng-model="course.location"></td>
+                        <td class="blackTen">
+                            <input id="textfield4" name="textfield4" type="text" size="92" ng-model="course.location" ng-required="true">
+                        </td>
                     </tr>
                     <tr valign="top" >
                         <td class="blackTen"><strong>Address:</strong>*</td>
-                        <td class="blackTen"> <input id="textfield" name="textfield" type="text" size="92" ng-model="course.address"></td>
+                        <td class="blackTen"> <input id="textfield" name="textfield" type="text" size="92" ng-model="course.address" ng-required="true"></td>
                     </tr>
                     <tr>
                         <td valign="middle" class="blackTen"><strong>City:</strong>*</td>
-                        <td valign="top"  class="blackTen"> <input name="textfield2" id="textfield2" type="text" size="70" ng-model="course.city"> <strong> </strong></td>
+                        <td valign="top"  class="blackTen"> <input name="textfield2" id="textfield2" type="text" size="70" ng-model="course.city" ng-required="true"> <strong> </strong></td>
                     </tr>
                     <tr valign="top" >
                         <td class="blackTen"><strong>State: </strong>*</td>
-                        <td class="blackTen"><strong><select id="select4" name="select4" class="frmFieldSearch" ng-model="course.state">
-                            <option value="2">Alaska</option><option value="1">Alabama</option><option value="4">Arkansas</option><option value="52">American Samoa</option><option value="3">Arizona</option><option value="5">California</option><option value="6">Colorado</option><option value="7">Connecticut</option><option value="9">District of Columbia</option><option value="8">Deleware</option><option value="10">Florida</option><option value="11">Georgia</option><option value="53">Guam</option><option value="12">Hawaii</option><option value="16">Iowa</option><option value="13">Idaho</option><option value="14">Illinois</option><option value="15">Indiana</option><option value="17">Kansas</option><option value="18">Kentucky</option><option value="19">Louisiana</option><option value="22">Massachusetts</option><option value="21">Maryland</option><option value="20">Maine</option><option value="23">Michigan</option><option value="24">Minnesota</option><option value="26">Missouri</option><option value="25">Mississippi</option><option value="27">Montana</option><option value="34">North Carolina</option><option value="35">North Dakota</option><option value="28">Nebraska</option><option value="30">New Hampshire</option><option value="31">New Jersey</option><option value="32">New Mexico</option><option value="29">Nevada</option><option value="33">New York</option><option value="36">Ohio</option><option value="37">Oklahoma</option><option value="38">Oregon</option><option value="39">Pennsylvania</option><option value="54">Puerto Rico</option><option value="40">Rhode Island</option><option value="41">South Carolina</option><option value="42">South Dakota</option><option value="43">Tennessee</option><option value="44">Texas</option><option value="45">Utah</option><option value="47">Virginia</option><option value="55">US Virgin Islands</option><option value="46">Vermont</option><option value="48">Washington</option><option value="50">Wisconsin</option><option value="49">West Virginia</option><option value="51">Wyoming</option></select></strong></td>
+                        <td class="blackTen"><strong>
+                            <select id="select4" name="select4" class="frmFieldSearch" ng-model="course.stateId" ng-required="true">
+
+                                <option ng-repeat="stateCode in stateCodes" value="{{stateCode.stateCd}}">{{stateCode.stateCd}}</option>
+                            </select></strong></td>
                     </tr>
                     <tr valign="top" >
                         <td colspan="2"><span class="blackTen"><strong>Registration
                             Link:</strong>*</span> <span class="blackSix">[Website
                         links only. Please ensure link includes &quot;http://&quot;.]</span>
-                            <input id="url" name="url" type="text" size="106" ng-model="course.regUrl"></td>
+                            <input id="url" name="url" type="text" size="106" ng-model="course.url" ng-required="true"></td>
                     </tr>
                 </table>
             </td>
@@ -97,38 +66,43 @@ Location: {{course.location}}<br>
                 <table width="100%" border="0" cellspacing="0" cellpadding="2" summary="" class="blackTen">
                     <tr valign="top" >
                         <td width="48%" ><strong>Start Date:</strong>*</td>
-                        <td width="52%" ><input id="startDate" name="startDate" type="text" size="10"  ng-model="course.start"></td>
+                        <td width="52%" >
+                            <input ng-model="course.startDate" value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true">
                     </tr>
                     <tr valign="top" >
                         <td ><strong>End Date:</strong>*</td>
-                        <td width="52%"><input id="endDate" name="endDate" type="text" size="10" ng-model="course.end"></td>
+                        <td width="52%">
+                            <input ng-model="course.endDate" value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true">
+                        </td>
                     </tr>
                     <tr valign="top" >
                         <td ><strong>No. of Days:</strong></td>
-                        <td ><input name="select" id="select" type="text" size="10" ng-model="course.days"></td>
+                        <td ><input name="select" id="select" type="text" size="10" ng-model="course.noOfDays"></td>
                     </tr>
                     <tr valign="top" >
                         <td ><strong>Contact Hours:</strong>*</td>
-                        <td ><input name="courseLength" id="courseLength" type="text" size="10" ng-model="course.hours"></td>
+                        <td ><input name="courseLength" id="courseLength" type="text" size="10" ng-model="course.length" ng-required="true"></td>
                     </tr>
                     <tr valign="top" >
                         <td ><strong>CM Points: </strong></td>
-                        <td ><input name="cmPoints" id="cmPoints" type="text" size="10" ng-model="course.cmpoints"></td>
+                        <td ><input name="cmPoints" id="cmPoints" type="text" size="10" ng-model="course.cmPoints"></td>
                     </tr>
                     <tr valign="top" >
                         <td ><strong>CEU Points:</strong></td>
-                        <td ><input name="ceuPoints" id="ceuPoints" type="text" size="10" ng-model="course.ceupoints"></td>
+                        <td ><input name="ceuPoints" id="ceuPoints" type="text" size="10" ng-model="course.ceuPoints"></td>
                     </tr>
                     <tr valign="top"  >
                         <td colspan="2" class="blackTen"></td>
                     </tr>
                     <tr valign="top" >
                         <td ><strong>Cost: </strong></td>
-                        <td><input name="cost" type="text" id="cost" size="10" value="" ng-model="course.tuition"></td>
+                        <td><input name="cost" type="text" id="cost" size="10" value="" ng-model="course.cost"></td>
                     </tr>
                     <tr>
-                        <td valign="middle" ><strong>Language:</strong>*</td>
-                        <td valign="top"><select id="select2" name="select2" class="frmFieldSearch"><option value="1">English</option><option value="3">Korean</option><option value="2">Spanish</option></select></td>
+                        <td valign="middle" ><strong>Language: {{course.courseLanguage.lang}}</strong>*</td>
+                        <td valign="top">
+                            <select ng-options="language.lang for language in courseLanguages" ng-required="true" ng-model="course.courseLanguage" value="{{course.courseLanguage}}"></select>
+                        </td>
                     </tr>
                 </table>
                 <table width="100%" border="0" cellspacing="0" cellpadding="1" summary="">
@@ -145,3 +119,6 @@ Location: {{course.location}}<br>
         </tr>
     </table>
 </div>
+
+<a data-dismiss="modal">Close 1</a>
+</form>
