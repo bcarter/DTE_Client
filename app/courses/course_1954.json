@@ -1,41 +1,36 @@
-{"activeInd":"1", "address":"7600 Dublin Boulevard Suite 102", "ceuPoints":"0.7", "city":"Dublin", "cmPoints":"0", "cost":"155"
-    , "courseTitle":{
-    "description":"The focus of this 5 hour course is to identify, blah blah blah.....",
-    "id":"37",
-    "insertDate":"2012-01-11T00:00:00-07:00",
-    "name":"#7405 Fall Hazard Awareness for the Construction Industry",
-    "updateUser":"DTE_COURSE_ADMIN"
-}
-    , "edCenterId":"3", "educationCenter":{
-    "city":"Dublin",
-    "description":"initial insert",
-    "id":"3",
-    "insertDate":"2012-01-11T00:00:00-07:00",
-    "name":"Chabot-Las Positas Community College District OSHA Training Center",
-    "otiStateCodes":{
-        "description":"California",
-        "id":"5",
-        "insertDate":"2012-01-11T00:00:00-07:00",
-        "stateCd":"CA",
-        "updateUser":"DTE_COURSE_ADMIN"
+{"activeInd": "1", "address": "7600 Dublin Boulevard Suite 102", "ceuPoints": "0.7", "city": "Dublin", "cmPoints": "0", "cost": "155", "courseTitle": {
+    "description": "The focus of this 5 hour course is to identify, blah blah blah.....",
+    "id": "37",
+    "insertDate": "2012-01-11T00:00:00-07:00",
+    "name": "#7405 Fall Hazard Awareness for the Construction Industry",
+    "updateUser": "DTE_COURSE_ADMIN"
+}, "edCenterId": "3", "educationCenter": {
+    "city": "Dublin",
+    "description": "initial insert",
+    "id": "3",
+    "insertDate": "2012-01-11T00:00:00-07:00",
+    "name": "Chabot-Las Positas Community College District OSHA Training Center",
+    "otiStateCodes": {
+        "description": "California",
+        "id": "5",
+        "insertDate": "2012-01-11T00:00:00-07:00",
+        "stateCd": "CA",
+        "updateUser": "DTE_COURSE_ADMIN"
     },
-    "updateDate":"2012-02-07T00:00:00-07:00",
-    "updateUser":"DTE_COURSE_ADMIN",
-    "url":"http://www.osha.gov/pls/oshaweb/owaredirect.html?p_url=http://www.osha4you.com"
-}, "endDate":"2012-12-13T00:00:00-07:00"
-    , "id":"108", "industryId":"1"
-    , "insertDate":"2012-02-28T00:00:00-07:00"
-    , "courseLanguage":{
-        "description":"English",
-        "id":"1",
-        "insertDate":"2012-01-11T00:00:00-07:00",
-        "lang":"English",
-        "updateUser":"DTE_COURSE_ADMIN"
-    }, "length":"7", "location":"Dublin OSHA Training Institute Education Center", "noOfDays":"1"
-    , "startDate":"2012-12-13T00:00:00-07:00", "stateCode":{
-    "description":"California",
-    "id":"5",
-    "insertDate":"2012-01-11T00:00:00-07:00",
-    "stateCd":"CA",
-    "updateUser":"DTE_COURSE_ADMIN"
-}, "stateId":"5", "titleId":"37", "updateUser":"DTE_COURSE_ADMIN", "url":"http://www.osha4you.com/osha-7405"}
+    "updateDate": "2012-02-07T00:00:00-07:00",
+    "updateUser": "DTE_COURSE_ADMIN",
+    "url": "http://www.osha.gov/pls/oshaweb/owaredirect.html?p_url=http://www.osha4you.com"
+}, "endDate": "2012-12-13T00:00:00-07:00", "id": "108", "industryId": "1", "insertDate": "2012-02-28T00:00:00-07:00", "courseLanguage": {
+    "description": "English",
+    "id": "1",
+    "insertDate": "2012-01-11T00:00:00-07:00",
+    "lang": "English",
+    "updateUser": "DTE_COURSE_ADMIN"
+}, "length": "7", "location": "Dublin OSHA Training Institute Education Center", "noOfDays": "1", "startDate": "2012-12-13T00:00:00-07:00"
+, "stateCode": {
+    "description": "California",
+    "id": "5",
+    "insertDate": "2012-01-11T00:00:00-07:00",
+    "stateCd": "CA",
+    "updateUser": "DTE_COURSE_ADMIN"
+}, "stateId": "5", "titleId": "37", "updateUser": "DTE_COURSE_ADMIN", "url": "http://www.osha4you.com/osha-7405"}

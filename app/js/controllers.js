@@ -17,21 +17,21 @@ function CourseListCtrl($scope, $http, Course) {
     );
 
     $scope.head = [
-        {head:"OTI Education Center", column:"educationCenter.name"},
-        {head:"Course Title", column:"courseTitle.name"},
-        {head:"Start Date", column:"startDate"},
-        {head:"End Date", column:"endDate"},
-        {head:"Training Location", column:"location"},
-        {head:"Address", column:"address"},
-        {head:"City", column:"city"},
-        {head:"State", column:"stateCode.stateCd"},
-        {head:"CM", column:"cmPoints"},
-        {head:"CEU", column:"ceuPoints"}
+        {head: "OTI Education Center", column: "educationCenter.name"},
+        {head: "Course Title", column: "courseTitle.name"},
+        {head: "Start Date", column: "startDate"},
+        {head: "End Date", column: "endDate"},
+        {head: "Training Location", column: "location"},
+        {head: "Address", column: "address"},
+        {head: "City", column: "city"},
+        {head: "State", column: "stateCode.stateCd"},
+        {head: "CM", column: "cmPoints"},
+        {head: "CEU", column: "ceuPoints"}
     ];
 
     $scope.sort = {
-        column:'startDate',
-        descending:false
+        column: 'startDate',
+        descending: false
     };
 
     $scope.selectedCls = function (column) {
@@ -66,7 +66,7 @@ function CourseListCtrl($scope, $http, Course) {
 //CourseListCtrl.$inject = ['$scope', '$http', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $http, Course) {
+function CourseDetailCtrl($scope, $routeParams, $http, $q, $timeout, Course) {
     $scope.date = new Date();
     if ($routeParams.course_id === "new") {
         $scope.course = new Course();
@@ -76,49 +76,59 @@ function CourseDetailCtrl($scope, $routeParams, $http, Course) {
 
     } else {
 
-
-        /*
-         $http.get('courses/course_1954.json').success(function (data) {
-         $scope.course = data;
-         $scope.course_id = $scope.course.course_id;
-         $scope.location = $scope.course.location;
-         $scope.course.endDate = new Date();
-
-         for (var i = 0; i < $scope.courseLanguages.length; i++) {
-         if ($scope.courseLanguages[i].id === $scope.course.courseLanguage.id) {
-         $scope.course.courseLanguage = $scope.courseLanguages[i];
-         break;
-         }
-         }
-         });
-         */
-
-        $scope.course = Course.query({course_id:$routeParams.course_id}, function (course) {
-            $scope.course_id = $routeParams.course_id;
-            $scope.location = course.location;
-            $scope.course.endDate = new Date();
-
-            $http.get('courses/courseLanguages.json').success(function (data) {
-                $scope.courseLanguages = data;
-
-                for (var i = 0; i < $scope.courseLanguages.length; i++) {
-                    if ($scope.courseLanguages[i].id === $scope.course.courseLanguage.id) {
-                        $scope.course.courseLanguage = $scope.courseLanguages[i];
-                        break;
-                    }
-                }
-            });
+        var courseTitlesP = $http.get('courses/courseTitle.json').success(function (data) {
+            $scope.courseTitles = data;
         });
 
+        var stateCodesP = $http.get('courses/stateCodes.json').success(function (data) {
+            $scope.stateCodes = data;
+        });
+
+
+        var courseLanguagesP = $http.get('courses/courseLanguages.json').success(function (data) {
+//            $scope.derferred = $q.defer();
+            $timeout(function () {
+                $scope.courseLanguages = data;
+                $scope.derferred.resolve();
+            }, 5000)
+//            return $scope.derferred.promise;
+        });
+
+
+            Course.query({course_id: $routeParams.course_id}, function (course) {
+//        var courseP = $http.get('courses/course_1954.json').success(function (data) {
+//            $scope.course_id = $scope.course.course_id;
+//            $scope.location = $scope.course.location;
+//            $scope.course.endDate = new Date();
+                $q.all([courseTitlesP, stateCodesP, courseLanguagesP]).then(function (values) {
+                try {
+                    for (var i = 0; i < $scope.courseTitles.length; i++) {
+                        if ($scope.courseTitles[i].id === course.courseTitle.id) {
+                            course.courseTitle = $scope.courseTitles[i];
+                            break;
+                        }
+                    }
+
+                    for (var i = 0; i < $scope.stateCodes.length; i++) {
+                        if ($scope.stateCodes[i].stateCd === course.stateCode.stateCd) {
+                            course.stateCode = $scope.stateCodes[i];
+                            break;
+                        }
+                    }
+
+                    for (var i = 0; i < $scope.courseLanguages.length; i++) {
+                        if ($scope.courseLanguages[i].id === course.courseLanguage.id) {
+                            course.courseLanguage = $scope.courseLanguages[i];
+                            break;
+                        }
+                    }
+                } catch (e) {
+                }
+
+                $scope.course = course;
+            })
+        });
     }
-
-    $http.get('courses/courseTitle.json').success(function (data) {
-        $scope.courseTitles = data;
-    });
-
-    $http.get('courses/stateCodes.json').success(function (data) {
-        $scope.stateCodes = data;
-    });
 
     $scope.save = function () {
         if ($routeParams.course_id === "new") {
@@ -144,5 +154,5 @@ function CourseDetailCtrl($scope, $routeParams, $http, Course) {
     }
 }
 
-//CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, 'Course'];
+//CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 
