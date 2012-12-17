@@ -66,7 +66,7 @@ function CourseListCtrl($scope, $http, Course) {
 //CourseListCtrl.$inject = ['$scope', '$http', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $http, $q, $timeout, Course) {
+function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
     $scope.date = new Date();
     if ($routeParams.course_id === "new") {
         $scope.course = new Course();
@@ -86,12 +86,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $timeout, Course) {
 
 
         var courseLanguagesP = $http.get('courses/courseLanguages.json').success(function (data) {
-//            $scope.derferred = $q.defer();
-            $timeout(function () {
-                $scope.courseLanguages = data;
-                $scope.derferred.resolve();
-            }, 5000)
-//            return $scope.derferred.promise;
+            $scope.courseLanguages = data;
         });
 
 
@@ -100,6 +95,11 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $timeout, Course) {
 //            $scope.course_id = $scope.course.course_id;
 //            $scope.location = $scope.course.location;
 //            $scope.course.endDate = new Date();
+                course.noOfDays = parseInt(course.noOfDays);
+                course.length = parseInt(course.length);
+                course.cmPoints = parseFloat(course.cmPoints);
+                course.ceuPoints = parseFloat(course.ceuPoints);
+                course.cost = parseFloat(course.cost);
                 $q.all([courseTitlesP, stateCodesP, courseLanguagesP]).then(function (values) {
                 try {
                     for (var i = 0; i < $scope.courseTitles.length; i++) {
@@ -145,12 +145,17 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $timeout, Course) {
                 } else (console.log(res))
             })
         }
+        $scope.changeView('courses');
     }
 
     $scope.delete = function () {
         $scope.course.activeInd = "0";
         $scope.save();
-        $scope.route = "/courses";
+        $scope.changeView('courses');
+    }
+
+    $scope.changeView = function(view){
+        $location.path(view); // path not hash
     }
 }
 
