@@ -1,0 +1,37 @@
+<div id="page3" class="subpage">
+    <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
+    <br>
+    <p class="blackTen">
+
+    <form name="userInputForm">
+    <table class="blackTwelve">
+        <tr>
+            <td width="150"><strong>Extranet Email:</strong></td>
+            <td width="70"><input  id="userEmail" name="UserEmail" type="email" size="50" ng-model="user.extranetEmail" ng-required="true"></td>
+        </tr>
+        <tr>
+            <td width="150"><strong>OTI Education Center:</strong></td>
+            <td width="100"><select ng-options="educationCenter.name for educationCenter in educationCenters" ng-required="true"
+                                       ng-model="user.educationCenter"></select>
+            </td>
+        </tr>
+        <tr><td><button ng-click="save()" ng-disabled="isClean() || userInputForm.$invalid">Add User</button></td></tr>
+
+
+    </table>
+    </form>
+    </p>
+</div>
+
+<div id = "header" style="width:980;" align="center">
+    <table width="100%" border="1"  summary="" ng-grid>
+        <!--<tr style="font-size:70%; font-weight:bold; background:#D9D9D9;" align="center" id = "srchTabHdr">-->
+            <!--<th ng-repeat="th in head" ng-class="selectedCls(th.column)" ng-click="changeSorting(th.column)">{{th.head}}</th>-->
+        <!--</tr>-->
+        <tr ng-repeat="user in users">
+            <td width="120">{{user.extranetEmail}}</td>
+            <td width="5">{{user.userType}}</td>
+            <td width="145">{{user.educationCenter.name}}</td>
+        </tr>
+    </table>
+</div>

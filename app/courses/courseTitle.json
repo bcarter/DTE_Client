@@ -1,0 +1,343 @@
+[
+    {
+        "description":"The focus of this 5 hour course is to identify, blah blah blah.....",
+        "id":"37",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7405 Fall Hazard Awareness for the Construction Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    },
+    {
+        "description":"In this one-day course, students will learn about the role and responsibility of the employer to assign a competent person to the excavation site and arm that person with the knowledge to perform the work properly. Topics include the understanding and application of definitions relating to OSHA's Excavation Standard (Subpart P), excavation hazards and control measures, soil analysis techniques, protective system requirements and emergency response. At the conclusion of this course, the participant will understand the importance and duties of a competent person towards excavation work and will have the knowledge and skills that are required to perform those duties.",
+        "id":"38",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7410 Managing Excavation Hazards",
+        "updateUser":"DTE_COURSE_ADMIN"
+    },
+    {
+        "description":"#500 Title",
+        "id":"1",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#500 Trainer Course in Occupational Safety and Health Standards for the Construction Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#501 Title",
+        "id":"2",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#501 Trainer Course in Occupational Safety and Health Standards for General Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#502 Title",
+        "id":"3",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#502 Update for Construction Industry Outreach Trainers",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#503 Title",
+        "id":"4",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#503 Update for General Industry Outreach Trainers",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#50 Title",
+        "id":"5",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#510 Occupational Safety and Health Standards for the Construction Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#511 Title",
+        "id":"6",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#511 Occupational Safety and Health Standards for General Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#521 Title",
+        "id":"7",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#521 OSHA Guide to Industrial Hygiene",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#2015 Title",
+        "id":"8",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#2015 Hazardous Materials",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#2045 Title",
+        "id":"9",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#2045 Machinery and Machine Guarding Standards",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#2225 Title",
+        "id":"10",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#2225 Respiratory Protection",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#2250 Title",
+        "id":"11",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#2250 Principles of Ergonomics Applied to Work-Related Musculoskeletal and Nerve Disorders",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#2264 Title",
+        "id":"12",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#2264 Permit-Required Confined Space Entry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#3010 Title",
+        "id":"13",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#3010 Excavation, Trenching and Soil Mechanics",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#3095 Title",
+        "id":"14",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#3095 Electrical Standards",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#3110 Title",
+        "id":"15",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#3110 Fall Arrest Systems",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5109 Title",
+        "id":"16",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5109 Occupational Safety and Health Standards for the Construction Industry including CAL-OSHA Requirements",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5119 Title",
+        "id":"17",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5119 Occupational Safety and Health Standards for General Industry including CAL-OSHA Requirements",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5400 Title",
+        "id":"18",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5400 Trainer Course in Occupational Safety and Health Standards for the Maritime Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5402 Title",
+        "id":"19",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5402 Maritime Industry Trainer Update Course",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5410 Title",
+        "id":"20",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5410 Occupational Safety and Health Standards for the Maritime Industry",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5600 Title",
+        "id":"21",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5600 Disaster Site Worker Trainer Course",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#5602 Title",
+        "id":"22",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#5602 Disaster Site Worker Trainer Update Course",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#6000 Title",
+        "id":"23",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#6000 Collateral Duty Course for Other Federal Agencies",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7000 Title",
+        "id":"24",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7000 OSHA Ergonomic Guidelines for Nursing Homes",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7005 Title",
+        "id":"25",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7005 Public Warehousing and Storage",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7100 Title",
+        "id":"26",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7100 Introduction to Machinery and Machine Safeguarding",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7105 Title",
+        "id":"27",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7105 Evacuation and Emergency Preparedness",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7110 Title",
+        "id":"28",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7110 Safe Bolting: Principles and Practices",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7115 Title",
+        "id":"29",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7115 Lockout/Tagout",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7120 Title",
+        "id":"33",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7120 Introduction to Combustible Dust Hazards (2 days)",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7125 Title",
+        "id":"34",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7125 Seminar on Combustible Dust Hazards (1 day)",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7200 Title",
+        "id":"30",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7200 Bloodborne Pathogen Exposure Control for Healthcare Facilities",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7205 Title",
+        "id":"31",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7205 Health Hazard Awareness",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7210 Title",
+        "id":"32",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7210 Pandemic Influenza Preparedness",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7300 Title",
+        "id":"35",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7300 OSHA's Permit-Required Confined Space Standard",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7400 Title",
+        "id":"36",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7400 Trainer Course in Construction Noise",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7415 Title",
+        "id":"39",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7415 OSHA Construction Industry Requirements Awareness of Major Hazards and Prevention Strategies",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7500 Title",
+        "id":"40",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7500 Introduction to Safety and Health Management",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7505 Title",
+        "id":"41",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7505 Introduction to Accident Investigation",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7510 Title",
+        "id":"42",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7510 Introduction to OSHA for Small Business",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"#7845 Title",
+        "id":"43",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "name":"#7845 Recordkeeping Rule Seminar",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+]

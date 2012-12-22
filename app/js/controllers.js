@@ -54,12 +54,20 @@ function CourseListCtrl($scope, $http, Course) {
 
     $scope.filterText = "";
 
-    $http.get('courses/courseTitle.json').success(function (data) {
-        $scope.courseTitles = data;
+    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
+        $scope.courseTitles = data.courseTitle;
     });
 
-    $http.get('courses/stateCodes.json').success(function (data) {
-        $scope.stateCodes = data;
+    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
+        $scope.stateCodes = data.stateCode;
+    });
+
+    var courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
+        $scope.courseLanguages = data.courseLanguage;
+    });
+
+    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
+        $scope.educationCenters = data.educationCenter;
     });
 }
 
@@ -91,8 +99,8 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
         $scope.course.activeInd = "1";
         $scope.course.industryId = 1;
     } else {
- //       Course.query({course_id: $routeParams.course_id}, function (course) {
-          $http.get('courses/course_1954.json').success(function (course) {
+        //       Course.query({course_id: $routeParams.course_id}, function (course) {
+        $http.get('courses/course_1954.json').success(function (course) {
             course.noOfDays = parseInt(course.noOfDays);
             course.length = parseInt(course.length);
             course.cmPoints = parseFloat(course.cmPoints);
@@ -149,7 +157,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
                     //alert(res.toString());
 //                    $location.path("/course");
                 } else {
-                   // alert("error: " + res.ok);
+                    // alert("error: " + res.ok);
                 }
             }, function (res){
                 alert("error: " + res);
@@ -170,4 +178,44 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 }
 
 //CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
+
+
+function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
+
+    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
+        $scope.educationCenters = data.educationCenter;
+    });
+
+    $scope.user = new User();
+
+    User.list({},
+        function (data) {
+            //Success
+            $scope.users = data.dteUser;
+        }
+        , function (data) {
+
+        }
+    );
+
+    $scope.save = function () {
+        User.insert({}, $scope.user, function (res) {
+            if (res.ok === 1) {
+            } else {
+                console.log(res);
+            }
+            $location.path("/users");
+        }, function (res) {
+            alert("error");
+            $location.path("/users");
+        })
+        //    $scope.changeView('courses');
+    };
+
+    $scope.changeView = function (view) {
+        $location.path(view); // path not hash
+    };
+}
+
+//UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 

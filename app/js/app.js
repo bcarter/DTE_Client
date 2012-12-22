@@ -8,5 +8,6 @@ angular.module('dteCourseAdmin', ['dteCourseAdminFilters', 'dteCourseAdminServic
         when('/', {templateUrl: 'partials/home.html'}).
         when('/courses', {templateUrl: 'partials/course-search.html', controller: CourseListCtrl}).
         when('/course/:course_id', {templateUrl: 'partials/course-detail.html', controller: CourseDetailCtrl}).
+        when('/users', {templateUrl: 'partials/userEdit.html', controller: UsersCtrl}).
         otherwise({redirectTo: '/'});
 }]);

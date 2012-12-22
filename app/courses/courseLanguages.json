@@ -1,0 +1,25 @@
+[
+    {
+        "description":"English",
+        "id":"1",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "lang":"English",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"Spanish",
+        "id":"2",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "lang":"Spanish",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+    ,
+    {
+        "description":"Korean",
+        "id":"3",
+        "insertDate":"2012-01-11T00:00:00-07:00",
+        "lang":"Korean",
+        "updateUser":"DTE_COURSE_ADMIN"
+    }
+]
