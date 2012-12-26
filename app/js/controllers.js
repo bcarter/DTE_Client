@@ -6,6 +6,32 @@ function CourseListCtrl($scope, $http, Course) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
 
+//    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
+    $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
+        $scope.courseTitles = data.courseTitle;
+    }).error(function (data, status, headers, config) {
+            alert("Titles : " + status + "<br>" + data);
+        });
+
+//    $scope.courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
+    $scope.courseLanguagesP = $http.get('/DTEAdmin/services/Language').success(function (data) {
+        $scope.courseLanguages = data.courseLanguage;
+    });
+
+//    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
+    $scope.stateCodesP = $http.get('/DTEAdmin/services/StateCode').success(function (data) {
+        $scope.stateCodes = data.stateCode;
+    }).error(function (data, status, headers, config) {
+            alert("States : " + status + "<br>" + data);
+        });
+
+//    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
+    $scope.educationCentersP = $http.get('/DTEAdmin/services/EducationCenter').success(function (data) {
+        $scope.educationCenters = data.educationCenter;
+    }).error(function (data, status, headers, config) {
+            alert("Ed Centers : " + status + "<br>" + data);
+        });
+
     Course.list({},
         function (data) {
             //Success
@@ -21,6 +47,7 @@ function CourseListCtrl($scope, $http, Course) {
         {head: "Course Title", column: "courseTitle.name"},
         {head: "Start Date", column: "startDate"},
         {head: "End Date", column: "endDate"},
+        {head: "No. of Days", column: "noOfDays"},
         {head: "Training Location", column: "location"},
         {head: "Address", column: "address"},
         {head: "City", column: "city"},
@@ -48,27 +75,17 @@ function CourseListCtrl($scope, $http, Course) {
         }
     };
 
-    $scope.numberOfPages = function () {
-        return Math.ceil($scope.filtered.length / $scope.pageSize);
+    $scope.numberOfPages = function (filtered) {
+        return Math.ceil(filtered.length / $scope.pageSize);
     };
 
     $scope.filterText = "";
 
-    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
-        $scope.courseTitles = data.courseTitle;
-    });
-
-    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
-        $scope.stateCodes = data.stateCode;
-    });
-
-    var courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
-        $scope.courseLanguages = data.courseLanguage;
-    });
-
-    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
-        $scope.educationCenters = data.educationCenter;
-    });
+    $scope.advFilterText = {"startDate":""
+        ,"endDate":""
+        ,"noOfDays":""
+        ,"cmPoints":false
+        ,"ceuPoints":false};
 }
 
 //CourseListCtrl.$inject = ['$scope', '$http', 'Course'];
@@ -77,21 +94,21 @@ function CourseListCtrl($scope, $http, Course) {
 function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
     $scope.date = new Date();
 
-    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
-        $scope.courseTitles = data.courseTitle;
-    });
-
-    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
-        $scope.stateCodes = data.stateCode;
-    });
-
-    var courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
-        $scope.courseLanguages = data.courseLanguage;
-    });
-
-    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
-        $scope.educationCenters = data.educationCenter;
-    });
+//    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
+//        $scope.courseTitles = data.courseTitle;
+//    });
+//
+//    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
+//        $scope.stateCodes = data.stateCode;
+//    });
+//
+//    var courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
+//        $scope.courseLanguages = data.courseLanguage;
+//    });
+//
+//    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
+//        $scope.educationCenters = data.educationCenter;
+//    });
 
     if ($routeParams.course_id === "new") {
         $scope.course = new Course();
@@ -99,14 +116,14 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
         $scope.course.activeInd = "1";
         $scope.course.industryId = 1;
     } else {
-        //       Course.query({course_id: $routeParams.course_id}, function (course) {
-        $http.get('courses/course_1954.json').success(function (course) {
+        Course.query({course_id: $routeParams.course_id}, function (course) {
+//        $http.get('courses/course_1954.json').success(function (course) {
             course.noOfDays = parseInt(course.noOfDays);
             course.length = parseInt(course.length);
             course.cmPoints = parseFloat(course.cmPoints);
             course.ceuPoints = parseFloat(course.ceuPoints);
             course.cost = parseFloat(course.cost);
-            $q.all([courseTitlesP, stateCodesP, courseLanguagesP, educationCentersP]).then(function (values) {
+            $q.all([$scope.courseTitlesP, $scope.stateCodesP, $scope.courseLanguagesP, $scope.educationCentersP]).then(function (values) {
                 try {
                     for (var i = 0; i < $scope.courseTitles.length; i++) {
                         if ($scope.courseTitles[i].id === course.courseTitle.id) {
@@ -159,7 +176,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
                 } else {
                     // alert("error: " + res.ok);
                 }
-            }, function (res){
+            }, function (res) {
                 alert("error: " + res);
             })
         }

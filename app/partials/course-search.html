@@ -36,11 +36,11 @@
                 	<option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
               	</select>
 
-                <strong>Start Date:</strong><input id="pg3StartDate" name="pg3StartDate" type="text" size="10" value="mm/dd/yyyy" ui-date>&nbsp;
-                <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" value="mm/dd/yyyy" ui-date>&nbsp;
-                <strong>No. of Days:</strong><input id="noOfDays" name="noOfDays" type="text" size="2" value="">&nbsp;
-                <strong>CM:</strong> <input type="checkbox" id="pg3cmPoints" name="pg3cmPoints"  ng-model="filterText.cmPoints">&nbsp;
-                <strong>CEU:</strong> <input type="checkbox" id="pg3ceuPoints" name="pg3ceuPoints" value="Y">
+                <strong>Start Date:</strong><input id="pg3StartDate" name="pg3StartDate" type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date>&nbsp;
+                <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date>&nbsp;
+                <strong>No. of Days:</strong><input id="noOfDays" name="noOfDays" ng-model="advFilterText.noOfDays" type="text" size="2" value="">&nbsp;
+                <strong>CM:</strong> <input type="checkbox" id="pg3cmPoints" name="pg3cmPoints" ng-model="advFilterText.cmPoints" data-ng-true-value="!0" data-ng-false-value="">&nbsp;
+                <strong>CEU:</strong> <input type="checkbox" id="pg3ceuPoints" name="pg3ceuPoints" ng-model="advFilterText.ceuPoints" data-ng-true-value="!0" data-ng-false-value="">
             </td>
         </tr>
     </table>
@@ -49,7 +49,7 @@
 <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
         Previous
     </button>
-    <span ng-bind-template="{{currentPage+1}}">1</span>/<span ng-bind-template="{{numberOfPages()}}">1</span>
+    <span ng-bind-template="{{currentPage+1}}">1</span>/<span ng-bind-template="{{numberOfPages(filtered)}}">1</span>
     <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1">
         Next
     </button>
@@ -59,11 +59,12 @@
                 <tr style="font-size:70%; font-weight:bold; background:#D9D9D9;" align="center" id = "srchTabHdr">
                     <th ng-repeat="th in head" ng-class="selectedCls(th.column)" ng-click="changeSorting(th.column)">{{th.head}}</th>
                 </tr>
-                <tr ng-repeat="course in filtered = (courses | filter:filterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <tr ng-repeat="course in filtered = (courses | filter:filterText | cmGTZero:advFilterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
                     <td width="145">{{course.educationCenter.name}}</td>
                     <td width="175"><a href="#/course/{{course.id}}">{{course.courseTitle.name}}</a></td>
                     <td width="70">{{course.startDate | date:'MM/dd/yyyy'}}</td>
                     <td width="70">{{course.endDate | date:'MM/dd/yyyy'}}</td>
+                    <td width="80">{{course.noOfDays}}</td>
                     <td width="110">{{course.location}}</td>
                     <td width="120">{{course.address}}</td>
                     <td width="80">{{course.city}}</td>
