@@ -742,7 +742,7 @@ function courseSearch(pageNo){
             courses = xmlDoc.getElementsByTagName("course");
 
             for(i=0; i < courses.length; i++){
-                var tabId = courses[i].getElementsByTagName("course_id")[0].childNodes[0].nodeValue;
+                var tabId = courses[i].getElementsByTagName("courseId")[0].childNodes[0].nodeValue;
                 var colorStr;
                 var vFeatures = '"dialogWidth:1100px"';
 
@@ -752,11 +752,11 @@ function courseSearch(pageNo){
                     backgroundStr = "background:#F3F3F3;"
                 }
 
-                userEditable = '</td><td width="40" align="center" valign="top"><a target="_blank" href="course_input_screen.html?p_course_id='+courses[i].getElementsByTagName("course_id")[0].childNodes[0].nodeValue+'" title="Edit"> <img src="box_edit.png" alt="Edit" title="Edit" border="0"/></a>' +
-                        '</td><td width="30" align="center" valign="top"><img src="box_delete.png" alt="Delete" title="Delete" border="0" onclick="deleteRow(' + courses[i].getElementsByTagName("course_id")[0].childNodes[0].nodeValue + ')"/>';
+                userEditable = '</td><td width="40" align="center" valign="top"><a target="_blank" href="course_input_screen.html?p_course_id='+courses[i].getElementsByTagName("courseId")[0].childNodes[0].nodeValue+'" title="Edit"> <img src="box_edit.png" alt="Edit" title="Edit" border="0"/></a>' +
+                        '</td><td width="30" align="center" valign="top"><img src="box_delete.png" alt="Delete" title="Delete" border="0" onclick="deleteRow(' + courses[i].getElementsByTagName("courseId")[0].childNodes[0].nodeValue + ')"/>';
 
-                dataString = dataString + '<tr style="font-size:70%; '+ backgroundStr + '" ondblclick=window.showModalDialog("course_input_screen.html?p_course_id=' + courses[i].getElementsByTagName("course_id")[0].childNodes[0].nodeValue + '","",' + vFeatures + ');> <td width="140" valign="top"> ' + courses[i].getElementsByTagName("ed_center")[0].childNodes[0].nodeValue +
-                        '</td><td id="crsId' + i + '"width="0" valign="top" style="display:none">'+ courses[i].getElementsByTagName("course_id")[0].childNodes[0].nodeValue +
+                dataString = dataString + '<tr style="font-size:70%; '+ backgroundStr + '" ondblclick=window.showModalDialog("course_input_screen.html?p_course_id=' + courses[i].getElementsByTagName("courseId")[0].childNodes[0].nodeValue + '","",' + vFeatures + ');> <td width="140" valign="top"> ' + courses[i].getElementsByTagName("ed_center")[0].childNodes[0].nodeValue +
+                        '</td><td id="crsId' + i + '"width="0" valign="top" style="display:none">'+ courses[i].getElementsByTagName("courseId")[0].childNodes[0].nodeValue +
                         '</td><td width="175" valign="top">'+ courses[i].getElementsByTagName("title")[0].childNodes[0].nodeValue +
                         '</td><td width="70"valign="top">'+ courses[i].getElementsByTagName("start")[0].childNodes[0].nodeValue +
                         '</td><td width="70" valign="top">'+ courses[i].getElementsByTagName("end")[0].childNodes[0].nodeValue +

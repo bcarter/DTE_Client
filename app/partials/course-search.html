@@ -1,6 +1,6 @@
 <div id="page2" class="subpage">
     <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
-    <p class="blackTen" align="center"><strong>Selection Criteria:</strong>
+    <p class="blackTen" align="left"><strong>Selection Criteria:</strong>
         Users may use any of the selection criteria below to search for OSHA
         training courses offered by the OSHA Training Institute (OTI) Education
         Centers. Please note that registration is conducted through the authorized
@@ -15,29 +15,26 @@
                     <option ng-repeat="courseTitle in courseTitles">{{courseTitle.name}}</option>
             	</select>
             </td>
-            
-
-            <td width="140" rowspan="3" align="right" valign="bottom">
-                <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Find Courses">
-                <input class="blackSix" name="button" type="button" onClick="courseSearch(3);" value= "Refresh">
-                <input class="blackSix"  name="button" type="button" onClick="clearDocument(3);" value= "Reset">
-            </td>
         </tr>
         <tr class="blackTen">
             <td><strong>OTI Education Center:</strong></td>
             <td><select ng-model="filterText.educationCenter">
                 <option></option>
-                <option ng-repeat="educationCenter in educationCenters">{{educationCenter.name}}</option></select></td>
+                <option ng-repeat="educationCenter in educationCenters">{{educationCenter.name}}</option></select>
+                <strong>State:</strong><select id="stateLov" name="stateLov" class="frmFieldSearch" ng-model="filterText.stateCode">
+                    <option></option>
+                    <option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
+                </select>
+            </td>
         </tr>
         <tr>
-            <td  class="blackTen" colspan="2"><strong>State:</strong>
-                <select id="stateLov" name="stateLov" class="frmFieldSearch" ng-model="filterText.stateCode">
-                    <option></option>
-                	<option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
-              	</select>
-
+            <td  class="blackTen" colspan="2">
                 <strong>Start Date:</strong><input id="pg3StartDate" name="pg3StartDate" type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date>&nbsp;
                 <strong>End Date:</strong> <input id="pg3EndDate" name="pg3EndDate" type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date>&nbsp;
+            </td>
+        </tr>
+        <tr class="blackTen">
+            <td  class="blackTen" colspan="2">
                 <strong>No. of Days:</strong><input id="noOfDays" name="noOfDays" ng-model="advFilterText.noOfDays" type="text" size="2" value="">&nbsp;
                 <strong>CM:</strong> <input type="checkbox" id="pg3cmPoints" name="pg3cmPoints" ng-model="advFilterText.cmPoints" data-ng-true-value="!0" data-ng-false-value="">&nbsp;
                 <strong>CEU:</strong> <input type="checkbox" id="pg3ceuPoints" name="pg3ceuPoints" ng-model="advFilterText.ceuPoints" data-ng-true-value="!0" data-ng-false-value="">

@@ -17,21 +17,21 @@ app.filter('startFrom', function() {
 });
 
 app.filter('cmGTZero', function() {
-    return function(input, advFilterText) {
+    return function(courses, advFilterText) {
         var out = [];
         var checkDate;
 
 //        if (typeof advFilterText.startDate === "object") {alert(advFilterText.startDate)}
-      for (var i = 0; i < input.length; i++){
-          checkDate = new Date(input[i].startDate);
+      for (var i = 0; i < courses.length; i++){
+          checkDate = new Date(courses[i].startDate);
 //          alert(typeof checkDate);
 
-          if((advFilterText.noOfDays == "" || input[i].noOfDays===advFilterText.noOfDays)
-              &&(!advFilterText.cmPoints || input[i].cmPoints > 0)
-              &&(!advFilterText.ceuPoints || input[i].ceuPoints > 0)
+          if((advFilterText.noOfDays == "" || courses[i].noOfDays===advFilterText.noOfDays)
+              &&(!advFilterText.cmPoints || courses[i].cmPoints > 0)
+              &&(!advFilterText.ceuPoints || courses[i].ceuPoints > 0)
               &&(typeof advFilterText.startDate != "object" || advFilterText.startDate === null || checkDate.toUTCString() === advFilterText.startDate.toUTCString())
-              &&(typeof advFilterText.endDate != "object" || advFilterText.endDate === null || (new Date(input[i].endDate)).toUTCString() === advFilterText.endDate.toUTCString())){
-              out.push(input[i]);
+              &&(typeof advFilterText.endDate != "object" || advFilterText.endDate === null || (new Date(courses[i].endDate)).toUTCString() === advFilterText.endDate.toUTCString())){
+              out.push(courses[i]);
           }
       }
     return out;

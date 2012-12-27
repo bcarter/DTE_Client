@@ -27,7 +27,7 @@ function CourseListCtrl($scope, $http, Course) {
 
 //    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
     $scope.educationCentersP = $http.get('/DTEAdmin/services/EducationCenter').success(function (data) {
-        $scope.educationCenters = data.educationCenter;
+        $scope.educationCenters = [].concat(data.educationCenter);
     }).error(function (data, status, headers, config) {
             alert("Ed Centers : " + status + "<br>" + data);
         });
@@ -110,13 +110,13 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 //        $scope.educationCenters = data.educationCenter;
 //    });
 
-    if ($routeParams.course_id === "new") {
+    if ($routeParams.courseId === "new") {
         $scope.course = new Course();
         $scope.course.id = "0";
         $scope.course.activeInd = "1";
         $scope.course.industryId = 1;
     } else {
-        Course.query({course_id: $routeParams.course_id}, function (course) {
+        Course.query({courseId: $routeParams.courseId}, function (course) {
 //        $http.get('courses/course_1954.json').success(function (course) {
             course.noOfDays = parseInt(course.noOfDays);
             course.length = parseInt(course.length);
@@ -161,7 +161,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
     }
 
     $scope.save = function () {
-        if ($routeParams.course_id === "new") {
+        if ($routeParams.courseId === "new") {
             Course.insert({}, $scope.course, function (res) {
                 if (res.ok === 1) {
                     $location.path("/course");
@@ -180,7 +180,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
                 alert("error: " + res);
             })
         }
-        //    $scope.changeView('courses');
+            $scope.changeView('courses');
     };
 
     $scope.delete = function () {
@@ -199,11 +199,8 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 
 function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
 
-    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
-        $scope.educationCenters = data.educationCenter;
-    });
-
     $scope.user = new User();
+    $scope.user.userType="S";
 
     User.list({},
         function (data) {
@@ -223,7 +220,7 @@ function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
             }
             $location.path("/users");
         }, function (res) {
-            alert("error");
+            alert("error: " + res);
             $location.path("/users");
         })
         //    $scope.changeView('courses');

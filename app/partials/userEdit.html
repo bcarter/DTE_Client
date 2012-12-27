@@ -10,9 +10,18 @@
             <td width="70"><input  id="userEmail" name="UserEmail" type="email" size="50" ng-model="user.extranetEmail" ng-required="true"></td>
         </tr>
         <tr>
+            <td width="150"><strong>User Type:</strong></td>
+            <td width="100">
+                <select ng-required="true" ng-model="user.userType">
+                    <option value="S">S</option>
+                    <option value="A">A</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td width="150"><strong>OTI Education Center:</strong></td>
             <td width="100"><select ng-options="educationCenter.name for educationCenter in educationCenters" ng-required="true"
-                                       ng-model="user.educationCenter"></select>
+                                    ng-model="user.educationCenter"></select>
             </td>
         </tr>
         <tr><td><button ng-click="save()" ng-disabled="isClean() || userInputForm.$invalid">Add User</button></td></tr>
