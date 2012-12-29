@@ -2,9 +2,10 @@
 
 /* Controllers */
 
-function CourseListCtrl($scope, $http, Course) {
+function CourseListCtrl($scope, $http, $route, Course) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
+    $scope.$route = $route;
 
 //    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {

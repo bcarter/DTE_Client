@@ -1,135 +1,212 @@
 <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
-<p><h2>Sponsoring OTI Education Center:
-    <select ng-options="educationCenter.name for educationCenter in educationCenters" ng-required="true"
-            ng-model="course.educationCenter" value="{{course.educationCenter}}"></select>
-</h2>
+<p>
+    <button ng-click="changeView('courses')">Cancel</button>
+    <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid">Save</button>
+    <button ng-click="delete()">Delete</button>
 </p>
-<form name="courseInputForm">
-    <p>
-        <button ng-click="changeView('courses')">Cancel</button>
-        <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid">Save</button>
-        <button ng-click="delete()">Delete</button>
-    </p>
-    <div>
-        <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
-        <input type="hidden" id="crsId" ng-model="course.course_id"/>
-        <table width="970" border="0" cellspacing="0" cellpadding="0" summary="">
-            <tr>
-                <td valign="top" width="75%">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="2" summary="">
-                        <tr valign="top">
-                            <td><span class="blackTen"><strong>Title:</strong>*</span></td>
-                            <td class="blackTen">
-                                <select ng-options="title.name for title in courseTitles" ng-required="true"
-                                        ng-model="course.courseTitle" value="{{course.courseTitle}}"></select>
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <td class="blackTen"><strong>Description:</strong></td>
-                            <td><textarea id="titleDesc" name="titleDesc" cols="92" rows="7" readonly
-                                          ng-model="course.courseTitle.description"></textarea></td>
-                        </tr>
-                        <tr valign="top">
-                            <td colspan="2" class="blackTen"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td width="7%" class="blackTen"><strong>Location:</strong>*</td>
-                            <td class="blackTen">
-                                <input id="textfield4" name="textfield4" type="text" size="92"
-                                       ng-model="course.location" ng-required="true">
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <td class="blackTen"><strong>Address:</strong>*</td>
-                            <td class="blackTen"><input id="textfield" name="textfield" type="text" size="92"
-                                                        ng-model="course.address" ng-required="true"></td>
-                        </tr>
-                        <tr>
-                            <td valign="middle" class="blackTen"><strong>City:</strong>*</td>
-                            <td valign="top" class="blackTen"><input name="textfield2" id="textfield2" type="text"
-                                                                     size="70" ng-model="course.city"
-                                                                     ng-required="true"> <strong> </strong></td>
-                        </tr>
-                        <tr valign="top">
-                            <td class="blackTen"><strong>State: </strong>*</td>
-                            <td class="blackTen"><strong>
-                                <select ng-options="stateCode.description for stateCode in stateCodes"
-                                        ng-required="true" ng-model="course.stateCode"
-                                        value="{{course.stateCode}}"></select></strong></td>
-                        </tr>
-                        <tr valign="top">
-                            <td colspan="2"><span class="blackTen"><strong>Registration
-                                Link:</strong>*</span> <span class="blackSix">[Website
-                        links only. Please ensure link includes &quot;http://&quot;.]</span>
-                                <input id="url" name="url" type="url" size="106" ng-model="course.url"
-                                       ng-required="true" placeholder="eg. http://www.osha.gov">
-                                <a href="{{course.url}}" target="_blank" ng-show='courseInputForm.url.$valid'>{{course.url}}</a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="25%" valign="top">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="2" summary="" class="blackTen">
-                        <tr valign="top">
-                            <td width="48%"><strong>Start Date:</strong>*</td>
-                            <td width="52%">
-                                <input ng-model="course.startDate" value="{{course.startDate | date: 'MM/dd/yyyy'}}"
-                                       ui-date ng-required="true">
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>End Date:</strong>*</td>
-                            <td width="52%">
-                                <input ng-model="course.endDate" value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date
-                                       ng-required="true">
-                            </td>
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>No. of Days:</strong></td>
-                            <td><input min="0" type="number" ng-model="course.noOfDays"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>Contact Hours:</strong>*</td>
-                            <td><input name="courseLength" min="0" type="number" ng-model="course.length"
-                                       ng-required="true"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>CM Points: </strong></td>
-                            <td><input name="cmPoints" min="0" type="number" ng-model="course.cmPoints"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>CEU Points:</strong></td>
-                            <td><input name="ceuPoints" min="0" type="number" ng-model="course.ceuPoints"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td colspan="2" class="blackTen"></td>
-                        </tr>
-                        <tr valign="top">
-                            <td><strong>Cost: </strong></td>
-                            <td><input name="cost" min="0" type="number" ng-model="course.cost"></td>
-                        </tr>
-                        <tr>
-                            <td valign="middle"><strong>Language: {{course.courseLanguage.lang}}</strong>*</td>
-                            <td valign="top">
-                                <select ng-options="language.lang for language in courseLanguages" ng-required="true"
-                                        ng-model="course.courseLanguage" value="{{course.courseLanguage}}"></select>
-                            </td>
-                        </tr>
-                    </table>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="1" summary="">
-                        <tr>
-                            <td align="right"><input id="Submit" name="Submit" type="button" onClick="submitDocument();"
-                                                     value="Submit"><input id="Reset" name="Reset" type="button"
-                                                                           onClick="clearDocument(1);" value="Reset">
-                            </td>
-                        </tr>
-                    </table>
+<div>
+    <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
+    <input type="hidden" id="crsId" ng-model="course.course_id"/>
+</div>
+<div class="container">
+    <form name="courseInputForm" class="form-horizontal">
+        <div class="row">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label" for="edCenterSelect">Sponsoring OTI Education Center*</label>
 
-                    <div align="right" class="blackSix"><strong>* Required field</strong></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" valign="top"></td>
-            </tr>
-        </table>
-    </div>
-</form>
+                    <div class="controls">
+                        <select id="edCenterSelect"
+                                ng-options="educationCenter.name for educationCenter in educationCenters"
+                                ng-required="true"
+                                ng-model="course.educationCenter" value="{{course.educationCenter}}"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="titleSelect">Title*</label>
+
+                    <div class="controls">
+                        <select id="titleSelect" ng-options="title.name for title in courseTitles"
+                                ng-required="true"
+                                ng-model="course.courseTitle" value="{{course.courseTitle}}"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="startDateInput">Start Date*</label>
+
+                    <div class="controls">
+                        <input id="startDateInput" ng-model="course.startDate"
+                               value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label" for="titleDesc">Description</label>
+
+                            <div class="controls">
+                                <textarea id="titleDesc" name="titleDesc" cols="92" rows="6" readonly
+                                          ng-model="course.courseTitle.description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="row">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label" for="endDateInput">End Date*</label>
+
+                            <div class="controls">
+                                <input id="endDateInput" ng-model="course.endDate"
+                                       value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date
+                                       ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label" for="noOfDaysInput">No. of Days</label>
+
+                            <div class="controls">
+                                <input id="noOfDaysInput" min="0" type="number" ng-model="course.noOfDays">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12">
+                        <div class="control-group">
+                            <label class="control-label" for="contractHoursInput">Contact Hours*</label>
+
+                            <div class="controls">
+                                <input id="contractHoursInput" name="courseLength" min="0" type="number"
+                                       ng-model="course.length"
+                                       ng-required="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="locationInput">Location*</label>
+
+                    <div class="controls">
+                        <input id="locationInput" type="text" size="92"
+                               ng-model="course.location" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="cmPointsInput">CM Points</label>
+
+                    <div class="controls">
+                        <input id="cmPointsInput" name="cmPoints" min="0" type="number" ng-model="course.cmPoints">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="addressInput">Address*</label>
+
+                    <div class="controls">
+                        <input id="addressInput" type="text" size="92"
+                               ng-model="course.address" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="ceuPointsInput">CEU Points</label>
+
+                    <div class="controls">
+                        <input id="ceuPointsInput" min="0" type="number" ng-model="course.ceuPoints">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="cityInput">City*</label>
+
+                    <div class="controls">
+                        <input id="cityInput" type="text" size="70" ng-model="course.city" ng-required="true">
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="costInput">Cost</label>
+
+                    <div class="controls">
+                        <input id="costInput" name="cost" min="0" type="number" ng-model="course.cost">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="stateSelect">State*</label>
+
+                    <div class="controls">
+                        <select id="stateSelect" ng-options="stateCode.description for stateCode in stateCodes"
+                                ng-required="true" ng-model="course.stateCode"
+                                value="{{course.stateCode}}"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="languageSelect">Language*</label>
+
+                    <div class="controls">
+                        <select id="languageSelect" ng-options="language.lang for language in courseLanguages"
+                                ng-required="true"
+                                ng-model="course.courseLanguage" value="{{course.courseLanguage}}"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="control-group">
+                    <p>[Website links only. Please ensure link includes &quot;http://&quot;.]</p>
+                    <label class="control-label" for="urlInput">Registration Link*</label>
+
+                    <div class="controls">
+                        <input id="urlInput" type="url" size="106" ng-model="course.url"
+                               ng-required="true" placeholder="eg. http://www.osha.gov">
+                        <a href="{{course.url}}" target="_blank"
+                           ng-show='courseInputForm.url.$valid'>{{course.url}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <strong>* Required field</strong>
+            </div>
+        </div>
+    </form>
+</div>
