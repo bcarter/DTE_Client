@@ -82,14 +82,11 @@ function CourseListCtrl($scope, $http, $route, Course) {
 
     $scope.filterText = "";
 
-    $scope.advFilterText = {"startDate":""
-        ,"endDate":""
-        ,"noOfDays":""
-        ,"cmPoints":false
-        ,"ceuPoints":false};
+    $scope.advFilterText = {"startDate": "", "endDate": "", "noOfDays": "", "cmPoints": false, "ceuPoints": false, "courseTitle": "", "educationCenter": "", "stateCode": ""
+    };
 }
 
-//CourseListCtrl.$inject = ['$scope', '$http', 'Course'];
+//CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
 
 
 function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
@@ -163,10 +160,28 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 
     $scope.save = function () {
         if ($routeParams.courseId === "new") {
-            Course.insert({}, $scope.course, function (res) {
-                if (res.ok === 1) {
-                    $location.path("/course");
-                } else (console.log(res))
+            Course.insert({}, $scope.course, function (res, getResponseHeaders) {
+//                var returnHeaders = "";
+//                var responseHeaders = getResponseHeaders();
+//                for (var key in responseHeaders) {
+//                    if (responseHeaders.hasOwnProperty(key)) {
+//                        returnHeaders += key + ":" + getResponseHeaders(key) + " | ";
+//                    }
+//                }
+//                alert(returnHeaders);
+//                $scope.changeView("course/" + res.id);
+                $scope.changeView("courses");
+            }, function (data, status, headers, config) {
+//                var returnHeaders = "";
+//                var responseHeaders = getResponseHeaders();
+//                for (var key in responseHeaders) {
+//                    if (responseHeaders.hasOwnProperty(key)) {
+//                        returnHeaders += key + ":" + getResponseHeaders(key) + " | ";
+//                    }
+//                }
+//                alert(returnHeaders);
+//                $scope.changeView("course/" + res.id);
+                $scope.changeView("courses");
             })
         }
         else {
@@ -181,13 +196,13 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
                 alert("error: " + res);
             })
         }
-            $scope.changeView('courses');
+        $scope.changeView("courses");
     };
 
-    $scope.delete = function () {
+    $scope.deleteCourse = function () {
         $scope.course.activeInd = "0";
         $scope.save();
-        $scope.changeView('courses');
+        $scope.changeView("courses");
     };
 
     $scope.changeView = function (view) {
@@ -201,7 +216,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
 
     $scope.user = new User();
-    $scope.user.userType="S";
+    $scope.user.userType = "S";
 
     User.list({},
         function (data) {

@@ -2,7 +2,7 @@
 <p>
     <button ng-click="changeView('courses')">Cancel</button>
     <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid">Save</button>
-    <button ng-click="delete()">Delete</button>
+    <button ng-click="deleteCourse()">Delete</button>
 </p>
 <div>
     <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
@@ -55,7 +55,7 @@
                             <label class="control-label" for="titleDesc">Description</label>
 
                             <div class="controls">
-                                <textarea id="titleDesc" name="titleDesc" cols="92" rows="6" readonly
+                                <textarea id="titleDesc" name="titleDesc" cols="92" rows="5" readonly
                                           ng-model="course.courseTitle.description"></textarea>
                             </div>
                         </div>

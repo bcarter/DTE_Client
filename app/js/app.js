@@ -7,7 +7,7 @@ angular.module('dteCourseAdmin', ['dteCourseAdminFilters', 'dteCourseAdminServic
     $routeProvider.
         when('/', {templateUrl: 'partials/home.html', activetab: 'index'}).
         when('/courses', {templateUrl: 'partials/course-search.html', activetab: 'search'}).
-        when('/course/:courseId', {templateUrl: 'partials/course-detail.html', controller: CourseDetailCtrl, activetab: 'detail'}).
-        when('/users', {templateUrl: 'partials/userEdit.html', controller: UsersCtrl, activetab: 'user'}).
+        when('/course/:courseId', {templateUrl: 'partials/course-detail.html', controller: 'CourseDetailCtrl', activetab: 'detail'}).
+        when('/users', {templateUrl: 'partials/userEdit.html', controller: 'UsersCtrl', activetab: 'user'}).
         otherwise({redirectTo: '/'});
 }]);

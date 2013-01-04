@@ -21,16 +21,17 @@ app.filter('cmGTZero', function() {
         var out = [];
         var checkDate;
 
-//        if (typeof advFilterText.startDate === "object") {alert(advFilterText.startDate)}
       for (var i = 0; i < courses.length; i++){
           checkDate = new Date(courses[i].startDate);
-//          alert(typeof checkDate);
 
           if((advFilterText.noOfDays == "" || courses[i].noOfDays===advFilterText.noOfDays)
               &&(!advFilterText.cmPoints || courses[i].cmPoints > 0)
               &&(!advFilterText.ceuPoints || courses[i].ceuPoints > 0)
               &&(typeof advFilterText.startDate != "object" || advFilterText.startDate === null || checkDate.toUTCString() === advFilterText.startDate.toUTCString())
-              &&(typeof advFilterText.endDate != "object" || advFilterText.endDate === null || (new Date(courses[i].endDate)).toUTCString() === advFilterText.endDate.toUTCString())){
+              &&(typeof advFilterText.endDate != "object" || advFilterText.endDate === null || (new Date(courses[i].endDate)).toUTCString() === advFilterText.endDate.toUTCString())
+              &&( advFilterText.courseTitle === "" || (courses[i].courseTitle.name === advFilterText.courseTitle))
+              &&( advFilterText.educationCenter === "" || (courses[i].educationCenter.name === advFilterText.educationCenter))
+              &&( advFilterText.stateCode === "" || (courses[i].stateCode.description === advFilterText.stateCode))){
               out.push(courses[i]);
           }
       }
