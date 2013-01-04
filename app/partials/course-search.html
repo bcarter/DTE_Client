@@ -9,132 +9,146 @@
 
     <div class="container">
         <!--<form name="courseSearchForm" class="form-horizontal">-->
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="control-group">
-                        <label class="control-label" for="edCenterSelect">OTI Education Center</label>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label" for="edCenterSelect">OTI Education Center</label>
 
-                        <div class="controls">
-                            <select id="edCenterSelect" class="input-xxlarge search-query"
-                                    ng-model="advFilterText.educationCenter">
-                                <option></option>
-                                <option ng-repeat="educationCenter in educationCenters">{{educationCenter.name}}</option>
-                            </select>
-                        </div>
+                    <div class="controls">
+                        <select id="edCenterSelect" class="input-xxlarge search-query"
+                                ng-model="advFilterText.educationCenter">
+                            <option></option>
+                            <option ng-repeat="educationCenter in educationCenters">{{educationCenter.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="control-group">
-                        <label class="control-label" for="titleSelect">Course Title</label>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="control-group">
+                    <label class="control-label" for="titleSelect">Course Title</label>
 
-                        <div class="controls">
-                            <select id="titleSelect" class="input-xxlarge search-query"
-                                    ng-model="advFilterText.courseTitle" value="{{advFilterText.courseTitle}}">
-                                <option></option>
-                                <option ng-repeat="courseTitle in courseTitles">{{courseTitle.name}}</option>
-                            </select>
-                        </div>
+                    <div class="controls">
+                        <select id="titleSelect" class="input-xxlarge search-query"
+                                ng-model="advFilterText.courseTitle" value="{{advFilterText.courseTitle}}">
+                            <option></option>
+                            <option ng-repeat="courseTitle in courseTitles">{{courseTitle.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="control-group">
-                        <label class="control-label" for="startDateInput">Start Date</label>
+        </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="startDateInput">Start Date</label>
 
-                        <div class="controls">
-                            <input id="startDateInput" class="input-medium search-query"
-                                   type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date>
-                        </div>
-                    </div>
-                </div>
-                <div class="span6">
-                    <div class="control-group">
-                        <label class="control-label" for="endDateInput">End Date</label>
-
-                        <div class="controls">
-                            <input id="endDateInput" class="input-medium search-query"
-                                   type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date>
-                        </div>
+                    <div class="controls">
+                        <input id="startDateInput" class="input-medium search-query"
+                               type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date>
                     </div>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="span3">
-                    <div class="control-group">
-                        <label class="control-label" for="stateSelect">State</label>
+            <div class="span6">
+                <div class="control-group">
+                    <label class="control-label" for="endDateInput">End Date</label>
 
-                        <div class="controls">
-                            <select id="stateSelect" class="input-medium search-query" ng-model="advFilterText.stateCode">
-                                <option></option>
-                                <option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="control-group">
-                        <label class="control-label" for="noOfDaysInput">No. of Days</label>
-
-                        <div class="controls">
-                            <input id="noOfDaysInput" class="input-small search-query"
-                                   type="text" size="2" ng-model="advFilterText.noOfDays" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="span2">
-                    <div class="control-group">
-                        <label class="control-label" for="cmPointsCheckbox">CM</label>
-
-                        <div class="controls">
-                            <input id="cmPointsCheckbox" type="checkbox"   class="input-mini"
-                                   ng-model="advFilterText.cmPoints">
-                        </div>
-                    </div>
-                </div>
-                <div class="span2">
-                    <div class="control-group">
-                        <label class="control-label" for="ceuPointsCheckbox">CEU</label>
-
-                        <div class="controls">
-                            <input id="ceuPointsCheckbox" type="checkbox"   class="input-mini"
-                                   ng-model="advFilterText.ceuPoints">
-                        </div>
+                    <div class="controls">
+                        <input id="endDateInput" class="input-medium search-query"
+                               type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="control-group">
+                    <label class="control-label" for="stateSelect">State</label>
+
+                    <div class="controls">
+                        <select id="stateSelect" class="input-medium search-query" ng-model="advFilterText.stateCode">
+                            <option></option>
+                            <option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="control-group">
+                    <label class="control-label" for="noOfDaysInput">No. of Days</label>
+
+                    <div class="controls">
+                        <input id="noOfDaysInput" class="input-small search-query"
+                               type="text" size="2" ng-model="advFilterText.noOfDays" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="span2">
+                <div class="control-group">
+                    <label class="control-label" for="cmPointsCheckbox">CM</label>
+
+                    <div class="controls">
+                        <input id="cmPointsCheckbox" type="checkbox" class="input-mini"
+                               ng-model="advFilterText.cmPoints">
+                    </div>
+                </div>
+            </div>
+            <div class="span2">
+                <div class="control-group">
+                    <label class="control-label" for="ceuPointsCheckbox">CEU</label>
+
+                    <div class="controls">
+                        <input id="ceuPointsCheckbox" type="checkbox" class="input-mini"
+                               ng-model="advFilterText.ceuPoints">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--</form>-->
     </div>
     <hr size="1">
-    <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
-    <span ng-bind-template="{{currentPage+1}}">1</span>/<span ng-bind-template="{{numberOfPages(filtered)}}">Loading</span>
-    <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
-    <div style="border: 2px solid #D9D9D9; width:980; height:275; ">
-        <div id="header" style="width:980;" align="center">
-            <table width="100%" border="1" summary="" ng-grid>
-                <tr style="font-size:70%; font-weight:bold; background:#D9D9D9;" align="center" id="srchTabHdr">
-                    <th ng-repeat="th in head" ng-class="selectedCls(th.column)" ng-click="changeSorting(th.column)">
-                        {{th.head}}
-                    </th>
-                </tr>
-                <tr ng-repeat="course in filtered = (courses | cmGTZero:advFilterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
-                    <td width="145">{{course.educationCenter.name}}</td>
-                    <td width="175"><a href="#/course/{{course.id}}">{{course.courseTitle.name}}</a></td>
-                    <td width="70">{{course.startDate | date:'MM/dd/yyyy'}}</td>
-                    <td width="70">{{course.endDate | date:'MM/dd/yyyy'}}</td>
-                    <td width="80">{{course.noOfDays}}</td>
-                    <td width="110">{{course.location}}</td>
-                    <td width="120">{{course.address}}</td>
-                    <td width="80">{{course.city}}</td>
-                    <td width="40">{{course.stateCode.stateCd}}</td>
-                    <td width="40">{{course.cmPoints}}</td>
-                    <td width="40">{{course.ceuPoints}}</td>
-                </tr>
-            </table>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span2">
+                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="pull-right">
+                    Previous
+                </button>
+            </div>
+            <div class="span1">
+                <span ng-bind-template="{{currentPage+1}}">1</span>/<span
+                    ng-bind-template="{{numberOfPages(filtered)}}">Loading</span>
+            </div>
+            <div class="span2">
+                <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1"
+                        class="pull-left">
+                    Next
+                </button>
+            </div>
+            <div class="span7">
+                <button ng-click="courseList(); currentPage=0;" class="pull-right">Refresh</button>
+            </div>
         </div>
-
-        <div id="pg3dgrid" style="width:980; height:250; overflow:auto;" align="center"></div>
+        <table class="table table-bordered" ng-grid>
+            <tr>
+                <th ng-repeat="th in head" ng-class="selectedCls(th.column)"
+                    ng-click="changeSorting(th.column)">
+                    {{th.head}}
+                </th>
+            </tr>
+            <tr ng-repeat="course in filtered = (courses | cmGTZero:advFilterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td>{{course.educationCenter.name}}</td>
+                <td><a href="#/course/{{course.id}}">{{course.courseTitle.name}}</a></td>
+                <td>{{course.startDate | date:'MM/dd/yyyy'}}</td>
+                <td>{{course.endDate | date:'MM/dd/yyyy'}}</td>
+                <td>{{course.noOfDays}}</td>
+                <td>{{course.location}}</td>
+                <td>{{course.address}}</td>
+                <td>{{course.city}}</td>
+                <td>{{course.stateCode.stateCd}}</td>
+                <td>{{course.cmPoints}}</td>
+                <td>{{course.ceuPoints}}</td>
+            </tr>
+        </table>
     </div>
 </div>

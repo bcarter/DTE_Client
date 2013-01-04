@@ -7,41 +7,45 @@ function CourseListCtrl($scope, $http, $route, Course) {
     $scope.pageSize = 5;
     $scope.$route = $route;
 
-//    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
+//    var courseTitlesP = $http.get('courses/Title').success(function (data) {
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
         $scope.courseTitles = data.courseTitle;
     }).error(function (data, status, headers, config) {
             alert("Titles : " + status + "<br>" + data);
         });
 
-//    $scope.courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
+//    $scope.courseLanguagesP = $http.get('courses/Language').success(function (data) {
     $scope.courseLanguagesP = $http.get('/DTEAdmin/services/Language').success(function (data) {
         $scope.courseLanguages = data.courseLanguage;
     });
 
-//    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
+//    var stateCodesP = $http.get('courses/StateCode').success(function (data) {
     $scope.stateCodesP = $http.get('/DTEAdmin/services/StateCode').success(function (data) {
         $scope.stateCodes = data.stateCode;
     }).error(function (data, status, headers, config) {
             alert("States : " + status + "<br>" + data);
         });
 
-//    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
+//    var educationCentersP = $http.get('courses/EducationCenter').success(function (data) {
     $scope.educationCentersP = $http.get('/DTEAdmin/services/EducationCenter').success(function (data) {
         $scope.educationCenters = [].concat(data.educationCenter);
     }).error(function (data, status, headers, config) {
             alert("Ed Centers : " + status + "<br>" + data);
         });
 
-    Course.list({},
-        function (data) {
-            //Success
-            $scope.courses = data.course;
-        }
-        , function (data) {
+    $scope.courseList = function () {
+        Course.list({},
+            function (data) {
+                //Success
+                $scope.courses = data.course;
+            }
+            , function (data) {
 
-        }
-    );
+            }
+        );
+    }
+
+    $scope.courseList();
 
     $scope.head = [
         {head: "OTI Education Center", column: "educationCenter.name"},
@@ -91,22 +95,6 @@ function CourseListCtrl($scope, $http, $route, Course) {
 
 function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
     $scope.date = new Date();
-
-//    var courseTitlesP = $http.get('courses/Title.json').success(function (data) {
-//        $scope.courseTitles = data.courseTitle;
-//    });
-//
-//    var stateCodesP = $http.get('courses/StateCode.json').success(function (data) {
-//        $scope.stateCodes = data.stateCode;
-//    });
-//
-//    var courseLanguagesP = $http.get('courses/Language.json').success(function (data) {
-//        $scope.courseLanguages = data.courseLanguage;
-//    });
-//
-//    var educationCentersP = $http.get('courses/EducationCenter.json').success(function (data) {
-//        $scope.educationCenters = data.educationCenter;
-//    });
 
     if ($routeParams.courseId === "new") {
         $scope.course = new Course();
@@ -170,6 +158,8 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 //                }
 //                alert(returnHeaders);
 //                $scope.changeView("course/" + res.id);
+                //TODO Test This
+                $scope.courses.push(res);
                 $scope.changeView("courses");
             }, function (data, status, headers, config) {
 //                var returnHeaders = "";
@@ -186,14 +176,17 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
         }
         else {
             Course.update({}, $scope.course, function (res) {
-                if (res.ok === 1) {
-                    //alert(res.toString());
-//                    $location.path("/course");
-                } else {
-                    // alert("error: " + res.ok);
+                //TODO Test This
+                //TODO fix date sort after change
+                for (var i = 0; i < $scope.courses.length; i++) {
+                    if ($scope.courses[i].id === $scope.course.id) {
+                        $scope.courses[i] = $scope.course;
+                        break;
+                    }
                 }
-            }, function (res) {
-                alert("error: " + res);
+
+            }, function (data, status, headers, config) {
+                alert("error: " + data.status);
             })
         }
         $scope.changeView("courses");

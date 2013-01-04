@@ -1,4 +1,4 @@
-<div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
+<div align="center" xmlns="http://www.w3.org/1999/html"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
 <p>
     <button ng-click="changeView('courses')">Cancel</button>
     <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid">Save</button>
@@ -19,7 +19,8 @@
                         <select id="edCenterSelect"
                                 ng-options="educationCenter.name for educationCenter in educationCenters"
                                 ng-required="true"
-                                ng-model="course.educationCenter" value="{{course.educationCenter}}"></select>
+                                ng-model="course.educationCenter" value="{{course.educationCenter}}"
+                                class="input-xxlarge"></select>
                     </div>
                 </div>
             </div>
@@ -191,14 +192,13 @@
         <div class="row">
             <div class="span12">
                 <div class="control-group">
-                    <p>[Website links only. Please ensure link includes &quot;http://&quot;.]</p>
+                    <p>[Website links only. Please ensure link includes &quot;http://&quot;.]
+                        &nbsp;&nbsp;<a href="{{course.url}}" target="_blank" ng-show="courseInputForm.urlInput.$valid">Try in a new window.</a></p>
                     <label class="control-label" for="urlInput">Registration Link*</label>
 
                     <div class="controls">
-                        <input id="urlInput" type="url" size="106" ng-model="course.url"
-                               ng-required="true" placeholder="eg. http://www.osha.gov">
-                        <a href="{{course.url}}" target="_blank"
-                           ng-show='courseInputForm.url.$valid'>{{course.url}}</a>
+                        <input id="urlInput" name="urlInput" type="url" ng-model="course.url"
+                               ng-required="true" placeholder="eg. http://www.osha.gov" class="input-xxlarge">
                     </div>
                 </div>
             </div>

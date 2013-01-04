@@ -11,6 +11,8 @@ var DEFAULT_PORT = 8000;
 function main(argv) {
   new HttpServer({
     'GET': createServlet(StaticServlet),
+    'PUT': createServlet(StaticServlet),
+    'POST': createServlet(StaticServlet),
     'HEAD': createServlet(StaticServlet)
   }).start(Number(argv[2]) || DEFAULT_PORT);
 }
@@ -85,21 +87,30 @@ StaticServlet.MimeMap = {
   'svg': 'image/svg+xml'
 };
 
-StaticServlet.prototype.handleRequest = function(req, res) {
-  var self = this;
-  var path = ('./' + req.url.pathname).replace('//','/').replace(/%(..)/g, function(match, hex){
-    return String.fromCharCode(parseInt(hex, 16));
-  });
-  var parts = path.split('/');
-  if (parts[parts.length-1].charAt(0) === '.')
-    return self.sendForbidden_(req, res, path);
-  fs.stat(path, function(err, stat) {
-    if (err)
-      return self.sendMissing_(req, res, path);
-    if (stat.isDirectory())
-      return self.sendDirectory_(req, res, path);
-    return self.sendFile_(req, res, path);
-  });
+StaticServlet.prototype.handleRequest = function (req, res) {
+    var self = this;
+    var path = ('./' + req.url.pathname).replace('//', '/').replace(/%(..)/g, function (match, hex) {
+        return String.fromCharCode(parseInt(hex, 16));
+    });
+    path = path.replace("/DTEAdmin/services/", "/app/courses/").replace("/app/courses/Course/1954", "/app/courses/1954");
+    if (req.method === 'POST' || req.method === 'PUT') {
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        });
+        res.end();
+        return self.sendFile_(req, res, req.body);
+    } else {
+        var parts = path.split('/');
+        if (parts[parts.length - 1].charAt(0) === '.')
+            return self.sendForbidden_(req, res, path);
+        fs.stat(path, function (err, stat) {
+            if (err)
+                return self.sendMissing_(req, res, path);
+            if (stat.isDirectory())
+                return self.sendDirectory_(req, res, path);
+            return self.sendFile_(req, res, path);
+        });
+    }
 }
 
 StaticServlet.prototype.sendError_ = function(req, res, error) {
