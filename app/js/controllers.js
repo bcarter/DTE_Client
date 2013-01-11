@@ -160,7 +160,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
 //                $scope.changeView("course/" + res.id);
                 //TODO Test This
                 $scope.courses.push(res);
-                $scope.changeView("courses");
+                $scope.changeView("course/new");
             }, function (data, status, headers, config) {
 //                var returnHeaders = "";
 //                var responseHeaders = getResponseHeaders();
@@ -185,11 +185,18 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
                     }
                 }
 
+                $scope.changeView("courses");
             }, function (data, status, headers, config) {
-                alert("error: " + data.status);
+                if (data.status === 409) {
+                    alert("Record changed by another user: " + data);
+                    $scope.changedCourse = data;
+                    alert(data.address);
+//                    $scope.changeView("courseConflict");
+                } else {
+                    alert("error: " + data.status + data);
+                }
             })
         }
-        $scope.changeView("courses");
     };
 
     $scope.deleteCourse = function () {

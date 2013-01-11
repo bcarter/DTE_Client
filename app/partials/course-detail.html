@@ -1,15 +1,15 @@
 <div align="center" xmlns="http://www.w3.org/1999/html"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
-<p>
-    <button ng-click="changeView('courses')">Cancel</button>
-    <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid">Save</button>
-    <button ng-click="deleteCourse()">Delete</button>
-</p>
 <div>
     <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
     <input type="hidden" id="crsId" ng-model="course.course_id"/>
 </div>
 <div class="container">
     <form name="courseInputForm" class="form-horizontal">
+    <p>
+        <button ng-click="changeView('courses')">Cancel</button>
+        <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid" tabindex="17">Save</button>
+        <button ng-click="deleteCourse()">Delete</button>
+    </p>
         <div class="row">
             <div class="span12">
                 <div class="control-group">
@@ -20,7 +20,8 @@
                                 ng-options="educationCenter.name for educationCenter in educationCenters"
                                 ng-required="true"
                                 ng-model="course.educationCenter" value="{{course.educationCenter}}"
-                                class="input-xxlarge"></select>
+                                class="input-xxlarge"
+                                tabindex="1"></select>
                     </div>
                 </div>
             </div>
@@ -33,7 +34,8 @@
                     <div class="controls">
                         <select id="titleSelect" ng-options="title.name for title in courseTitles"
                                 ng-required="true"
-                                ng-model="course.courseTitle" value="{{course.courseTitle}}"></select>
+                                ng-model="course.courseTitle" value="{{course.courseTitle}}"
+                                tabindex="2"></select>
                     </div>
                 </div>
             </div>
@@ -43,7 +45,8 @@
 
                     <div class="controls">
                         <input id="startDateInput" ng-model="course.startDate"
-                               value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true">
+                               value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true"
+                               tabindex="7">
                     </div>
                 </div>
             </div>
@@ -72,7 +75,8 @@
                             <div class="controls">
                                 <input id="endDateInput" ng-model="course.endDate"
                                        value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date
-                                       ng-required="true">
+                                       ng-required="true"
+                                       tabindex="8">
                             </div>
                         </div>
                     </div>
@@ -83,7 +87,7 @@
                             <label class="control-label" for="noOfDaysInput">No. of Days</label>
 
                             <div class="controls">
-                                <input id="noOfDaysInput" min="0" type="number" ng-model="course.noOfDays">
+                                <input id="noOfDaysInput" min="0" type="number" ng-model="course.noOfDays" tabindex="9">
                             </div>
                         </div>
                     </div>
@@ -96,7 +100,8 @@
                             <div class="controls">
                                 <input id="contractHoursInput" name="courseLength" min="0" type="number"
                                        ng-model="course.length"
-                                       ng-required="true">
+                                       ng-required="true"
+                                       tabindex="10">
                             </div>
                         </div>
                     </div>
@@ -110,7 +115,7 @@
 
                     <div class="controls">
                         <input id="locationInput" type="text" size="92"
-                               ng-model="course.location" ng-required="true">
+                               ng-model="course.location" ng-required="true" tabindex="3">
                     </div>
                 </div>
             </div>
@@ -119,7 +124,8 @@
                     <label class="control-label" for="cmPointsInput">CM Points</label>
 
                     <div class="controls">
-                        <input id="cmPointsInput" name="cmPoints" min="0" type="number" ng-model="course.cmPoints">
+                        <input id="cmPointsInput" name="cmPoints" min="0"
+                               type="number" ng-model="course.cmPoints" tabindex="12">
                     </div>
                 </div>
             </div>
@@ -131,7 +137,7 @@
 
                     <div class="controls">
                         <input id="addressInput" type="text" size="92"
-                               ng-model="course.address" ng-required="true">
+                               ng-model="course.address" ng-required="true" tabindex="4">
                     </div>
                 </div>
             </div>
@@ -140,7 +146,7 @@
                     <label class="control-label" for="ceuPointsInput">CEU Points</label>
 
                     <div class="controls">
-                        <input id="ceuPointsInput" min="0" type="number" ng-model="course.ceuPoints">
+                        <input id="ceuPointsInput" min="0" type="number" ng-model="course.ceuPoints" tabindex="13">
                     </div>
                 </div>
             </div>
@@ -151,7 +157,8 @@
                     <label class="control-label" for="cityInput">City*</label>
 
                     <div class="controls">
-                        <input id="cityInput" type="text" size="70" ng-model="course.city" ng-required="true">
+                        <input id="cityInput" type="text" size="70"
+                               ng-model="course.city" ng-required="true" tabindex="5">
                     </div>
                 </div>
             </div>
@@ -160,7 +167,7 @@
                     <label class="control-label" for="costInput">Cost</label>
 
                     <div class="controls">
-                        <input id="costInput" name="cost" min="0" type="number" ng-model="course.cost">
+                        <input id="costInput" step="0.01" name="cost" min="0" type="number" ng-model="course.cost" tabindex="14">
                     </div>
                 </div>
             </div>
@@ -173,7 +180,7 @@
                     <div class="controls">
                         <select id="stateSelect" ng-options="stateCode.description for stateCode in stateCodes"
                                 ng-required="true" ng-model="course.stateCode"
-                                value="{{course.stateCode}}"></select>
+                                value="{{course.stateCode}}" tabindex="6"></select>
                     </div>
                 </div>
             </div>
@@ -184,7 +191,9 @@
                     <div class="controls">
                         <select id="languageSelect" ng-options="language.lang for language in courseLanguages"
                                 ng-required="true"
-                                ng-model="course.courseLanguage" value="{{course.courseLanguage}}"></select>
+                                ng-model="course.courseLanguage"
+                                value="{{course.courseLanguage}}"
+                                tabindex="15"></select>
                     </div>
                 </div>
             </div>
@@ -198,7 +207,8 @@
 
                     <div class="controls">
                         <input id="urlInput" name="urlInput" type="url" ng-model="course.url"
-                               ng-required="true" placeholder="eg. http://www.osha.gov" class="input-xxlarge">
+                               ng-required="true" placeholder="eg. http://www.osha.gov"
+                               class="input-xxlarge" tabindex="16">
                     </div>
                 </div>
             </div>
@@ -209,4 +219,5 @@
             </div>
         </div>
     </form>
+<div ng-show="changedCourse.id===course.id"> Ed Center : {{course.educationCenter.name}} | {{changedCourse.educationCenter.name}}</div>
 </div>
