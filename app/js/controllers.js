@@ -93,7 +93,7 @@ function CourseListCtrl($scope, $http, $route, Course) {
 //CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
+function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Course) {
     $scope.date = new Date();
 
     if ($routeParams.courseId === "new") {
@@ -189,7 +189,7 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
             }, function (data, status, headers, config) {
                 if (data.status === 409) {
                     alert("Record changed by another user: " + data);
-                    $scope.changedCourse = data;
+                    $scope.remoteCourse = data;
                     alert(data.address);
 //                    $scope.changeView("courseConflict");
                 } else {
@@ -208,6 +208,99 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, Course) {
     $scope.changeView = function (view) {
         $location.path(view); // path not hash
     };
+
+    var changedCourse = $http.get('/DTEAdmin/services/Course/2469').success(function (changedCourse) {
+            $scope.remoteCourse = changedCourse;
+            $scope.mergedCourse = {};
+
+            $scope.compareCourseProperty("educationCenter");
+            $scope.compareCourseProperty("courseTitle");
+            $scope.compareCourseProperty("location");
+            $scope.compareCourseProperty("address");
+            $scope.compareCourseProperty("city");
+            $scope.compareCourseProperty("stateCode");
+            $scope.compareCourseProperty("startDate");
+            $scope.compareCourseProperty("endDate");
+            $scope.compareCourseProperty("noOfDays");
+            $scope.compareCourseProperty("length");
+            $scope.compareCourseProperty("cmPoints");
+            $scope.compareCourseProperty("ceuPoints");
+            $scope.compareCourseProperty("cost");
+            $scope.compareCourseProperty("courseLanguage");
+            $scope.compareCourseProperty("url");
+
+
+            if (+$scope.remoteCourse.id === $scope.course.id) {
+                $scope.mergedCourse.id = $scope.remoteCourse.id;
+            }
+
+            if ($scope.remoteCourse.activeInd === $scope.course.activeInd) {
+                $scope.mergedCourse.activeInd = $scope.course.activeInd;
+            }
+
+            if (+$scope.remoteCourse.industryId === $scope.course.industryId) {
+                $scope.mergedCourse.industryId = $scope.course.industryId;
+            }
+
+            if ($scope.remoteCourse.updateUser === $scope.course.updateUser) {
+                $scope.mergedCourse.updateUser = $scope.course.updateUser;
+            }
+        }
+    );
+
+    $scope.compareCourseProperty = function (property) {
+        try {
+            var localValue = $parse("course." + property);
+            var remoteValue = $parse("remoteCourse." + property);
+            var mergedValue = $parse("mergedCourse." + property);
+            var localStyle = $parse(property + ".localStyle");
+            var remoteStyle = $parse(property + ".remoteStyle");
+            var mergedStyle = $parse(property + ".mergedStyle");
+            var isObject = (Object.prototype.toString.call( localValue($scope)) === '[object Object]');
+
+            if ((isObject && localValue($scope).id == remoteValue($scope).id)
+                ||!isObject && localValue($scope) == remoteValue($scope)) {
+                mergedValue.assign($scope, localValue($scope));
+                localStyle.assign($scope, {"background-color": "green"});
+                remoteStyle.assign($scope, {"background-color": "green"});
+                mergedStyle.assign($scope, {"background-color": "green"});
+            } else if ((isObject && localValue($scope).id == mergedValue($scope).id)
+                ||!isObject && localValue($scope) == mergedValue($scope)) {
+                localStyle.assign($scope, {"background-color": "green"});
+                remoteStyle.assign($scope, {"background-color": "red"});
+            } else if ((isObject && remoteValue($scope).id == mergedValue($scope).id)
+                ||!isObject && remoteValue($scope) == mergedValue($scope)) {
+                localStyle.assign($scope, {"background-color": "red"});
+                remoteStyle.assign($scope, {"background-color": "green"});
+            } else {
+                localStyle.assign($scope, {"background-color": "red"});
+                remoteStyle.assign($scope, {"background-color": "red"});
+            }
+
+        } catch (e) {
+            alert(e)
+        }
+
+    }
+
+    $scope.copyCourseProperty = function (property, direction) {
+        try {
+            var localValue = $parse("course." + property);
+            var remoteValue = $parse("remoteCourse." + property);
+            var mergedValue = $parse("mergedCourse." + property);
+
+            if (direction === ">") {
+                mergedValue.assign($scope, localValue($scope));
+            } else {
+                mergedValue.assign($scope, remoteValue($scope));
+            }
+
+            $scope.compareCourseProperty(property);
+        } catch (e) {
+            alert(e)
+        }
+
+    }
 }
 
 //CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];

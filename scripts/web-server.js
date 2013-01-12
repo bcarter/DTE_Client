@@ -92,7 +92,7 @@ StaticServlet.prototype.handleRequest = function (req, res) {
     var path = ('./' + req.url.pathname).replace('//', '/').replace(/%(..)/g, function (match, hex) {
         return String.fromCharCode(parseInt(hex, 16));
     });
-    path = path.replace("/DTEAdmin/services/", "/app/courses/").replace("/app/courses/Course/1954", "/app/courses/1954");
+    path = path.replace("/DTEAdmin/services/", "/courses/").replace("/courses/Course/1954", "/courses/1954").replace("/courses/Course/2469", "/courses/2469");
     if (req.method === 'POST' || req.method === 'PUT') {
         res.writeHead(200, {
             'Content-Type': 'application/json'

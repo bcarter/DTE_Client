@@ -1,4 +1,4 @@
-{"activeInd":"1", "address":"4200 S. I-10 Service Road", "ceuPoints":"3", "city":"New Orleans", "cmPoints":"4.34", "cost":"595", "courseLanguage":{
+{"activeInd":"1", "address":"x4200 S. I-10 Service Road", "ceuPoints":"3", "city":"New Orleans", "cmPoints":"4.34", "cost":"595", "courseLanguage":{
     "description":"English",
     "id":"1",
     "lang":"English",
@@ -21,7 +21,7 @@
     },
     "updateUser":"DTE_COURSE_ADMIN",
     "url":"http://www.osha.gov/pls/oshaweb/owaredirect.html?p_url=https://www.uta.edu/wconnect/osha/static/osha-home.shtml"
-}, "endDate":"2012-04-13T00:00:00-06:00", "id":"610", "industryId":"1", "length":"30", "location":"National Safety Council                 ", "noOfDays":"4", "startDate":"2012-04-10T00:00:00-06:00", "stateCode":{
+}, "endDate":"2012-04-13T00:00:00-06:00", "id":"610", "industryId":"1", "length":"30", "location":"National Safety Council", "noOfDays":"4", "startDate":"2012-04-10T00:00:00-06:00", "stateCode":{
     "description":"Louisiana",
     "id":"19",
     "stateCd":"LA",
