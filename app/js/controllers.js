@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function CourseListCtrl($scope, $http, $route, Course) {
+function CourseListCtrl($scope, $http, $route, $location, Course) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
     $scope.$route = $route;
@@ -88,12 +88,16 @@ function CourseListCtrl($scope, $http, $route, Course) {
 
     $scope.advFilterText = {"startDate": "", "endDate": "", "noOfDays": "", "cmPoints": false, "ceuPoints": false, "courseTitle": "", "educationCenter": "", "stateCode": ""
     };
+
+    $scope.changeView = function (view) {
+        $location.path(view); // path not hash
+    };
 }
 
 //CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Course) {
+function CourseDetailCtrl($scope, $routeParams, $http, $q, Course) {
     $scope.date = new Date();
 
     if ($routeParams.courseId === "new") {
@@ -189,9 +193,9 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Co
             }, function (data, status, headers, config) {
                 if (data.status === 409) {
                     alert("Record changed by another user: " + data);
-                    $scope.remoteCourse = data;
-                    alert(data.address);
-//                    $scope.changeView("courseConflict");
+//                    $scope.remoteCourse = data;
+//                    alert(data.address);
+                    $scope.changeView("courseConflict");
                 } else {
                     alert("error: " + data.status + data);
                 }
@@ -204,12 +208,50 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Co
         $scope.save();
         $scope.changeView("courses");
     };
+}
 
-    $scope.changeView = function (view) {
-        $location.path(view); // path not hash
+//CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
+
+
+function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
+
+    $scope.user = new User();
+    $scope.user.userType = "S";
+
+    User.list({},
+        function (data) {
+            //Success
+            $scope.users = data.dteUser;
+        }
+        , function (data) {
+
+        }
+    );
+
+    $scope.save = function () {
+        User.insert({}, $scope.user, function (res) {
+            if (res.ok === 1) {
+            } else {
+                console.log(res);
+            }
+            $location.path("/users");
+        }, function (res) {
+            alert("error: " + res);
+            $location.path("/users");
+        })
+        //    $scope.changeView('courses');
     };
+}
 
-    var changedCourse = $http.get('/DTEAdmin/services/Course/2469').success(function (changedCourse) {
+//UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
+
+
+function courseConflictCtrl($scope, $http, $parse, Course) {
+    try{
+    $scope.course = Course;
+    } catch (e){alert(e);}
+
+    var changedCourse = $http.get('/DTEAdmin/services/Course/2641').success(function (changedCourse) {
             $scope.remoteCourse = changedCourse;
             $scope.mergedCourse = {};
 
@@ -261,20 +303,20 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Co
             if ((isObject && localValue($scope).id == remoteValue($scope).id)
                 ||!isObject && localValue($scope) == remoteValue($scope)) {
                 mergedValue.assign($scope, localValue($scope));
-                localStyle.assign($scope, {"background-color": "green"});
-                remoteStyle.assign($scope, {"background-color": "green"});
-                mergedStyle.assign($scope, {"background-color": "green"});
+                localStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
+                remoteStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
+                mergedStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
             } else if ((isObject && localValue($scope).id == mergedValue($scope).id)
                 ||!isObject && localValue($scope) == mergedValue($scope)) {
-                localStyle.assign($scope, {"background-color": "green"});
-                remoteStyle.assign($scope, {"background-color": "red"});
+                localStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
+                remoteStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
             } else if ((isObject && remoteValue($scope).id == mergedValue($scope).id)
                 ||!isObject && remoteValue($scope) == mergedValue($scope)) {
-                localStyle.assign($scope, {"background-color": "red"});
-                remoteStyle.assign($scope, {"background-color": "green"});
+                localStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
+                remoteStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
             } else {
-                localStyle.assign($scope, {"background-color": "red"});
-                remoteStyle.assign($scope, {"background-color": "red"});
+                localStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
+                remoteStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
             }
 
         } catch (e) {
@@ -301,43 +343,6 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, $location, $parse, Co
         }
 
     }
-}
-
-//CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
-
-
-function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
-
-    $scope.user = new User();
-    $scope.user.userType = "S";
-
-    User.list({},
-        function (data) {
-            //Success
-            $scope.users = data.dteUser;
-        }
-        , function (data) {
-
-        }
-    );
-
-    $scope.save = function () {
-        User.insert({}, $scope.user, function (res) {
-            if (res.ok === 1) {
-            } else {
-                console.log(res);
-            }
-            $location.path("/users");
-        }, function (res) {
-            alert("error: " + res);
-            $location.path("/users");
-        })
-        //    $scope.changeView('courses');
-    };
-
-    $scope.changeView = function (view) {
-        $location.path(view); // path not hash
-    };
 }
 
 //UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];

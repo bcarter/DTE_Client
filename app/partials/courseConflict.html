@@ -1,15 +1,15 @@
 <div class="container">
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2"></div>
         <div class="span3">Your Course</div>
         <div class="span3">Merged Course</div>
         <div class="span3">Conflicting Course</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Education Center*</div>
         <div class="span3" ng-style="educationCenter.localStyle">{{course.educationCenter.name}}</div>
         <div class="span3" ng-style="educationCenter.mergedStyle"><div class="controls">
-            <select id="edCenterSelect"
+            <select class="input-block-level" id="edCenterSelect"
                     ng-options="educationCenter.name for educationCenter in educationCenters"
                     ng-required="true"
                     ng-model="mergedCourse.educationCenter" value="{{mergedCourse.educationCenter}}"
@@ -17,109 +17,109 @@
         </div></div>
         <div class="span3" ng-style="educationCenter.remoteStyle">{{remoteCourse.educationCenter.name}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Title*</div>
         <div class="span3" ng-style="courseTitle.localStyle">{{course.courseTitle.name}}</div>
-        <div class="span3" ng-style="courseTitle.mergedStyle"><select id="titleSelect" ng-options="title.name for title in courseTitles"
+        <div class="span3" ng-style="courseTitle.mergedStyle"><select class="input-block-level" id="titleSelect" ng-options="title.name for title in courseTitles"
                                    ng-required="true"
                                    ng-model="mergedCourse.courseTitle" value="{{mergedCourse.courseTitle}}"
                                    tabindex="2"></select></div>
         <div class="span3" ng-style="courseTitle.remoteStyle">{{remoteCourse.courseTitle.name}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Location*</div>
         <div class="span3" ng-style="location.localStyle" ng-click="copyCourseProperty('location', '>')">{{course.location}}</div>
-        <div class="span3" ng-style="location.mergedStyle"><input id="locationInput" type="text" size="92"
+        <div class="span3" ng-style="location.mergedStyle"><input class="input-block-level" id="locationInput" type="text"
                                   ng-model="mergedCourse.location" ng-required="true" tabindex="3"></div>
         <div class="span3" ng-style="location.remoteStyle" ng-click="copyCourseProperty('location', '<')">{{remoteCourse.location}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Address*</div>
         <div class="span3" ng-style="address.localStyle" ng-click="copyCourseProperty('address', '>')">{{course.address}}</div>
-        <div class="span3" ng-style="address.mergedStyle"><input id="addressInput" type="text" size="92"
+        <div class="span3" ng-style="address.mergedStyle"><input class="input-block-level" id="addressInput" type="text" 
                                   ng-model="mergedCourse.address" ng-required="true" tabindex="4"></div>
         <div class="span3" ng-style="address.remoteStyle" ng-click="copyCourseProperty('address', '<')">{{remoteCourse.address}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">City*</div>
         <div class="span3" ng-style="city.localStyle">{{course.city}}</div>
-        <div class="span3" ng-style="city.mergedStyle"><input id="cityInput" type="text" size="70"
+        <div class="span3" ng-style="city.mergedStyle"><input class="input-block-level" id="cityInput" type="text" 
                                   ng-model="mergedCourse.city" ng-required="true" tabindex="5"></div>
         <div class="span3" ng-style="city.remoteStyle">{{remoteCourse.city}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">State*</div>
         <div class="span3" ng-style="stateCode.localStyle">{{course.stateCode.description}}</div>
-        <div class="span3" ng-style="stateCode.mergedStyle"><select id="stateSelect" ng-options="stateCode.description for stateCode in stateCodes"
+        <div class="span3" ng-style="stateCode.mergedStyle"><select class="input-block-level" id="stateSelect" ng-options="stateCode.description for stateCode in stateCodes"
                                    ng-required="true" ng-model="mergedCourse.stateCode"
                                    value="{{mergedCourse.stateCode}}" tabindex="6"></select></div>
         <div class="span3" ng-style="stateCode.remoteStyle">{{remoteCourse.stateCode.description}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Start Date*</div>
         <div class="span3" ng-style="startDate.localStyle">{{course.startDate | date: 'MM/dd/yyyy'}}</div>
-        <div class="span3" ng-style="startDate.mergedStyle"><input id="startDateInput" ng-model="mergedCourse.startDate"
+        <div class="span3" ng-style="startDate.mergedStyle"><input class="input-block-level" id="startDateInput" ng-model="mergedCourse.startDate"
                                   value="{{mergedCourse.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true"
                                   tabindex="7"></div>
         <div class="span3" ng-style="startDate.remoteStyle">{{remoteCourse.startDate | date: 'MM/dd/yyyy'}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">End Date*</div>
         <div class="span3" ng-style="endDate.localStyle">{{course.endDate | date: 'MM/dd/yyyy'}}</div>
-        <div class="span3" ng-style="endDate.mergedStyle"><input id="endDateInput" ng-model="mergedCourse.endDate"
+        <div class="span3" ng-style="endDate.mergedStyle"><input class="input-block-level" id="endDateInput" ng-model="mergedCourse.endDate"
                                   value="{{mergedCourse.endDate | date: 'MM/dd/yyyy'}}" ui-date
                                   ng-required="true"
                                   tabindex="8"></div>
         <div class="span3" ng-style="endDate.remoteStyle">{{remoteCourse.endDate | date: 'MM/dd/yyyy'}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">No. of Days</div>
         <div class="span3" ng-style="noOfDays.localStyle">{{course.noOfDays}}</div>
-        <div class="span3" ng-style="noOfDays.mergedStyle"><input id="noOfDaysInput" min="0" type="number" ng-model="mergedCourse.noOfDays" tabindex="9"></div>
+        <div class="span3" ng-style="noOfDays.mergedStyle"><input class="input-block-level" id="noOfDaysInput" min="0" type="number" ng-model="mergedCourse.noOfDays" tabindex="9"></div>
         <div class="span3" ng-style="noOfDays.remoteStyle">{{remoteCourse.noOfDays}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Contact Hours*</div>
         <div class="span3" ng-style="length.localStyle">{{course.length}}</div>
-        <div class="span3" ng-style="length.mergedStyle"><input id="contractHoursInput" name="courseLength" min="0" type="number"
+        <div class="span3" ng-style="length.mergedStyle"><input class="input-block-level" id="contractHoursInput" name="courseLength" min="0" type="number"
                                   ng-model="mergedCourse.length"
                                   ng-required="true"
                                   tabindex="10"></div>
         <div class="span3" ng-style="length.remoteStyle">{{remoteCourse.length}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">CM Points</div>
         <div class="span3" ng-style="cmPoints.localStyle">{{course.cmPoints}}</div>
-        <div class="span3" ng-style="cmPoints.mergedStyle"><input id="cmPointsInput" name="cmPoints" min="0"
+        <div class="span3" ng-style="cmPoints.mergedStyle"><input class="input-block-level" id="cmPointsInput" name="cmPoints" min="0"
                                   type="number" ng-model="mergedCourse.cmPoints" tabindex="12"></div>
         <div class="span3" ng-style="cmPoints.remoteStyle">{{remoteCourse.cmPoints}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">CEU Points</div>
         <div class="span3" ng-style="ceuPoints.localStyle">{{course.ceuPoints}}</div>
-        <div class="span3" ng-style="ceuPoints.mergedStyle"><input id="ceuPointsInput" min="0" type="number" ng-model="mergedCourse.ceuPoints" tabindex="13"></div>
+        <div class="span3" ng-style="ceuPoints.mergedStyle"><input class="input-block-level" id="ceuPointsInput" min="0" type="number" ng-model="mergedCourse.ceuPoints" tabindex="13"></div>
         <div class="span3" ng-style="ceuPoints.remoteStyle">{{remoteCourse.ceuPoints}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Cost</div>
         <div class="span3" ng-style="cost.localStyle">{{course.cost}}</div>
-        <div class="span3" ng-style="cost.mergedStyle"><input id="costInput" step="0.01" name="cost" min="0" type="number" ng-model="mergedCourse.cost" tabindex="14"></div>
+        <div class="span3" ng-style="cost.mergedStyle"><input class="input-block-level" id="costInput" step="0.01" name="cost" min="0" type="number" ng-model="mergedCourse.cost" tabindex="14"></div>
         <div class="span3" ng-style="cost.remoteStyle">{{remoteCourse.cost}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Language*</div>
         <div class="span3" ng-style="courseLanguage.localStyle">{{course.courseLanguage.description}}</div>
-        <div class="span3" ng-style="courseLanguage.mergedStyle"><select id="languageSelect" ng-options="language.lang for language in courseLanguages"
+        <div class="span3" ng-style="courseLanguage.mergedStyle"><select class="input-block-level" id="languageSelect" ng-options="language.lang for language in courseLanguages"
                                    ng-required="true"
                                    ng-model="mergedCourse.courseLanguage"
                                    value="{{mergedCourse.courseLanguage}}"
                                    tabindex="15"></select></div>
         <div class="span3" ng-style="courseLanguage.remoteStyle">{{remoteCourse.courseLanguage.description}}</div>
     </div>
-    <div class="row-fluid">
+    <div class="row-fluid" style="margin:4px 0">
         <div class="span2">Registration Link*</div>
         <div class="span3" ng-style="url.localStyle">{{course.url}}</div>
-        <div class="span3" ng-style="url.mergedStyle"><input id="urlInput" name="urlInput" type="url" ng-model="mergedCourse.url"
+        <div class="span3" ng-style="url.mergedStyle"><input class="input-block-level" id="urlInput" name="urlInput" type="url" ng-model="mergedCourse.url"
                                   ng-required="true" placeholder="eg. http://www.osha.gov"
                                   tabindex="16"></div>
         <div class="span3" ng-style="url.remoteStyle">{{remoteCourse.url}}</div>

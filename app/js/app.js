@@ -8,7 +8,7 @@ angular.module('dteCourseAdmin', ['dteCourseAdminFilters', 'dteCourseAdminServic
         when('/', {templateUrl: 'partials/home.html', activetab: 'index'}).
         when('/courses', {templateUrl: 'partials/course-search.html', activetab: 'search'}).
         when('/course/:courseId', {templateUrl: 'partials/course-detail.html', controller: 'CourseDetailCtrl', activetab: 'detail'}).
-        when('/courseConflict/:courseId', {templateUrl: 'partials/courseConflict.html', controller: 'CourseDetailCtrl', activetab: 'courseConflict'}).
+        when('/courseConflict', {templateUrl: 'partials/courseConflict.html', controller: 'courseConflictCtrl', activetab: 'courseConflict'}).
         when('/users', {templateUrl: 'partials/userEdit.html', controller: 'UsersCtrl', activetab: 'user'}).
         otherwise({redirectTo: '/'});
 }]);
