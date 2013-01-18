@@ -97,13 +97,11 @@ function CourseListCtrl($scope, $http, $route, $location, Course) {
 //CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $http, $q, Course) {
+function CourseDetailCtrl($scope, $routeParams, $location, $q, Course) {
     $scope.date = new Date();
 
     if ($routeParams.courseId === "new") {
         $scope.course = new Course();
-        $scope.course.id = "0";
-        $scope.course.activeInd = "1";
         $scope.course.industryId = 1;
     } else {
         Course.query({courseId: $routeParams.courseId}, function (course) {
@@ -114,36 +112,36 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, Course) {
             course.ceuPoints = parseFloat(course.ceuPoints);
             course.cost = parseFloat(course.cost);
             $q.all([$scope.courseTitlesP, $scope.stateCodesP, $scope.courseLanguagesP, $scope.educationCentersP]).then(function (values) {
-                try {
-                    for (var i = 0; i < $scope.courseTitles.length; i++) {
-                        if ($scope.courseTitles[i].id === course.courseTitle.id) {
-                            course.courseTitle = $scope.courseTitles[i];
-                            break;
-                        }
-                    }
-
-                    for (var i = 0; i < $scope.stateCodes.length; i++) {
-                        if ($scope.stateCodes[i].stateCd === course.stateCode.stateCd) {
-                            course.stateCode = $scope.stateCodes[i];
-                            break;
-                        }
-                    }
-
-                    for (var i = 0; i < $scope.courseLanguages.length; i++) {
-                        if ($scope.courseLanguages[i].id === course.courseLanguage.id) {
-                            course.courseLanguage = $scope.courseLanguages[i];
-                            break;
-                        }
-                    }
-
-                    for (var i = 0; i < $scope.educationCenters.length; i++) {
-                        if ($scope.educationCenters[i].id === course.educationCenter.id) {
-                            course.educationCenter = $scope.educationCenters[i];
-                            break;
-                        }
-                    }
-                } catch (e) {
-                }
+//                try {
+//                    for (var i = 0; i < $scope.courseTitles.length; i++) {
+//                        if ($scope.courseTitles[i].id === course.courseTitle.id) {
+//                            course.courseTitle = $scope.courseTitles[i];
+//                            break;
+//                        }
+//                    }
+//
+//                    for (var i = 0; i < $scope.stateCodes.length; i++) {
+//                        if ($scope.stateCodes[i].stateCd === course.stateCode.stateCd) {
+//                            course.stateCode = $scope.stateCodes[i];
+//                            break;
+//                        }
+//                    }
+//
+//                    for (var i = 0; i < $scope.courseLanguages.length; i++) {
+//                        if ($scope.courseLanguages[i].id === course.courseLanguage.id) {
+//                            course.courseLanguage = $scope.courseLanguages[i];
+//                            break;
+//                        }
+//                    }
+//
+//                    for (var i = 0; i < $scope.educationCenters.length; i++) {
+//                        if ($scope.educationCenters[i].id === course.educationCenter.id) {
+//                            course.educationCenter = $scope.educationCenters[i];
+//                            break;
+//                        }
+//                    }
+//                } catch (e) {
+//                }
 
                 $scope.course = course;
             });
@@ -162,9 +160,11 @@ function CourseDetailCtrl($scope, $routeParams, $http, $q, Course) {
 //                }
 //                alert(returnHeaders);
 //                $scope.changeView("course/" + res.id);
-                //TODO Test This
-                $scope.courses.push(res);
-                $scope.changeView("course/new");
+//                $scope.courses.push(res);
+//                $location.path("course/new");
+                //TODO Make this work
+                $scope.course = new Course();
+                $scope.course.industryId = 1;
             }, function (data, status, headers, config) {
 //                var returnHeaders = "";
 //                var responseHeaders = getResponseHeaders();

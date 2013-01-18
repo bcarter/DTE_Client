@@ -1,154 +1,118 @@
-<div id="page2" class="subpage">
-    <div align="center"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
+<div class="span12">
+    <h3>Course Edit</h3>
+    <hr size="1">
     <p class="blackTen" align="left"><strong>Selection Criteria:</strong>
         Users may use any of the selection criteria below to search for OSHA
         training courses offered by the OSHA Training Institute (OTI) Education
         Centers. Please note that registration is conducted through the authorized
         OTI Education Center. </p>
     <hr size="1">
+</div>
 
-    <div class="container">
-        <!--<form name="courseSearchForm" class="form-horizontal">-->
+<!--<form name="courseSearchForm" class="form-horizontal">-->
+<div class="row-fluid">
+    <div class="span12">
+
         <div class="row-fluid">
-            <div class="span12">
-                <div class="control-group">
-                    <label class="control-label" for="edCenterSelect">OTI Education Center</label>
-
-                    <div class="controls">
-                        <select id="edCenterSelect" class="input-xxlarge search-query"
-                                ng-model="advFilterText.educationCenter">
-                            <option></option>
-                            <option ng-repeat="educationCenter in educationCenters">{{educationCenter.name}}</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="span6"><label for="edCenterSelect">OTI Education Center</label>
+                <select id="edCenterSelect" class="input-xxlarge search-query" ng-model="advFilterText.educationCenter">
+                    <option></option>
+                    <option ng-repeat="educationCenter in educationCenters | orderBy:'name'" value="{{educationCenter.id}}">{{educationCenter.name}}</option>
+                </select>
             </div>
+            <div class="span2"><label for="startDateInput">Start Date</label>
+                <input id="startDateInput" class="input-medium search-query" type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date></div>
+            <div class="span2"><label for="endDateInput">End Date</label>
+                <input id="endDateInput" class="input-medium search-query" type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date></div>
+            <div class="span2"><label for="noOfDaysInput">No. of Days</label>
+                <input id="noOfDaysInput" class="input-small search-query" type="text" size="2" ng-model="advFilterText.noOfDays" value=""></div>
         </div>
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="control-group">
-                    <label class="control-label" for="titleSelect">Course Title</label>
-
-                    <div class="controls">
-                        <select id="titleSelect" class="input-xxlarge search-query"
-                                ng-model="advFilterText.courseTitle" value="{{advFilterText.courseTitle}}">
-                            <option></option>
-                            <option ng-repeat="courseTitle in courseTitles">{{courseTitle.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="startDateInput">Start Date</label>
-
-                    <div class="controls">
-                        <input id="startDateInput" class="input-medium search-query"
-                               type="text" size="10" ng-model="advFilterText.startDate" value="mm/dd/yyyy" ui-date>
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="endDateInput">End Date</label>
-
-                    <div class="controls">
-                        <input id="endDateInput" class="input-medium search-query"
-                               type="text" size="10" ng-model="advFilterText.endDate" value="mm/dd/yyyy" ui-date>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span3">
-                <div class="control-group">
-                    <label class="control-label" for="stateSelect">State</label>
-
-                    <div class="controls">
-                        <select id="stateSelect" class="input-medium search-query" ng-model="advFilterText.stateCode">
-                            <option></option>
-                            <option ng-repeat="stateCode in stateCodes">{{stateCode.description}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="span3">
-                <div class="control-group">
-                    <label class="control-label" for="noOfDaysInput">No. of Days</label>
-
-                    <div class="controls">
-                        <input id="noOfDaysInput" class="input-small search-query"
-                               type="text" size="2" ng-model="advFilterText.noOfDays" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="span2">
-                <div class="control-group">
-                    <label class="control-label" for="cmPointsCheckbox">CM</label>
-
-                    <div class="controls">
-                        <input id="cmPointsCheckbox" type="checkbox" class="input-mini"
-                               ng-model="advFilterText.cmPoints">
-                    </div>
-                </div>
-            </div>
-            <div class="span2">
-                <div class="control-group">
-                    <label class="control-label" for="ceuPointsCheckbox">CEU</label>
-
-                    <div class="controls">
-                        <input id="ceuPointsCheckbox" type="checkbox" class="input-mini"
-                               ng-model="advFilterText.ceuPoints">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--</form>-->
-    </div>
-    <hr size="1">
-    <div class="container">
-        <div class="row-fluid">
-            <div class="span2">
-                <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="pull-right">
-                    Previous
-                </button>
-            </div>
-            <div class="span1">
-                <span ng-bind-template="{{currentPage+1}}">1</span>/<span
-                    ng-bind-template="{{numberOfPages(filtered)}}">Loading</span>
-            </div>
-            <div class="span2">
-                <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1"
-                        class="pull-left">
-                    Next
-                </button>
-            </div>
-            <div class="span7">
-                <button ng-click="courseList(); currentPage=0;" class="pull-right">Refresh</button>
-            </div>
-        </div>
-        <table class="table table-bordered" ng-grid>
-            <tr>
-                <th ng-repeat="th in head" ng-class="selectedCls(th.column)"
-                    ng-click="changeSorting(th.column)">
-                    {{th.head}}
-                </th>
-            </tr>
-            <tr ng-repeat="course in filtered = (courses | cmGTZero:advFilterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
-                <td>{{course.educationCenter.name}}</td>
-                <td><a href="#/course/{{course.id}}">{{course.courseTitle.name}}</a></td>
-                <td>{{course.startDate | date:'MM/dd/yyyy'}}</td>
-                <td>{{course.endDate | date:'MM/dd/yyyy'}}</td>
-                <td>{{course.noOfDays}}</td>
-                <td>{{course.location}}</td>
-                <td>{{course.address}}</td>
-                <td>{{course.city}}</td>
-                <td>{{course.stateCode.stateCd}}</td>
-                <td>{{course.cmPoints}}</td>
-                <td>{{course.ceuPoints}}</td>
-            </tr>
-        </table>
     </div>
 </div>
+
+<div class="row-fluid">
+    <div class="span6">
+        <label for="titleSelect">Course Title</label>
+        <select id="titleSelect" class="input-xxlarge search-query" ng-model="advFilterText.courseTitle">
+            <option></option>
+            <option ng-repeat="courseTitle in courseTitles | orderBy:'name'" value="{{courseTitle.id}}">{{courseTitle.name}}</option>
+        </select>
+    </div>
+    <div class="span2"><label for="stateSelect">State</label>
+        <select id="stateSelect" class="input-medium search-query" ng-model="advFilterText.stateCode">
+            <option></option>
+            <option ng-repeat="stateCode in stateCodes" value="{{stateCode.id}}">{{stateCode.description}}</option>
+        </select>
+    </div>
+
+    <div class="span4">
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div align="left" style="float:left; width:10%;"><label for="cmPointsCheckbox">CM</label></div>
+                <div align="left" style="float:left; width:90%;"><input id="cmPointsCheckbox" type="checkbox" ng-model="advFilterText.cmPoints"></div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div align="left" style="float:left; width:10%;"><label for="ceuPointsCheckbox">CEU</label></div>
+                <div align="left" style="float:left; width:90%;"><input id="ceuPointsCheckbox" type="checkbox" ng-model="advFilterText.ceuPoints"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--</form>-->
+
+<hr size="1">
+
+<div class="row-fluid">
+    <div class="span6">
+        <strong>Pages:</strong>
+        <span ng-bind-template="{{currentPage+1}}">1</span> of <span ng-bind-template="{{numberOfPages(filtered)}}">Loading...</span>
+    </div>
+    <div class="span6">
+        <div class="span7" align="right">
+            <!--select style="width:65px; margin-bottom:-5px" ng-model="pageSize" >
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="5000">All</option>
+            </select>&nbsp;Per Page -->
+        </div>
+        <div class="span5">
+            <button ng-click="courseList(); currentPage=0;" class="pull-right">Refresh</button>
+            <button ng-disabled="currentPage >= filtered.length/pageSize - 1" ng-click="currentPage=currentPage+1" class="pull-right">Next</button>
+            <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class="pull-right">Previous</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" ng-grid>
+    <tr>
+        <th ng-repeat="th in head" ng-class="selectedCls(th.column)"
+            ng-click="changeSorting(th.column)" >
+            {{th.head}}&nbsp;
+            <span class="caret" style="margin-top: 7px;"></span>
+        </th>
+    </tr>
+    <tr ng-repeat="course in filtered = (courses | cmGTZero:advFilterText | orderBy:sort.column:sort.descending) | startFrom:currentPage*pageSize | limitTo:pageSize">
+        <td width="20%">{{course.edCenterId | getEdCenterNameById:educationCenters}}</td>
+        <td width="20%"><a href="#/course/{{course.id}}" title="Edit Course">{{course.titleId | getTitleNameById:courseTitles}}</a></td>
+        <td width="5%">{{course.startDate | date:'MM/dd/yyyy'}}</td>
+        <td width="4%">{{course.endDate | date:'MM/dd/yyyy'}}</td>
+        <td width="5%">{{course.noOfDays}}</td>
+        <td width="10%">{{course.location}}</td>
+        <td width="15%">{{course.address}}</td>
+        <td width="15%">{{course.city}}</td>
+        <td width="2%">{{course.stateCode.stateCd}}</td>
+        <td width="2%">{{course.cmPoints}}</td>
+        <td width="2%">{{course.ceuPoints}}</td>
+    </tr>
+</table>

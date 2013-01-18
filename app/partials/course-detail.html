@@ -1,223 +1,153 @@
-<div align="center" xmlns="http://www.w3.org/1999/html"><img src="banner.png" border="0" alt="OTI Education Center Course Search"></div>
-<div>
-    <h2 style="background-color:#D9D9D9; padding: 2px;">Course Input</h2>
-    <input type="hidden" id="crsId" ng-model="course.course_id"/>
-</div>
-<div class="container">
-    <form name="courseInputForm" class="form-horizontal">
-    <p>
-        <button ng-click="changeView('courses')">Cancel</button>
-        <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid" tabindex="17">Save</button>
-        <button ng-click="deleteCourse()">Delete</button>
-    </p>
-        <div class="row">
+<input type="hidden" id="crsId" ng-model="course.course_id"/>
+
+<form name="courseInputForm" class="form-horizontal">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="span10"><h3>New Course</h3></div>
+            <div class="span2" style="margin-top:25px;">
+                <button ng-click="changeView('courses')">Cancel</button>
+                <button ng-click="save()" ng-disabled="isClean() || courseInputForm.$invalid" tabindex="17">Save</button>
+                <button ng-click="deleteCourse()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12"><hr size="1"></div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12 red" align="right"><strong>* Required field</strong></div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span7">
+            <div style="float: left; width: 20%; margin-bottom: 5px;">
+                <label for="edCenterSelect">OTI Education Center*</label></div>
+            <div style="float: left; width: 80%; margin-bottom: 5px;">
+                <select id="edCenterSelect" ng-options="educationCenter.id as educationCenter.name for educationCenter in educationCenters | orderBy:'name'" ng-required="true" ng-model="course.edCenterId" class="input-xxlarge" tabindex="1"></select></div>
+        </div>
+        <div class="span5">
+            <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="startDateInput">Start Date*</label></div>
+            <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="startDateInput" ng-model="course.startDate" value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true" tabindex="7">
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span7">
+            <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="titleSelect">Course Title*</label></div>
+            <div style="float: left; width: 80%; margin-bottom: 5px;"><select id="titleSelect" ng-options="title.id as title.name for title in courseTitles | orderBy:'name'" ng-required="true" ng-model="course.titleId" class="input-xxlarge" tabindex="2"></select></div>
+        </div>
+        <div class="span5">
+            <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="endDateInput">End Date*</label></div>
+            <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="endDateInput" ng-model="course.endDate" value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true" tabindex="8"></div>
+        </div>
+
+    </div>
+
+
+    <div class="row-fluid">
+        <div class="span7">
+            <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="titleDesc">Description</label></div>
+            <div style="float: left; width: 80%; margin-bottom: 5px;"><textarea id="titleDesc" name="titleDesc" class="input-xxlarge" rows="10" readonly ng-model="course.titleId" value="{{course.titleId|getTitleDescById:courseTitles}}"></textarea></div>
+        </div>
+        <div class="span5">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="noOfDaysInput">No. of Days</label></div>
+                    <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="noOfDaysInput" min="0" type="number" ng-model="course.noOfDays" tabindex="9"></div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="contractHoursInput">Contact Hours*</label></div>
+                    <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="contractHoursInput" name="courseLength" min="0" type="number" ng-model="course.length" ng-required="true" tabindex="10">
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="cmPointsInput">CM Points</label></div>
+                        <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="cmPointsInput" name="cmPoints" min="0" type="number" ng-model="course.cmPoints" tabindex="12"></div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="ceuPointsInput">CEU Points</label></div>
+                        <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="ceuPointsInput" min="0" type="number" ng-model="course.ceuPoints" tabindex="13"></div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="costInput">Cost</label></div>
+                        <div style="float: left; width: 80%; margin-bottom: 5px;"><input id="costInput" step="0.01" name="cost" min="0" type="number" ng-model="course.cost" tabindex="14"></div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div style="float: left; width: 20%; margin-bottom: 5px;"><label for="languageSelect">Language*</label></div>
+                        <div style="float: left; width: 80%; margin-bottom: 5px;"><select id="languageSelect" ng-options="language.id as language.lang for language in courseLanguages " ng-required="true" ng-model="course.langId" tabindex="15"></select></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="float: left; width: 11.5%; margin-bottom: 5px;"><label for="locationInput">Location*</label></div>
+            <div style="float: left; width: 88.5%; margin-bottom: 5px;"><input id="locationInput" type="text" class="input-xxlarge" ng-model="course.location" ng-required="true" tabindex="3"></div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="float: left; width: 11.5%; margin-bottom: 5px;"><label for="addressInput">Address*</label></div>
+            <div style="float: left; width: 88.5%; margin-bottom: 5px;"><input id="addressInput" type="text" class="input-xxlarge" ng-model="course.address" ng-required="true" tabindex="4"></div>
+        </div>
+
+
+        <div class="row-fluid">
             <div class="span12">
-                <div class="control-group">
-                    <label class="control-label" for="edCenterSelect">Sponsoring OTI Education Center*</label>
-
-                    <div class="controls">
-                        <select id="edCenterSelect"
-                                ng-options="educationCenter.name for educationCenter in educationCenters"
-                                ng-required="true"
-                                ng-model="course.educationCenter" value="{{course.educationCenter}}"
-                                class="input-xxlarge"
-                                tabindex="1"></select>
-                    </div>
-                </div>
+                <div style="float: left; width: 11.5%; margin-bottom: 5px;"><label for="cityInput">City*</label></div>
+                <div style="float: left; width: 88.5%; margin-bottom: 5px;"><input id="cityInput" type="text" class="input-xxlarge" ng-model="course.city" ng-required="true" tabindex="5"></div>
             </div>
         </div>
-        <div class="row">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="titleSelect">Title*</label>
 
-                    <div class="controls">
-                        <select id="titleSelect" ng-options="title.name for title in courseTitles"
-                                ng-required="true"
-                                ng-model="course.courseTitle" value="{{course.courseTitle}}"
-                                tabindex="2"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="startDateInput">Start Date*</label>
-
-                    <div class="controls">
-                        <input id="startDateInput" ng-model="course.startDate"
-                               value="{{course.startDate | date: 'MM/dd/yyyy'}}" ui-date ng-required="true"
-                               tabindex="7">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span6">
-                <div class="row">
-                    <div class="span12">
-                        <div class="control-group">
-                            <label class="control-label" for="titleDesc">Description</label>
-
-                            <div class="controls">
-                                <textarea id="titleDesc" name="titleDesc" cols="92" rows="5" readonly
-                                          ng-model="course.courseTitle.description"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="row">
-                    <div class="span12">
-                        <div class="control-group">
-                            <label class="control-label" for="endDateInput">End Date*</label>
-
-                            <div class="controls">
-                                <input id="endDateInput" ng-model="course.endDate"
-                                       value="{{course.endDate | date: 'MM/dd/yyyy'}}" ui-date
-                                       ng-required="true"
-                                       tabindex="8">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span12">
-                        <div class="control-group">
-                            <label class="control-label" for="noOfDaysInput">No. of Days</label>
-
-                            <div class="controls">
-                                <input id="noOfDaysInput" min="0" type="number" ng-model="course.noOfDays" tabindex="9">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span12">
-                        <div class="control-group">
-                            <label class="control-label" for="contractHoursInput">Contact Hours*</label>
-
-                            <div class="controls">
-                                <input id="contractHoursInput" name="courseLength" min="0" type="number"
-                                       ng-model="course.length"
-                                       ng-required="true"
-                                       tabindex="10">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="locationInput">Location*</label>
-
-                    <div class="controls">
-                        <input id="locationInput" type="text" size="92"
-                               ng-model="course.location" ng-required="true" tabindex="3">
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="cmPointsInput">CM Points</label>
-
-                    <div class="controls">
-                        <input id="cmPointsInput" name="cmPoints" min="0"
-                               type="number" ng-model="course.cmPoints" tabindex="12">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="addressInput">Address*</label>
-
-                    <div class="controls">
-                        <input id="addressInput" type="text" size="92"
-                               ng-model="course.address" ng-required="true" tabindex="4">
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="ceuPointsInput">CEU Points</label>
-
-                    <div class="controls">
-                        <input id="ceuPointsInput" min="0" type="number" ng-model="course.ceuPoints" tabindex="13">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="cityInput">City*</label>
-
-                    <div class="controls">
-                        <input id="cityInput" type="text" size="70"
-                               ng-model="course.city" ng-required="true" tabindex="5">
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="costInput">Cost</label>
-
-                    <div class="controls">
-                        <input id="costInput" step="0.01" name="cost" min="0" type="number" ng-model="course.cost" tabindex="14">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="stateSelect">State*</label>
-
-                    <div class="controls">
-                        <select id="stateSelect" ng-options="stateCode.description for stateCode in stateCodes"
-                                ng-required="true" ng-model="course.stateCode"
-                                value="{{course.stateCode}}" tabindex="6"></select>
-                    </div>
-                </div>
-            </div>
-            <div class="span6">
-                <div class="control-group">
-                    <label class="control-label" for="languageSelect">Language*</label>
-
-                    <div class="controls">
-                        <select id="languageSelect" ng-options="language.lang for language in courseLanguages"
-                                ng-required="true"
-                                ng-model="course.courseLanguage"
-                                value="{{course.courseLanguage}}"
-                                tabindex="15"></select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+        <div class="row-fluid">
             <div class="span12">
-                <div class="control-group">
-                    <p>[Website links only. Please ensure link includes &quot;http://&quot;.]
-                        &nbsp;&nbsp;<a href="{{course.url}}" target="_blank" ng-show="courseInputForm.urlInput.$valid">Try in a new window.</a></p>
-                    <label class="control-label" for="urlInput">Registration Link*</label>
+                <div style="float: left; width: 11.5%; margin-bottom: 5px;"><label for="stateSelect">State*</label></div>
+                <div style="float: left; width: 88.5%; margin-bottom: 5px;"><select id="stateSelect" ng-options="stateCode.id as stateCode.description for stateCode in stateCodes | orderBy:'name'" ng-required="true" ng-model="course.stateId" tabindex="6"></select></div>
+            </div>
 
-                    <div class="controls">
-                        <input id="urlInput" name="urlInput" type="url" ng-model="course.url"
-                               ng-required="true" placeholder="eg. http://www.osha.gov"
-                               class="input-xxlarge" tabindex="16">
-                    </div>
-                </div>
-            </div>
+
         </div>
-        <div class="row">
-            <div class="span12">
-                <strong>* Required field</strong>
-            </div>
+    </div>
+    </div>
+
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="float:left; width: 11.5%;"><label for="urlInput">Registration Link*</label></div>
+            <div style="float:left; width: 88.5%;"><input id="urlInput" name="urlInput" type="url" ng-model="course.url" ng-required="true" placeholder="eg. http://www.osha.gov" class="input-xxlarge" tabindex="16"></div>
         </div>
-    </form>
-<div ng-show="remoteCourse.id===course.id"> Ed Center : {{course.educationCenter.name}} | {{remoteCourse.educationCenter.name}}</div>
-</div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div style="float:left; width: 11.5%;">&nbsp;</div>
+            <div style="float:left; width: 88.5%;">[Website links only. Please ensure link includes &quot;http://&quot;.]<br />
+                <a href="{{course.url}}" target="_blank" ng-show="courseInputForm.urlInput.$valid" title="Try website link">Try in a new window.</a></div>
+        </div>
+    </div>
+
+</form>

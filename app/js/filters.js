@@ -23,12 +23,55 @@ app.filter('cmGTZero', function() {
               &&(!advFilterText.ceuPoints || courses[i].ceuPoints > 0)
               &&(typeof advFilterText.startDate != "object" || advFilterText.startDate === null || checkDate.toUTCString() === advFilterText.startDate.toUTCString())
               &&(typeof advFilterText.endDate != "object" || advFilterText.endDate === null || (new Date(courses[i].endDate)).toUTCString() === advFilterText.endDate.toUTCString())
-              &&( advFilterText.courseTitle === "" || (courses[i].courseTitle.name === advFilterText.courseTitle))
-              &&( advFilterText.educationCenter === "" || (courses[i].educationCenter.name === advFilterText.educationCenter))
-              &&( advFilterText.stateCode === "" || (courses[i].stateCode.description === advFilterText.stateCode))){
+              &&( advFilterText.courseTitle === "" || (courses[i].titleId === advFilterText.courseTitle))
+              &&( advFilterText.educationCenter === "" || (courses[i].edCenterId === advFilterText.educationCenter))
+              &&( advFilterText.stateCode === "" || (courses[i].stateId === advFilterText.stateCode))){
               out.push(courses[i]);
           }
       }
     return out;
     }
 });
+
+app.filter('getEdCenterNameById', function() {
+    return function(edCenterId, educationCenters) {
+        var retName;
+
+        for (var i = 0; i < educationCenters.length; i++) {
+            if (educationCenters[i].id === edCenterId ){
+                retName = educationCenters[i].name;
+                break;
+            }
+        }
+        return retName;
+    }
+});
+
+app.filter('getTitleNameById', function() {
+    return function(edCenterId, educationCenters) {
+        var retName;
+
+        for (var i = 0; i < educationCenters.length; i++) {
+            if (educationCenters[i].id === edCenterId ){
+                retName = educationCenters[i].name;
+                break;
+            }
+        }
+        return retName;
+    }
+});
+
+app.filter('getTitleDescById', function() {
+    return function(edCenterId, educationCenters) {
+        var retName;
+
+        for (var i = 0; i < educationCenters.length; i++) {
+            if (educationCenters[i].id === edCenterId ){
+                retName = educationCenters[i].description;
+                break;
+            }
+        }
+        return retName;
+    }
+});
+
