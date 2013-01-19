@@ -1,9 +1,9 @@
 'use strict';
 
 /* Services */
+var app=angular.module('dteCourseAdminServices', ['ngResource']);
 
-angular.module('dteCourseAdminServices', ['ngResource']).
-    factory('Course',function ($resource) {
+app.factory('Course',function ($resource) {
         return $resource('/DTEAdmin/services/Course/:courseId', {}, {
         //return $resource('/app/courses/Course', {}, {
             list: {method: 'GET', params: {courseId: '', _: Math.random()}, isArray: false},
@@ -11,8 +11,9 @@ angular.module('dteCourseAdminServices', ['ngResource']).
             update: {method: 'PUT'},
             insert: {method: 'POST'}
         });
-    }).
-    factory('User', function ($resource) {
+    });
+
+app.factory('User', function ($resource) {
         return $resource('/DTEAdmin/services/User', {}, {
         //return $resource('/app/courses/User.json', {}, {
             list: {method: 'GET', params: {courseId: '', _: Math.random()}, isArray: false},
@@ -21,3 +22,15 @@ angular.module('dteCourseAdminServices', ['ngResource']).
             insert: {method: 'POST'}
         });
     });
+
+app.factory('Data', function(){
+    var course = {};
+    return {
+        getCourse:function () {
+            return course;
+        },
+        setCourse:function (value) {
+            course = value;
+        }
+    };
+});

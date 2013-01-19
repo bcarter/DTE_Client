@@ -111,7 +111,7 @@
         <td width="10%">{{course.location}}</td>
         <td width="15%">{{course.address}}</td>
         <td width="15%">{{course.city}}</td>
-        <td width="2%">{{course.stateCode.stateCd}}</td>
+        <td width="2%">{{course.stateId | getStateDescById:stateCodes}}</td>
         <td width="2%">{{course.cmPoints}}</td>
         <td width="2%">{{course.ceuPoints}}</td>
     </tr>

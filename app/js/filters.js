@@ -63,15 +63,43 @@ app.filter('getTitleNameById', function() {
 
 app.filter('getTitleDescById', function() {
     return function(edCenterId, educationCenters) {
-        var retName;
+        var retDesc;
 
         for (var i = 0; i < educationCenters.length; i++) {
             if (educationCenters[i].id === edCenterId ){
-                retName = educationCenters[i].description;
+                retDesc = educationCenters[i].description;
                 break;
             }
         }
-        return retName;
+        return retDesc;
+    }
+});
+
+app.filter('getStateDescById', function() {
+    return function(stateId, stateCodes) {
+        var retDesc;
+
+        for (var i = 0; i < stateCodes.length; i++) {
+            if (stateCodes[i].id === stateId ){
+                retDesc = stateCodes[i].description;
+                break;
+            }
+        }
+        return retDesc;
+    }
+});
+
+app.filter('getLangById', function() {
+    return function(langId, courseLanguages) {
+        var retDesc;
+
+        for (var i = 0; i < courseLanguages.length; i++) {
+            if (courseLanguages[i].id === langId ){
+                retDesc = courseLanguages[i].lang;
+                break;
+            }
+        }
+        return retDesc;
     }
 });
 

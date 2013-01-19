@@ -97,7 +97,7 @@ function CourseListCtrl($scope, $http, $route, $location, Course) {
 //CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
 
 
-function CourseDetailCtrl($scope, $routeParams, $location, $q, Course) {
+function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
     $scope.date = new Date();
 
     if ($routeParams.courseId === "new") {
@@ -105,50 +105,19 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course) {
         $scope.course.industryId = 1;
     } else {
         Course.query({courseId: $routeParams.courseId}, function (course) {
-//        $http.get('courses/course_1954.json').success(function (course) {
             course.noOfDays = parseInt(course.noOfDays);
             course.length = parseInt(course.length);
             course.cmPoints = parseFloat(course.cmPoints);
             course.ceuPoints = parseFloat(course.ceuPoints);
             course.cost = parseFloat(course.cost);
             $q.all([$scope.courseTitlesP, $scope.stateCodesP, $scope.courseLanguagesP, $scope.educationCentersP]).then(function (values) {
-//                try {
-//                    for (var i = 0; i < $scope.courseTitles.length; i++) {
-//                        if ($scope.courseTitles[i].id === course.courseTitle.id) {
-//                            course.courseTitle = $scope.courseTitles[i];
-//                            break;
-//                        }
-//                    }
-//
-//                    for (var i = 0; i < $scope.stateCodes.length; i++) {
-//                        if ($scope.stateCodes[i].stateCd === course.stateCode.stateCd) {
-//                            course.stateCode = $scope.stateCodes[i];
-//                            break;
-//                        }
-//                    }
-//
-//                    for (var i = 0; i < $scope.courseLanguages.length; i++) {
-//                        if ($scope.courseLanguages[i].id === course.courseLanguage.id) {
-//                            course.courseLanguage = $scope.courseLanguages[i];
-//                            break;
-//                        }
-//                    }
-//
-//                    for (var i = 0; i < $scope.educationCenters.length; i++) {
-//                        if ($scope.educationCenters[i].id === course.educationCenter.id) {
-//                            course.educationCenter = $scope.educationCenters[i];
-//                            break;
-//                        }
-//                    }
-//                } catch (e) {
-//                }
-
                 $scope.course = course;
+                Data.setCourse($scope.course);
             });
         });
     }
 
-    $scope.save = function () {
+        $scope.save = function () {
         if ($routeParams.courseId === "new") {
             Course.insert({}, $scope.course, function (res, getResponseHeaders) {
 //                var returnHeaders = "";
@@ -177,8 +146,7 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course) {
 //                $scope.changeView("course/" + res.id);
                 $scope.changeView("courses");
             })
-        }
-        else {
+        } else {
             Course.update({}, $scope.course, function (res) {
                 //TODO Test This
                 //TODO fix date sort after change
@@ -246,21 +214,21 @@ function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
 //UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 
 
-function courseConflictCtrl($scope, $http, $parse, Course) {
+function CourseConflictCtrl($scope, $http, $parse, Data) {
     try{
-    $scope.course = Course;
+    $scope.course = Data.getCourse();
     } catch (e){alert(e);}
 
-    var changedCourse = $http.get('/DTEAdmin/services/Course/2641').success(function (changedCourse) {
+    var changedCourse = $http.get('/DTEAdmin/services/Course/2469').success(function (changedCourse) {
             $scope.remoteCourse = changedCourse;
             $scope.mergedCourse = {};
 
-            $scope.compareCourseProperty("educationCenter");
-            $scope.compareCourseProperty("courseTitle");
+            $scope.compareCourseProperty("edCenterId");
+            $scope.compareCourseProperty("titleId");
             $scope.compareCourseProperty("location");
             $scope.compareCourseProperty("address");
             $scope.compareCourseProperty("city");
-            $scope.compareCourseProperty("stateCode");
+            $scope.compareCourseProperty("stateId");
             $scope.compareCourseProperty("startDate");
             $scope.compareCourseProperty("endDate");
             $scope.compareCourseProperty("noOfDays");
@@ -268,7 +236,7 @@ function courseConflictCtrl($scope, $http, $parse, Course) {
             $scope.compareCourseProperty("cmPoints");
             $scope.compareCourseProperty("ceuPoints");
             $scope.compareCourseProperty("cost");
-            $scope.compareCourseProperty("courseLanguage");
+            $scope.compareCourseProperty("langId");
             $scope.compareCourseProperty("url");
 
 
