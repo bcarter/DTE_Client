@@ -14,10 +14,10 @@ app.factory('Course',function ($resource) {
     });
 
 app.factory('User', function ($resource) {
-        return $resource('/DTEAdmin/services/User', {}, {
+        return $resource('/DTEAdmin/services/User/:userId', {}, {
         //return $resource('/app/courses/User.json', {}, {
-            list: {method: 'GET', params: {courseId: '', _: Math.random()}, isArray: false},
-            query: {method: 'GET', params: {courseId: 'new', _: Math.random()}, isArray: false},
+            list: {method: 'GET', params: {userId: '', _: Math.random()}, isArray: false},
+            query: {method: 'GET', params: {userId: 'new', _: Math.random()}, isArray: false},
             update: {method: 'PUT'},
             insert: {method: 'POST'}
         });

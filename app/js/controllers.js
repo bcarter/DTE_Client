@@ -117,33 +117,13 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
         });
     }
 
-        $scope.save = function () {
+    $scope.save = function () {
         if ($routeParams.courseId === "new") {
             Course.insert({}, $scope.course, function (res, getResponseHeaders) {
-//                var returnHeaders = "";
-//                var responseHeaders = getResponseHeaders();
-//                for (var key in responseHeaders) {
-//                    if (responseHeaders.hasOwnProperty(key)) {
-//                        returnHeaders += key + ":" + getResponseHeaders(key) + " | ";
-//                    }
-//                }
-//                alert(returnHeaders);
-//                $scope.changeView("course/" + res.id);
-//                $scope.courses.push(res);
-//                $location.path("course/new");
                 //TODO Make this work
                 $scope.course = new Course();
                 $scope.course.industryId = 1;
             }, function (data, status, headers, config) {
-//                var returnHeaders = "";
-//                var responseHeaders = getResponseHeaders();
-//                for (var key in responseHeaders) {
-//                    if (responseHeaders.hasOwnProperty(key)) {
-//                        returnHeaders += key + ":" + getResponseHeaders(key) + " | ";
-//                    }
-//                }
-//                alert(returnHeaders);
-//                $scope.changeView("course/" + res.id);
                 $scope.changeView("courses");
             })
         } else {
@@ -160,12 +140,12 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
                 $scope.changeView("courses");
             }, function (data, status, headers, config) {
                 if (data.status === 409) {
-                    alert("Record changed by another user: " + data);
+                    alert("Record changed by another user");
 //                    $scope.remoteCourse = data;
 //                    alert(data.address);
                     $scope.changeView("courseConflict");
                 } else {
-                    alert("error: " + data.status + data);
+                    alert("error: " + data.status);
                 }
             })
         }
@@ -181,46 +161,87 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
 //CourseDetailCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 
 
-function UsersCtrl($scope, $routeParams, $http, $q, $location, User) {
+function UsersCtrl($scope, $routeParams, $q, $location, User) {
 
-    $scope.user = new User();
-    $scope.user.userType = "S";
+    $scope.clearForm = function () {
+        $scope.user = new User();
+        $scope.user.id = "";
+        $scope.user.userType = "A";
+    };
 
-    User.list({},
-        function (data) {
-            //Success
-            $scope.users = data.dteUser;
-        }
-        , function (data) {
+    $scope.getUserById = function (userId) {
+        User.query({userId: userId}, function (user) {
+            $scope.user = user;
+        });
+    };
 
-        }
-    );
+    $scope.userList = function () {
+        User.list({},
+            function (data) {
+                //Success
+                $scope.users = data.dteUser;
+            }
+            , function (data) {
+
+            }
+        );
+    };
 
     $scope.save = function () {
-        User.insert({}, $scope.user, function (res) {
-            if (res.ok === 1) {
-            } else {
-                console.log(res);
-            }
-            $location.path("/users");
-        }, function (res) {
-            alert("error: " + res);
-            $location.path("/users");
-        })
-        //    $scope.changeView('courses');
+        if ($scope.user.id === "") {
+            User.insert({}, $scope.user , function (res) {
+                $scope.userList();
+                $scope.clearForm();
+                }, function (data, status, headers, config) {
+                     alert("error: " + data.status);
+                })
+        } else {
+            User.update({}, $scope.user, function (res) {
+                $scope.userList();
+                $scope.clearForm();
+            }, function (data, status, headers, config) {
+                switch (data.status) {
+                    case 404: alert("Record does not exist");
+                        break;
+                    case 412: alert("Invalid Change Request");
+                        break;
+                    case 409: alert("Record changed by another user");
+                        break;
+                    defalut: alert("Error: " + data.status);
+                }
+
+                $scope.userList();
+            })
+        }
     };
+
+    $scope.userList();
+    $scope.clearForm();
 }
 
 //UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 
 
-function CourseConflictCtrl($scope, $http, $parse, Data) {
-    try{
-    $scope.course = Data.getCourse();
-    } catch (e){alert(e);}
+function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
+    try {
+        $scope.course = Data.getCourse();
+//        $scope.course = $http.get('/DTEAdmin/services/Course/2641');
+    } catch (e) {
+        alert(e);
+    }
 
-    var changedCourse = $http.get('/DTEAdmin/services/Course/2469').success(function (changedCourse) {
+    var changedCourse = $http.get('/DTEAdmin/services/Course/' + $scope.course.id).success(function (changedCourse) {
             $scope.remoteCourse = changedCourse;
+            try {
+                $scope.remoteCourse.noOfDays  = +$scope.remoteCourse.noOfDays;
+                $scope.remoteCourse.length  = +$scope.remoteCourse.length;
+                $scope.remoteCourse.cmPoints  = +$scope.remoteCourse.cmPoints;
+                $scope.remoteCourse.ceuPoints  = +$scope.remoteCourse.ceuPoints;
+                $scope.remoteCourse.cost  = +$scope.remoteCourse.cost;
+            } catch (e){
+                alert(e);
+            }
+
             $scope.mergedCourse = {};
 
             $scope.compareCourseProperty("edCenterId");
@@ -240,25 +261,15 @@ function CourseConflictCtrl($scope, $http, $parse, Data) {
             $scope.compareCourseProperty("url");
 
 
-            if (+$scope.remoteCourse.id === $scope.course.id) {
-                $scope.mergedCourse.id = $scope.remoteCourse.id;
-            }
-
-            if ($scope.remoteCourse.activeInd === $scope.course.activeInd) {
-                $scope.mergedCourse.activeInd = $scope.course.activeInd;
-            }
-
-            if (+$scope.remoteCourse.industryId === $scope.course.industryId) {
-                $scope.mergedCourse.industryId = $scope.course.industryId;
-            }
-
-            if ($scope.remoteCourse.updateUser === $scope.course.updateUser) {
-                $scope.mergedCourse.updateUser = $scope.course.updateUser;
-            }
+            $scope.mergedCourse.id = $scope.remoteCourse.id;
+            $scope.mergedCourse.activeInd = $scope.course.activeInd;
+            $scope.mergedCourse.industryId = $scope.course.industryId;
+            $scope.mergedCourse.updateUser = $scope.course.updateUser;
+            $scope.mergedCourse.updateDate = $scope.remoteCourse.updateDate;
         }
     );
 
-    $scope.compareCourseProperty = function (property) {
+    $scope.compareCourseProperty = function (property, dataType) {
         try {
             var localValue = $parse("course." + property);
             var remoteValue = $parse("remoteCourse." + property);
@@ -266,31 +277,30 @@ function CourseConflictCtrl($scope, $http, $parse, Data) {
             var localStyle = $parse(property + ".localStyle");
             var remoteStyle = $parse(property + ".remoteStyle");
             var mergedStyle = $parse(property + ".mergedStyle");
-            var isObject = (Object.prototype.toString.call( localValue($scope)) === '[object Object]');
+            var isObject = (Object.prototype.toString.call(localValue($scope)) === '[object Object]');
 
             if ((isObject && localValue($scope).id == remoteValue($scope).id)
-                ||!isObject && localValue($scope) == remoteValue($scope)) {
+                || !isObject && localValue($scope) == remoteValue($scope)) {
                 mergedValue.assign($scope, localValue($scope));
-                localStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
-                remoteStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
-                mergedStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
+                localStyle.assign($scope, {"border": "1px solid green", "padding": "4px"});
+                remoteStyle.assign($scope, {"border": "1px solid green", "padding": "4px"});
+                mergedStyle.assign($scope, {"border": "1px solid green", "padding": "4px"});
             } else if ((isObject && localValue($scope).id == mergedValue($scope).id)
-                ||!isObject && localValue($scope) == mergedValue($scope)) {
-                localStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
-                remoteStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
+                || !isObject && localValue($scope) == mergedValue($scope)) {
+                localStyle.assign($scope, {"border": "1px solid green", "padding": "4px"});
+                remoteStyle.assign($scope, {"border": "1px solid red", "padding": "4px"});
             } else if ((isObject && remoteValue($scope).id == mergedValue($scope).id)
-                ||!isObject && remoteValue($scope) == mergedValue($scope)) {
-                localStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
-                remoteStyle.assign($scope, {"border": "1px solid green", "padding":"4px"});
+                || !isObject && remoteValue($scope) == mergedValue($scope)) {
+                localStyle.assign($scope, {"border": "1px solid red", "padding": "4px"});
+                remoteStyle.assign($scope, {"border": "1px solid green", "padding": "4px"});
             } else {
-                localStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
-                remoteStyle.assign($scope, {"border": "1px solid red", "padding":"4px"});
+                localStyle.assign($scope, {"border": "1px solid red", "padding": "4px"});
+                remoteStyle.assign($scope, {"border": "1px solid red", "padding": "4px"});
             }
 
         } catch (e) {
             alert(e)
         }
-
     }
 
     $scope.copyCourseProperty = function (property, direction) {
@@ -311,6 +321,30 @@ function CourseConflictCtrl($scope, $http, $parse, Data) {
         }
 
     }
+
+    $scope.save = function () {
+        Course.update({}, $scope.mergedCourse, function (res) {
+                //TODO Test This
+                //TODO fix date sort after change
+            for (var i = 0; i < $scope.courses.length; i++) {
+                if ($scope.courses[i].id === $scope.mergedCourse.id) {
+                    $scope.courses[i] = $scope.mergedCourse;
+                    break;
+                }
+            }
+
+            $scope.changeView("courses");
+            }, function (data, status, headers, config) {
+                if (data.status === 409) {
+                    alert("Record changed by another user");
+//                    $scope.remoteCourse = data;
+//                    alert(data.address);
+                    $scope.changeView("courseConflict");
+                } else {
+                    alert("error: " + data.status);
+                }
+            })
+    };
 }
 
 //UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];

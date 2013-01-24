@@ -103,3 +103,19 @@ app.filter('getLangById', function() {
     }
 });
 
+app.filter('getUserTypeByCode', function() {
+    return function(userType) {
+        var retType;
+
+        switch(userType){
+            case "S": retType = "System Administrator";
+                break;
+            case "A": retType = "Education Center Administrator";
+                break;
+            case "U": retType = "Disabled";
+                break;
+        }
+        return retType;
+    }
+});
+
