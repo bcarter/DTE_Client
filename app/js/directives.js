@@ -8,6 +8,9 @@ var app = angular.module('dteCourseAdminDirectives', []);
 app.directive("conflictItem", function(){
   return {
       restrict: "E",
+      scope: {
+          objectName: "@objectName"
+      },
       compile: function(element, attrs)
       {
 //          var type = attrs.objectName || 'text';
@@ -32,5 +35,33 @@ app.directive("conflictItem", function(){
 //            template: '<div>'+attrs.objectName+'</div>'
 //      template: "<div class=\"row-fluid\" style=\"margin:4px 0\"><div class=\"span2\">{{objectName}}:</div><div class=\"span3\" ng-style=\"location.localStyle\" ng-click=\"copyCourseProperty('location', '>')\">{{course.location}}</div><div class=\"span3\" ng-style=\"location.mergedStyle\"><input class=\"input-block-level\" id=\"locationInput\" type=\"text\" ng-model=\"mergedCourse.location\" ng-required=\"true\" tabindex=\"3\"></div><div class=\"span3\" ng-style=\"location.remoteStyle\" ng-click=\"copyCourseProperty('location', '<')\">{{remoteCourse.location}}</div></div>"
   }
+});
+
+app.directive("pricingTable", function($compile) {
+    return {
+        restrict: 'E',
+        scope: {
+            objectName: "=objectName"
+        },
+        template:
+            '<table border="1">' +
+                '<thead>' +
+                '<tr>' +
+                '<th>Mon{{remoteCourse.'+objectName+'}}</th>' +
+                '<th>Tue</th>' +
+                '<th>Wed</th>' +
+                '<th>Thu</th>' +
+                '<th>Fri</th>' +
+                '<th>Sat</th>' +
+                '<th>Sun</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>' +
+                '</tr>' +
+                '</tbody>' +
+                '</table>',
+        replace: true,
+        link: function (scope, element, attrs) {}
+    };
 });
 
