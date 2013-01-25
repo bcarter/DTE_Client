@@ -112,8 +112,14 @@
                     </div>
                 </div>
             </div>
-            <div ng-view></div>
         </div>
+            <button ng-click="pushLog('Test message')">Push</button>
+            <span style="background-color: #d3d3d3" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages"></span>
+        <div class="popup" ng-show="showLogs">
+            <div  ng-include='"partials/messages.html"' ></div>
+        </div>
+
+        <div ng-view></div>
     </div>
     <br>
 </div>

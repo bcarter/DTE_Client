@@ -1,0 +1,13 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h3>Messages</h3>
+        <button ng-click="clearLog()">Clear</button>
+        <hr size="1">
+    </div>
+    <table>
+        <tr ng-repeat="log in logs">
+            <td>{{log.severity}}</td>
+            <td>{{log.message}}</td>
+        </tr>
+    </table>
+</div>

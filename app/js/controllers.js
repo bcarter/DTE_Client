@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function CourseListCtrl($scope, $http, $route, $location, Course) {
+function CourseListCtrl($scope, $http, $route, $location, Course, Data) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
     $scope.$route = $route;
@@ -92,9 +92,36 @@ function CourseListCtrl($scope, $http, $route, $location, Course) {
     $scope.changeView = function (view) {
         $location.path(view); // path not hash
     };
+
+    try {
+        $scope.logs = Data.getLog();
+    } catch (e) {
+        alert(e);
+    }
+
+    $scope.pushLog = function(message, severity, object){
+        Data.addLog(message, severity, object);
+        $scope.showLogsButton = true;
+    }
+
+    $scope.clearLog = function(){
+        Data.clearLog();
+        $scope.showLogs = false;
+        $scope.showLogsButton = false;
+        $scope.messageLabel = "Show";
+    }
+
+    $scope.toggleLogs = function(){
+        $scope.showLogs = !$scope.showLogs;
+        $scope.messageLabel = $scope.showLogs?"Hide":"Show";
+    }
+
+    $scope.showLogs = false;
+    $scope.showLogsButton = false;
+    $scope.messageLabel = "Show";
 }
 
-//CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course'];
+//CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course', 'Data'];
 
 
 function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {

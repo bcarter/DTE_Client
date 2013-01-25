@@ -25,12 +25,24 @@ app.factory('User', function ($resource) {
 
 app.factory('Data', function(){
     var course = {};
+    var log = [];
     return {
         getCourse:function () {
             return course;
         },
         setCourse:function (value) {
             course = value;
+        },
+        getLog:function () {
+            return log;
+        },
+        addLog:function (message, severity, object) {
+            log.push({"message":message
+                    , "severity":severity
+                    , "object":object});
+        },
+        clearLog:function () {
+            log.splice(0,log.length);
         }
     };
 });
