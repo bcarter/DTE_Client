@@ -2709,21 +2709,21 @@ function createInjector(modulesToLoad) {
             provider[invokeArgs[1]].apply(provider, invokeArgs[2]);
           }
         } catch (e) {
-          if (e.message) e.message += ' from ' + module;
+          if (e.errorMessage) e.errorMessage += ' from ' + module;
           throw e;
         }
       } else if (isFunction(module)) {
         try {
           runBlocks.push(providerInjector.invoke(module));
         } catch (e) {
-          if (e.message) e.message += ' from ' + module;
+          if (e.errorMessage) e.errorMessage += ' from ' + module;
           throw e;
         }
       } else if (isArray(module)) {
         try {
           runBlocks.push(providerInjector.invoke(module));
         } catch (e) {
-          if (e.message) e.message += ' from ' + String(module[module.length - 1]);
+          if (e.errorMessage) e.errorMessage += ' from ' + String(module[module.length - 1]);
           throw e;
         }
       } else {
@@ -5540,11 +5540,11 @@ function $LogProvider(){
     function formatError(arg) {
       if (arg instanceof Error) {
         if (arg.stack) {
-          arg = (arg.message && arg.stack.indexOf(arg.message) === -1)
-              ? 'Error: ' + arg.message + '\n' + arg.stack
+          arg = (arg.errorMessage && arg.stack.indexOf(arg.errorMessage) === -1)
+              ? 'Error: ' + arg.errorMessage + '\n' + arg.stack
               : arg.stack;
         } else if (arg.sourceURL) {
-          arg = arg.message + '\n' + arg.sourceURL + ':' + arg.line;
+          arg = arg.errorMessage + '\n' + arg.sourceURL + ':' + arg.line;
         }
       }
       return arg;

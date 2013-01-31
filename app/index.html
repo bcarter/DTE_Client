@@ -15,14 +15,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-ui.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/angular-ui.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/existing.css">
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <!--<link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">-->
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-modal.js"></script>
     <!--<link rel="stylesheet/less" href="/path/to/bootstrap.less">-->
     <!--<script src="/path/to/less.js"></script>-->
     <!--<link rel="stylesheet" href="https://angular-ui.github.com/lib/select2/select2.css">-->
@@ -114,10 +114,9 @@
             </div>
         </div>
             <button ng-click="pushLog('Test message')">Push</button>
-            <span style="background-color: #d3d3d3" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages"></span>
-        <div class="popup" ng-show="showLogs">
-            <div  ng-include='"partials/messages.html"' ></div>
-        </div>
+            <!--<span style="background-color: #d3d3d3" data-toggle="modal" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages"></span>-->
+        <a data-toggle="modal" href="#messagesModal" class="btn btn-primary btn-small" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages">Launch demo modal</a>
+        <div ng-include='"partials/messages.html"' ></div>
 
         <div ng-view></div>
     </div>
@@ -134,3 +133,9 @@
 </div>
 </body>
 </html>
+
+
+<!--<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-modal.js"></script>-->
+
+<a ng-click="modalShown=!modalShown">Open 1</a>
+<a data-toggle="modal" href="#messagesModal">Open 2</a>

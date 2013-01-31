@@ -2,35 +2,33 @@
 
 /* Controllers */
 
-function CourseListCtrl($scope, $http, $route, $location, Course, Data) {
+function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
     $scope.currentPage = 0;
     $scope.pageSize = 5;
     $scope.$route = $route;
 
-//    var courseTitlesP = $http.get('courses/Title').success(function (data) {
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
         $scope.courseTitles = data.courseTitle;
     }).error(function (data, status, headers, config) {
-            alert("Titles : " + status + "<br>" + data);
+            $scope.pushLog("Error Loading Titles", 0);
         });
 
-//    $scope.courseLanguagesP = $http.get('courses/Language').success(function (data) {
     $scope.courseLanguagesP = $http.get('/DTEAdmin/services/Language').success(function (data) {
         $scope.courseLanguages = data.courseLanguage;
-    });
+    }).error(function (data, status, headers, config) {
+            $scope.pushLog("Error Loading Languages: " + status, 0);
+        });
 
-//    var stateCodesP = $http.get('courses/StateCode').success(function (data) {
     $scope.stateCodesP = $http.get('/DTEAdmin/services/StateCode').success(function (data) {
         $scope.stateCodes = data.stateCode;
     }).error(function (data, status, headers, config) {
-            alert("States : " + status + "<br>" + data);
+            $scope.pushLog("Error Loading States", 0);
         });
 
-//    var educationCentersP = $http.get('courses/EducationCenter').success(function (data) {
     $scope.educationCentersP = $http.get('/DTEAdmin/services/EducationCenter').success(function (data) {
         $scope.educationCenters = [].concat(data.educationCenter);
     }).error(function (data, status, headers, config) {
-            alert("Ed Centers : " + status + "<br>" + data);
+            $scope.pushLog("Error Loading Education Centers", 0);
         });
 
     $scope.courseList = function () {
@@ -99,21 +97,41 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data) {
         alert(e);
     }
 
-    $scope.pushLog = function(message, severity, object){
+    $scope.saveLog = function () {
+
+        var numLogs = $scope.logs.length;
+        for (var i = 0; i < numLogs; i++) {
+            var log = $scope.logs.shift();
+
+            try{
+                log.incomingData = angular.toJson(log.incomingData);
+            } catch (e){}
+
+            Log.insert({}, log, function (res, getResponseHeaders) {
+            });
+        }
+
+        $scope.clearLog();
+    }
+
+    $scope.pushLog = function (message, severity, object) {
         Data.addLog(message, severity, object);
         $scope.showLogsButton = true;
     }
 
-    $scope.clearLog = function(){
+    $scope.clearLog = function () {
         Data.clearLog();
         $scope.showLogs = false;
         $scope.showLogsButton = false;
         $scope.messageLabel = "Show";
     }
 
-    $scope.toggleLogs = function(){
+    $scope.toggleLogs = function () {
         $scope.showLogs = !$scope.showLogs;
-        $scope.messageLabel = $scope.showLogs?"Hide":"Show";
+        $scope.messageLabel = $scope.showLogs ? "Hide" : "Show";
+        $(function ()
+        { $("#example").modal();
+        });
     }
 
     $scope.showLogs = false;
@@ -126,6 +144,7 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data) {
 
 function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
     $scope.date = new Date();
+    $scope.saveEnabled = true;
 
     if ($routeParams.courseId === "new") {
         $scope.course = new Course();
@@ -145,14 +164,16 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
     }
 
     $scope.save = function () {
+        $scope.saveEnabled = false;
         if ($routeParams.courseId === "new") {
             Course.insert({}, $scope.course, function (res, getResponseHeaders) {
-                //TODO Make this work
                 $scope.course = new Course();
                 $scope.course.industryId = 1;
+                $scope.saveEnabled = true;
             }, function (data, status, headers, config) {
                 $scope.changeView("courses");
-            })
+                $scope.saveEnabled = true;
+            });
         } else {
             Course.update({}, $scope.course, function (res) {
                 //TODO Test This
@@ -165,16 +186,16 @@ function CourseDetailCtrl($scope, $routeParams, $location, $q, Course, Data) {
                 }
 
                 $scope.changeView("courses");
+                $scope.saveEnabled = true;
             }, function (data, status, headers, config) {
                 if (data.status === 409) {
                     alert("Record changed by another user");
-//                    $scope.remoteCourse = data;
-//                    alert(data.address);
                     $scope.changeView("courseConflict");
                 } else {
-                    alert("error: " + data.status);
+                    $scope.pushLog("Error Updating Course: " + data.status, 0, $scope.course);
                 }
-            })
+                $scope.saveEnabled = true;
+            });
         }
     };
 
@@ -216,25 +237,28 @@ function UsersCtrl($scope, $routeParams, $q, $location, User) {
 
     $scope.save = function () {
         if ($scope.user.id === "") {
-            User.insert({}, $scope.user , function (res) {
+            User.insert({}, $scope.user, function (res) {
                 $scope.userList();
                 $scope.clearForm();
-                }, function (data, status, headers, config) {
-                     alert("error: " + data.status);
-                })
+            }, function (data, status, headers, config) {
+                $scope.pushLog("Error Inserting User: " + data.status, 0, $scope.user);
+            })
         } else {
             User.update({}, $scope.user, function (res) {
                 $scope.userList();
                 $scope.clearForm();
             }, function (data, status, headers, config) {
                 switch (data.status) {
-                    case 404: alert("Record does not exist");
+                    case 404:
+                        alert("Record does not exist");
                         break;
-                    case 412: alert("Invalid Change Request");
+                    case 412:
+                        $scope.pushLog("Invalid Change Request: " + data.status, 0, $scope.user);
                         break;
-                    case 409: alert("Record changed by another user");
+                    case 409:;
+                        alert("Record changed by another user");
                         break;
-                    defalut: alert("Error: " + data.status);
+                      defalut: $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
                 }
 
                 $scope.userList();
@@ -254,19 +278,19 @@ function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
         $scope.course = Data.getCourse();
 //        $scope.course = $http.get('/DTEAdmin/services/Course/2641');
     } catch (e) {
-        alert(e);
+        $scope.pushLog("Error Loading Course: " + e, 0);
     }
 
     var changedCourse = $http.get('/DTEAdmin/services/Course/' + $scope.course.id).success(function (changedCourse) {
             $scope.remoteCourse = changedCourse;
             try {
-                $scope.remoteCourse.noOfDays  = +$scope.remoteCourse.noOfDays;
-                $scope.remoteCourse.length  = +$scope.remoteCourse.length;
-                $scope.remoteCourse.cmPoints  = +$scope.remoteCourse.cmPoints;
-                $scope.remoteCourse.ceuPoints  = +$scope.remoteCourse.ceuPoints;
-                $scope.remoteCourse.cost  = +$scope.remoteCourse.cost;
-            } catch (e){
-                alert(e);
+                $scope.remoteCourse.noOfDays = +$scope.remoteCourse.noOfDays;
+                $scope.remoteCourse.length = +$scope.remoteCourse.length;
+                $scope.remoteCourse.cmPoints = +$scope.remoteCourse.cmPoints;
+                $scope.remoteCourse.ceuPoints = +$scope.remoteCourse.ceuPoints;
+                $scope.remoteCourse.cost = +$scope.remoteCourse.cost;
+            } catch (e) {
+                $scope.pushLog("Error Loading Remote Course: " + e, 0);
             }
 
             $scope.mergedCourse = {};
@@ -326,7 +350,7 @@ function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
             }
 
         } catch (e) {
-            alert(e)
+            $scope.pushLog("Error Comparing Course Fields: " + e, 0);
         }
     }
 
@@ -344,15 +368,15 @@ function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
 
             $scope.compareCourseProperty(property);
         } catch (e) {
-            alert(e)
+            $scope.pushLog("Error Copying Course Fields: " + e, 0);
         }
 
     }
 
     $scope.save = function () {
         Course.update({}, $scope.mergedCourse, function (res) {
-                //TODO Test This
-                //TODO fix date sort after change
+            //TODO Test This
+            //TODO fix date sort after change
             for (var i = 0; i < $scope.courses.length; i++) {
                 if ($scope.courses[i].id === $scope.mergedCourse.id) {
                     $scope.courses[i] = $scope.mergedCourse;
@@ -361,16 +385,14 @@ function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
             }
 
             $scope.changeView("courses");
-            }, function (data, status, headers, config) {
-                if (data.status === 409) {
-                    alert("Record changed by another user");
-//                    $scope.remoteCourse = data;
-//                    alert(data.address);
-                    $scope.changeView("courseConflict");
-                } else {
-                    alert("error: " + data.status);
-                }
-            })
+        }, function (data, status, headers, config) {
+            if (data.status === 409) {
+                alert("Record changed by another user");
+                $scope.changeView("courseConflict");
+            } else {
+                $scope.pushLog("Error Updating Course: " + data.status, 0, $scope.mergedCourse);
+            }
+        })
     };
 }
 

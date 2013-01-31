@@ -1,13 +1,42 @@
-<div class="row-fluid">
-    <div class="span12">
+<!--<div class="row-fluid">-->
+<!--<div class="span12">-->
+<!--<h3>Messages</h3>-->
+<!--<button ng-click="clearLog()">Clear</button>-->
+<!--<button ng-click="saveLog()">Save</button>-->
+<!--<hr size="1">-->
+<!--</div>-->
+<!--<table>-->
+<!--<tr>-->
+<!--<th>Severity</th>-->
+<!--<th>Message</th>-->
+<!--</tr>-->
+<!--<tr ng-repeat="log in logs">-->
+<!--<td>{{log.severity}}</td>-->
+<!--<td>{{log.errorMessage}}</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->
+
+<!--<div id="messagesModal" class="modal hide fade in" style="display: none; " ui-modal ng-model="modalShown">-->
+<div ui-modal class="modal hide fade" id="messagesModal" ng-model="modalShown">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
         <h3>Messages</h3>
-        <button ng-click="clearLog()">Clear</button>
-        <hr size="1">
     </div>
-    <table>
-        <tr ng-repeat="log in logs">
-            <td>{{log.severity}}</td>
-            <td>{{log.message}}</td>
-        </tr>
-    </table>
+    <div class="modal-body">
+        <table>
+            <tr>
+                <th>Severity</th>
+                <th>Message</th>
+            </tr>
+            <tr ng-repeat="log in logs">
+                <td>{{log.severity}}</td>
+                <td>{{log.errorMessage}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" ng-click="clearLog(); modalShown=false">Clear</a>
+        <a href="#" class="btn"  ng-click="saveLog(); modalShown=false">Send</a>
+    </div>
 </div>
