@@ -15,17 +15,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/angular-ui.css">
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/existing.css">
-    <!--<link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">-->
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-    <script src="lib/bootstrap-modal.js"></script>
-    <!--<link rel="stylesheet/less" href="/path/to/bootstrap.less">-->
-    <!--<script src="/path/to/less.js"></script>-->
-    <!--<link rel="stylesheet" href="https://angular-ui.github.com/lib/select2/select2.css">-->
+
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/filters.js"></script>
@@ -57,7 +54,8 @@
                             | <a href="/directory.html" title="Employee Directory">OSHA Directory</a>
                             | <a href="/new-a-z-index.html" title="A to Z Index">A to Z Index</a>
                             | <a href="/helpdesk/index.html" title="IT Helpdesk">IT Helpdesk</a>
-                            | <a href="http://extranet.osha.gov/remote/logout.html" title="EXTRANET Log Out">EXTRANET Log Out</a>
+                            | <a href="http://extranet.osha.gov/remote/logout.html" title="EXTRANET Log Out">EXTRANET
+                            Log Out</a>
                         </div>
                         <div id="search">
                             <form action="/pls/oshainternal/intranet.search_results" method="GET">
@@ -113,22 +111,22 @@
                 </div>
             </div>
         </div>
-            <button ng-click="pushLog('Test message')">Push</button>
-            <!--<span style="background-color: #d3d3d3" data-toggle="modal" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages"></span>-->
+        <button ng-click="pushLog('Test message')">Push</button>
         <a data-toggle="modal" href="#messagesModal" class="btn btn-primary btn-small" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages">Launch demo modal</a>
-        <div ng-include='"partials/messages.html"' ></div>
+        <div ng-include='"partials/messages.html"'></div>
 
         <div ng-view></div>
     </div>
     <br>
 </div>
-    <div id="footer">
+<div id="footer">
     <div id="footerlinks">
         <a class="red" href="http://www.labornet.dol.gov/" title="LaborNet">LaborNet</a>
         | <a class="red" href="http://www.dol.gov" title="U.S. Deparment of Labor site">DOL.gov</a>
         | <a href="http://www.osha.gov" title="OSHA Public Site">OSHA.gov</a>
         | <a href="http://intranet.osha.gov/helpdesk/index.html" title="IT Helpdesk">IT Helpdesk</a>
-        | <a href="http://www.labornet.dol.gov/security/" title="Security & Emergency Management">Security & Emergency Management</a>
+        | <a href="http://www.labornet.dol.gov/security/" title="Security & Emergency Management">Security & Emergency
+        Management</a>
     </div>
 </div>
 </body>

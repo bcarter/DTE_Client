@@ -129,9 +129,6 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
     $scope.toggleLogs = function () {
         $scope.showLogs = !$scope.showLogs;
         $scope.messageLabel = $scope.showLogs ? "Hide" : "Show";
-        $(function ()
-        { $("#example").modal();
-        });
     }
 
     $scope.showLogs = false;
