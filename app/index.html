@@ -111,11 +111,10 @@
                 </div>
             </div>
         </div>
-        <button ng-click="pushLog('Test message')">Push</button>
-        <a data-toggle="modal" href="#messagesModal" class="btn btn-primary btn-small" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages">Launch demo modal</a>
+        <a data-toggle="modal" href="#messagesModal" class="pull-right btn btn-danger btn-mini" ng-click="toggleLogs()" ng-show="showLogsButton" ng-bind-template="{{messageLabel}} Messages">Launch demo modal</a>
         <div ng-include='"partials/messages.html"'></div>
 
-        <div ng-view></div>
+        <div ng-view ng-hide="compatibilityMode"></div>
     </div>
     <br>
 </div>

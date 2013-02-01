@@ -7,6 +7,53 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
     $scope.pageSize = 5;
     $scope.$route = $route;
 
+
+    $scope.saveLog = function () {
+
+        var numLogs = $scope.logs.length;
+        for (var i = 0; i < numLogs; i++) {
+            var log = $scope.logs.shift();
+
+            try{
+                log.incomingData = angular.toJson(log.incomingData);
+            } catch (e){}
+
+            Log.insert({}, log, function (res, getResponseHeaders) {
+            });
+        }
+
+        $scope.clearLog();
+    }
+
+    $scope.pushLog = function (message, severity, object) {
+        Data.addLog(message, severity, object);
+        $scope.showLogsButton = true;
+    }
+
+    $scope.clearLog = function () {
+        Data.clearLog();
+        $scope.showLogs = false;
+        $scope.showLogsButton = false;
+        $scope.messageLabel = "Show";
+    }
+
+    $scope.toggleLogs = function () {
+        $scope.showLogs = !$scope.showLogs;
+        $scope.messageLabel = $scope.showLogs ? "Hide" : "Show";
+    }
+
+    $scope.showLogs = false;
+    $scope.showLogsButton = false;
+    $scope.messageLabel = "Show";
+
+
+    $scope.compatibilityMode = false;
+
+    if(document.documentMode && document.documentMode < 8) {
+        $scope.compatibilityMode = true;
+        $scope.pushLog("This application does not support compatibility view.", 0);
+    }
+
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
         $scope.courseTitles = data.courseTitle;
     }).error(function (data, status, headers, config) {
@@ -96,44 +143,6 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
     } catch (e) {
         alert(e);
     }
-
-    $scope.saveLog = function () {
-
-        var numLogs = $scope.logs.length;
-        for (var i = 0; i < numLogs; i++) {
-            var log = $scope.logs.shift();
-
-            try{
-                log.incomingData = angular.toJson(log.incomingData);
-            } catch (e){}
-
-            Log.insert({}, log, function (res, getResponseHeaders) {
-            });
-        }
-
-        $scope.clearLog();
-    }
-
-    $scope.pushLog = function (message, severity, object) {
-        Data.addLog(message, severity, object);
-        $scope.showLogsButton = true;
-    }
-
-    $scope.clearLog = function () {
-        Data.clearLog();
-        $scope.showLogs = false;
-        $scope.showLogsButton = false;
-        $scope.messageLabel = "Show";
-    }
-
-    $scope.toggleLogs = function () {
-        $scope.showLogs = !$scope.showLogs;
-        $scope.messageLabel = $scope.showLogs ? "Hide" : "Show";
-    }
-
-    $scope.showLogs = false;
-    $scope.showLogsButton = false;
-    $scope.messageLabel = "Show";
 }
 
 //CourseListCtrl.$inject = ['$scope', '$http', '$route', 'Course', 'Data'];
