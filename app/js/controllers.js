@@ -2,11 +2,10 @@
 
 /* Controllers */
 
-function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
+function CourseListCtrl($scope, $http, $route, $location, Course, User, Data, Log) {
     $scope.currentPage = 0;
-    $scope.pageSize = 5;
+    $scope.pageSize = 25;
     $scope.$route = $route;
-
 
     $scope.saveLog = function () {
 
@@ -14,9 +13,10 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
         for (var i = 0; i < numLogs; i++) {
             var log = $scope.logs.shift();
 
-            try{
+            try {
                 log.incomingData = angular.toJson(log.incomingData);
-            } catch (e){}
+            } catch (e) {
+            }
 
             Log.insert({}, log, function (res, getResponseHeaders) {
             });
@@ -49,10 +49,37 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
 
     $scope.compatibilityMode = false;
 
-    if(document.documentMode && document.documentMode < 8) {
+    if (document.documentMode && document.documentMode < 8) {
         $scope.compatibilityMode = true;
         $scope.pushLog("This application does not support compatibility view.", 0);
     }
+
+    $scope.getCurrentUser = function () {
+        User.query({userId: "current"}, function (user) {
+            $scope.currentUser = user;
+        });
+    };
+
+    $scope.saveCurrentEdCenter = function () {
+            User.update({}, $scope.currentUser, function () {
+                $scope.getCurrentUser();
+                $scope.courseList();
+            }, function (data, status) {
+                switch (status) {
+                    case 404:
+                        alert("Record does not exist");
+                        break;
+                    case 412:
+                        $scope.pushLog("Invalid Change Request: " + data.status, 0, $scope.user);
+                        break;
+                    case 409:
+                        alert("Record changed by another user");
+                        break;
+                    default:
+                        $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
+                }
+            })
+    };
 
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
         $scope.courseTitles = data.courseTitle;
@@ -73,12 +100,14 @@ function CourseListCtrl($scope, $http, $route, $location, Course, Data, Log) {
         });
 
     $scope.educationCentersP = $http.get('/DTEAdmin/services/EducationCenter').success(function (data) {
+        $scope.getCurrentUser();
         $scope.educationCenters = [].concat(data.educationCenter);
     }).error(function () {
             $scope.pushLog("Error Loading Education Centers", 0);
         });
 
     $scope.courseList = function () {
+        $scope.courses=[{}];
         Course.list({},
             function (data) {
                 //Success
@@ -169,8 +198,23 @@ function CourseDetailCtrl($scope, $routeParams, $q, Course, Data) {
         });
     }
 
+    $scope.formatDate = function (inDate) {
+//        var date = new Date($scope.course.startDate);
+        var date = new Date(inDate);
+        var newDate =  date.getFullYear() + "-" + ("0" + (date.getMonth()+1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "T00:00:00-07:00" ;
+        return newDate;
+    }
+
+    $scope.isDate = function (inDate)
+        {
+            var date = new Date(inDate);
+        return (null != inDate) && !isNaN(inDate) && ("undefined" !== typeof date.getDate);
+        }
+
     $scope.save = function () {
         $scope.saveEnabled = false;
+        $scope.course.startDate = $scope.formatDate($scope.course.startDate);
+        $scope.course.endDate = $scope.formatDate($scope.course.endDate);
         if ($routeParams.courseId === "new") {
             Course.insert({}, $scope.course, function () {
                 $scope.course = new Course();
@@ -262,7 +306,8 @@ function UsersCtrl($scope, User) {
                     case 409:
                         alert("Record changed by another user");
                         break;
-                      default: $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
+                    default:
+                        $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
                 }
 
                 $scope.userList();
@@ -403,13 +448,17 @@ function CourseConflictCtrl($scope, $http, $parse, Data, Course) {
 //UsersCtrl.$inject = ['$scope', '$routeParams', $http, $q, 'Course'];
 
 
-function PhoneListCtrl($scope) {
-    $scope.phones = [
-        {"name": "Nexus S",
-            "snippet": "Fast just got faster with Nexus S."},
-        {"name": "Motorola XOOM™ with Wi-Fi",
-            "snippet": "The Next, Next Generation tablet."},
-        {"name": "MOTOROLA XOOM™",
-            "snippet": "The Next, Next Generation tablet."}
-    ];
+function PhoneListCtrl($scope, $http) {
+//    $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
+//        $scope.courseTitles = data.courseTitle;
+//    }).error(function () {
+//            $scope.pushLog("Error Loading Titles", 0);
+//        });
+
+
+    $http.get('phones/phones.json').success(function (data) {
+        $scope.phones = data;
+    });
+
+    $scope.orderProp = 'age';
 }
