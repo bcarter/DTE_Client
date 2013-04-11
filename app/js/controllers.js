@@ -61,24 +61,24 @@ function CourseListCtrl($scope, $http, $route, $location, Course, User, Data, Lo
     };
 
     $scope.saveCurrentEdCenter = function () {
-            User.update({}, $scope.currentUser, function () {
-                $scope.getCurrentUser();
-                $scope.courseList();
-            }, function (data, status) {
-                switch (status) {
-                    case 404:
-                        alert("Record does not exist");
-                        break;
-                    case 412:
-                        $scope.pushLog("Invalid Change Request: " + data.status, 0, $scope.user);
-                        break;
-                    case 409:
-                        alert("Record changed by another user");
-                        break;
-                    default:
-                        $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
-                }
-            })
+        User.update({}, $scope.currentUser, function () {
+            $scope.getCurrentUser();
+            $scope.courseList();
+        }, function (data, status) {
+            switch (status) {
+                case 404:
+                    alert("Record does not exist");
+                    break;
+                case 412:
+                    $scope.pushLog("Invalid Change Request: " + data.status, 0, $scope.user);
+                    break;
+                case 409:
+                    alert("Record changed by another user");
+                    break;
+                default:
+                    $scope.pushLog("Error Updating User: " + data.status, 0, $scope.user);
+            }
+        })
     };
 
     $scope.courseTitlesP = $http.get('/DTEAdmin/services/Title').success(function (data) {
@@ -200,16 +200,23 @@ function CourseDetailCtrl($scope, $routeParams, $q, Course, Data) {
 
     $scope.formatDate = function (inDate) {
 //        var date = new Date($scope.course.startDate);
-        var date = new Date(inDate);
-        var newDate =  date.getFullYear() + "-" + ("0" + (date.getMonth()+1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "T00:00:00-07:00" ;
+        try{
+            var date = new Date(inDate);
+                var year = date.getFullYear().toString();
+                var month = ("0" + (date.getMonth()+1).toString()).slice(-2);
+                var day = ("0" + date.getDate().toString()).slice(-2);
+                var newDate =  year + "-" + month + "-" + day + "T00:00:00-07:00";
+        } catch (e) {
+            newDate = inDate;
+        }
         return newDate;
     }
 
     $scope.isDate = function (inDate)
-        {
-            var date = new Date(inDate);
+    {
+        var date = new Date(inDate);
         return (null != inDate) && !isNaN(inDate) && ("undefined" !== typeof date.getDate);
-        }
+    }
 
     $scope.save = function () {
         $scope.saveEnabled = false;
